@@ -1,0 +1,94 @@
+.header{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    font-family: 'Bebas-Neue';
+    z-index: 1;
+}
+.flex-header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 90%;
+    margin: 0 auto;
+    /* padding: 15px 45px; */
+    line-height: 50px;
+    border-bottom: 1px solid rgba(255,255,255,.3);
+}
+.logo{
+    font-size: 24px;
+    opacity: 0.9;
+}
+.dot{
+    position: absolute;
+    top: 3px;
+    right: -15px;
+    width: 10px;
+    height: 10px;
+    background-color: #ef4413;
+    border-radius: 50%;
+}
+.flex-header a {
+    text-decoration: none;
+    color: white;
+    cursor: pointer;    
+}
+
+.menu>a{
+    /* text-decoration: none;
+    color: white; */
+    position: relative;
+    margin: 0px 10px;
+    cursor: pointer;
+    opacity: 0.9;
+    transition: all 0.2 ease-in-out;
+}
+.menu>a:hover{
+    opacity: 1;
+}
+.hamburger-wrapper{
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 25px;
+    display: none;
+}
+
+.hamburger-menu{
+    width: 20px;
+    height: 1px;
+    background-color: whitesmoke;
+    position: relative;
+    cursor: pointer;
+}
+.hamburger-menu:before{
+    content: '';
+    top:5px;
+    left: 0;
+    position: absolute;
+    width: 20px;
+    height: 1px;
+    background-color: whitesmoke;
+}
+.hamburger-menu:after{
+    content: '';
+    position: absolute;
+    bottom:5px;
+    right: 0;
+    width: 20px;
+    height: 1px;
+    background-color: whitesmoke;
+}
+
+@media (max-width: 550px) {  
+    .hamburger-wrapper{
+        display: flex;
+    }
+    .menu{
+        display: none;
+    }
+    
+
+  }
