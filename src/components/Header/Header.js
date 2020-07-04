@@ -6,8 +6,14 @@ function Header() {
     const [isActive, setIsActive] = useState(false);
 
     useEffect(() => {
-        window.addEventListener('resize', () => console.log(window.innerWidth))
-        console.log('isActive', isActive)
+        window.addEventListener('resize', () => {
+            if (isActive && window.innerWidth > 550) {
+                setIsActive(false)
+                console.log('CALLED')
+            }
+        }, [])
+
+
         return () => {
             window.removeEventListener('resize', () => window.innerWidth)
         }
@@ -26,7 +32,7 @@ function Header() {
                     </div>
                     <a className="hidden-bag" href="#">Bag<span className="dot"></span></a>
                     <div onClick={() => setIsActive(prevState => prevState = !prevState)} className="hamburger-wrapper">
-                        <div className="hamburger-menu">
+                        <div className={isActive ? "hamburger-menu active" : "hamburger-menu"}>
                         </div>
                     </div>
                 </div>
