@@ -36,7 +36,7 @@ function Header(theLocation) {
                 <div className="flex-header">
                     <a href="#" className="logo">Mulholland Drive</a>
                     <div className="menu">
-                        <a href="#">Go Back</a>
+                        <a style={{ color: "crimson" }} href="#">Go Back</a>
                         <a href="#">Shop</a>
                         <a href="#">Contact</a>
                         <a href="#">Sign In</a>
