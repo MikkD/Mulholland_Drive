@@ -1,30 +1,42 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 // import { Link } from 'react-router-dom';
 import './Header.css';
 
-function Header() {
+function Header(theLocation) {
     const [isActive, setIsActive] = useState(false);
+    const navbar = useRef()
 
     useEffect(() => {
         window.addEventListener('resize', () => {
             if (isActive && window.innerWidth > 550) {
                 setIsActive(false)
-                console.log('CALLED')
             }
-        }, [])
+        });
+
+        //**********************************//
+        // window.addEventListener('scroll', () => {
+        //     if (theLocation.theLocation.location.pathname === "/") {
+        //         window.scrollY > 725 ?
+        //             navbar.current.style.backgroundColor = "black" : navbar.current.style.backgroundColor = "transparent"
+        //     }
+        // })
+        //**********************************//
 
 
         return () => {
-            window.removeEventListener('resize', () => window.innerWidth)
+            window.removeEventListener('resize', () => window.innerWidth);
+            window.removeEventListener('scroll', () => window.innerWidth);
         }
-    })
+
+    }, [isActive])
 
     return (
         <React.Fragment>
-            <header className="header">
+            <header ref={navbar} className="header">
                 <div className="flex-header">
                     <a href="#" className="logo">Mulholland Drive</a>
                     <div className="menu">
+                        <a href="#">Go Back</a>
                         <a href="#">Shop</a>
                         <a href="#">Contact</a>
                         <a href="#">Sign In</a>

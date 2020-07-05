@@ -16,10 +16,16 @@
         /* url('./fonts/Darker_Grotesque/DarkerGrotesque-Black.ttf') */
 }
 
-.App{
+
+:root{
   font-family: 'Bebas-Neue';
-  /* font-family: 'Darker-Grotesque'; */
   background-color: black;
   color: white;
+  /* font-family: 'Darker-Grotesque'; */
 }
+/* .App{
+  font-family: 'Bebas-Neue';
+  background-color: black;
+  color: white;
+} */
 
