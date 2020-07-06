@@ -5,18 +5,21 @@ import Header from '../../../Header/Header';
 import './img/jacket1.jpg';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSortUp } from '@fortawesome/free-solid-svg-icons';
+import { theJackets } from './utils';
 
 
 class Jackets extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            viewport: window.innerWidth
+            viewport: window.innerWidth,
+            items: theJackets
         }
     }
 
     componentDidMount() {
         window.addEventListener('resize', () => this.setState({ viewport: window.innerWidth }))
+        console.log('JACKETS PROPS', this.state.props)
     }
     componentWillUnmount() {
         window.removeEventListener('resize', () => { })
@@ -44,74 +47,21 @@ class Jackets extends Component {
                         </div>
                         <div className="product-items-wrapper">
 
-                            <div className="product-item-tile">
-                                <Link className="product-item-link-wrapper" >
-                                    <img src={require('./img/jacket1.jpg')} to={{ pathname: '/' }} />
-                                    <Link to={{ pathname: '/' }} className="regular-button">Shop Now</Link>
-                                </Link>
-                                <div className="product-item-tile-description">
-                                    <p>Dock Short Sleeve Jacket</p>
-                                    <p>130$</p>
-                                </div>
-                            </div>
-
-
-                            <div className="product-item-tile">
-                                <a className="product-item-link-wrapper" href="#">
-                                    <img src={require('./img/jacket1.jpg')} />
-                                    <Link to={{ pathname: '/' }} className="regular-button">Shop Now</Link>
-                                </a>
-                                <div className="product-item-tile-description">
-                                    <p>Dock Short Sleeve Jacket</p>
-                                    <p>130$</p>
-                                </div>
-                            </div>
-
-
-                            <div className="product-item-tile">
-                                <a className="product-item-link-wrapper" href="#">
-                                    <img src={require('./img/jacket1.jpg')} />
-                                    <Link to={{ pathname: '/' }} className="regular-button">Shop Now</Link>
-                                </a>
-                                <div className="product-item-tile-description">
-                                    <p>Dock Short Sleeve Jacket</p>
-                                    <p>130$</p>
-                                </div>
-                            </div>
-
-                            <div className="product-item-tile">
-                                <a className="product-item-link-wrapper" href="#">
-                                    <img src={require('./img/jacket1.jpg')} />
-                                    <Link to={{ pathname: '/' }} className="regular-button">Shop Now</Link>
-                                </a>
-                                <div className="product-item-tile-description">
-                                    <p>Dock Short Sleeve Jacket</p>
-                                    <p>130$</p>
-                                </div>
-                            </div>
-
-                            <div className="product-item-tile">
-                                <a className="product-item-link-wrapper" href="#">
-                                    <img src={require('./img/jacket1.jpg')} />
-                                    <Link to={{ pathname: '/' }} className="regular-button">Shop Now</Link>
-                                </a>
-                                <div className="product-item-tile-description">
-                                    <p>Dock Short Sleeve Jacket</p>
-                                    <p>130$</p>
-                                </div>
-                            </div>
-
-                            <div className="product-item-tile">
-                                <a className="product-item-link-wrapper" href="#">
-                                    <img src={require('./img/jacket1.jpg')} />
-                                    <Link to={{ pathname: '/' }} className="regular-button">Shop Now</Link>
-                                </a>
-                                <div className="product-item-tile-description">
-                                    <p>Dock Short Sleeve Jacket</p>
-                                    <p>130$</p>
-                                </div>
-                            </div>
-
+                            {this.state.items.map((item, index) => {
+                                return (
+                                    <div key={index} className="product-item-tile">
+                                        <Link className="product-item-link-wrapper" >
+                                            <img src={item.image} to={{ pathname: '/' }} />
+                                            <Link to={{ pathname: '/' }} className="regular-button">Shop Now</Link>
+                                        </Link>
+                                        <div className="product-item-tile-description">
+                                            <h4>{item.name}</h4>
+                                            <p>{item.description}</p>
+                                            <p>{item.price}</p>
+                                        </div>
+                                    </div>
+                                )
+                            })}
                         </div>
                     </div>
                     {/* Footer */}

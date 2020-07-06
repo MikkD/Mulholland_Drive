@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import './ShopItems.css';
-// import { Products } from '../Products/Products';
+import ProductTemplate from '../Products/ProductTemplate/ProductTemplate';
 
 class ShopItems extends Component {
     constructor(props) {
@@ -56,7 +56,8 @@ class ShopItems extends Component {
                                     <div className="image-desciption">
                                         <h2>{title}</h2>
                                         <p>{description}</p>
-                                        <Link to={`/${title}`}>Discover Now</Link>
+                                        {/* <Link to={`/ProductTemplate/?name=${title}`}>Discover Now</Link> */}
+                                        <Link to={`/ProductTemplate/${title}`}>Discover Now</Link>
                                     </div>
                                 </div>
 

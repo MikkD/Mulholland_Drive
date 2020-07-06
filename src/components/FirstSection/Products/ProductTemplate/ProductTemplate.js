@@ -1,18 +1,36 @@
 import React, { Component } from 'react';
-import './Jeans.css';
-import { theJeans } from './utils';
 import { Link } from 'react-router-dom';
-import Header from '../../../Header/Header';
+import './ProductTemplate.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSortUp } from '@fortawesome/free-solid-svg-icons';
+import { Jackets, Jeans } from './utils';
+import Header from '../../../Header/Header';
+import { withRouter } from 'react-router-dom';
 
-class Jeans extends Component {
+
+class ProductTemplate extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            items: theJeans,
-            viewport: window.innerWidth
+            viewport: window.innerWidth,
+            items: Jackets
+
         }
+    }
+
+    static getDerivedStateFromProps = (prevProps, prevState) => {
+        console.log('getDerivedStateFromProps')
+        console.log('getDerivedStateFromProps ::prevProps', prevProps)
+        console.log('getDerivedStateFromProps ::prevState', prevState)
+    }
+
+    componentDidMount(prevState) {
+        console.log('componentDidMount :: prevState', prevState)
+        window.addEventListener('resize', () => this.setState({ viewport: window.innerWidth }))
+        console.log('this.props.location', this.props.match.params.product)
+    }
+    componentWillUnmount() {
+        window.removeEventListener('resize', () => { })
     }
 
     render() {
@@ -22,7 +40,7 @@ class Jeans extends Component {
                     <Header />
                     {/* Product */}
                     <div className="single-product-wrapper">
-                        <h2>Jeans<span className="dot"></span></h2>
+                        <h2>JACKETS<span className="dot"></span></h2>
                         <div className="product-filter">
                             <div className="dropdown">
                                 <button className="regular-button dropdown-button">Filter<FontAwesomeIcon className="arrow-icon" icon={faSortUp} /> </button>
@@ -70,9 +88,6 @@ class Jeans extends Component {
                                     <a href="https://www.linkedin.com/login" className="social" ><i className="fab fa-linkedin-in"></i></a>
                                 </div>
                             </div>
-                            {/* <div className="footer-item  right-footer">
-                                <p></p>
-                            </div> */}
                         </div>
                     </div>
                 </div>
@@ -81,4 +96,4 @@ class Jeans extends Component {
     }
 }
 
-export default Jeans
+export default withRouter(ProductTemplate)

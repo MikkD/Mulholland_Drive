@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-// import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import './Header.css';
 
 function Header(theLocation) {
@@ -7,11 +7,15 @@ function Header(theLocation) {
     const navbar = useRef()
 
     useEffect(() => {
+        // console.log('isActive FIRST useEffect', isActive)
         window.addEventListener('resize', () => {
             if (isActive && window.innerWidth > 550) {
+                // console.log('isActive BEFORE', isActive)
+                // console.log('CALLED USESTATE ')
                 setIsActive(false)
             }
         });
+
 
         //**********************************//
         // window.addEventListener('scroll', () => {
@@ -28,7 +32,11 @@ function Header(theLocation) {
             window.removeEventListener('scroll', () => window.innerWidth);
         }
 
+    })
+    useEffect(() => {
+        console.log('isActive AFTER', isActive)
     }, [isActive])
+
 
     return (
         <React.Fragment>
@@ -36,7 +44,7 @@ function Header(theLocation) {
                 <div className="flex-header">
                     <a href="#" className="logo">Mulholland Drive</a>
                     <div className="menu">
-                        <a style={{ color: "crimson" }} href="#">Go Back</a>
+                        <Link to={{ pathname: '/' }} style={{ color: "crimson" }} href="#">Go Back</Link>
                         <a href="#">Shop</a>
                         <a href="#">Contact</a>
                         <a href="#">Sign In</a>

@@ -23,6 +23,12 @@
   color: white;
   /* font-family: 'Darker-Grotesque'; */
 }
+h4{
+  padding: 5px 0px;
+}
+p{
+  opacity: 0.9;
+}
 /* .App{
   font-family: 'Bebas-Neue';
   background-color: black;
