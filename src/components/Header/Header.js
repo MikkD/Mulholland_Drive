@@ -1,41 +1,37 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import './Header.css';
+import { withRouter } from 'react-router-dom';
+const DEFAULT_WIDTH = 550;
 
-function Header(theLocation) {
+function Header(props) {
     const [isActive, setIsActive] = useState(false);
+    const isActiveRef = useRef(false);
+    isActiveRef.current = isActive;
     const navbar = useRef()
 
     useEffect(() => {
-        // console.log('isActive FIRST useEffect', isActive)
-        window.addEventListener('resize', () => {
-            if (isActive && window.innerWidth > 550) {
-                // console.log('isActive BEFORE', isActive)
-                // console.log('CALLED USESTATE ')
+        console.log('Hedaer with the new page')
+        const handleViewPortChange = () => {
+            // #1
+            if (isActiveRef.current && window.innerWidth > DEFAULT_WIDTH) {
                 setIsActive(false)
             }
-        });
-
-
-        //**********************************//
-        // window.addEventListener('scroll', () => {
-        //     if (theLocation.theLocation.location.pathname === "/") {
-        //         window.scrollY > 725 ?
-        //             navbar.current.style.backgroundColor = "black" : navbar.current.style.backgroundColor = "transparent"
-        //     }
-        // })
-        //**********************************//
-
-
-        return () => {
-            window.removeEventListener('resize', () => window.innerWidth);
-            window.removeEventListener('scroll', () => window.innerWidth);
         }
 
-    })
-    useEffect(() => {
-        console.log('isActive AFTER', isActive)
-    }, [isActive])
+        const handleScroll = () => {
+            props.match.params.product === undefined && window.scrollY > 725 ?
+                navbar.current.style.backgroundColor = "black" : navbar.current.style.backgroundColor = "transparent"
+            props.match.params.product !== undefined ? navbar.current.style.backgroundColor = "black" : navbar.current.style.backgroundColor = "transparent";
+
+        }
+        window.addEventListener('resize', handleViewPortChange)
+        window.addEventListener('scroll', handleScroll)
+        return () => {
+            window.removeEventListener('resize', handleViewPortChange);
+            window.removeEventListener('scroll', handleScroll);
+        }
+    }, [props.match])
 
 
     return (
@@ -44,14 +40,18 @@ function Header(theLocation) {
                 <div className="flex-header">
                     <a href="#" className="logo">Mulholland Drive</a>
                     <div className="menu">
-                        <Link to={{ pathname: '/' }} style={{ color: "crimson" }} href="#">Go Back</Link>
+                        <Link
+                            to={{ pathname: '/' }}
+                            style={props.match.params.product === undefined ? { display: "none" } : { color: "crimson", display: "inline-block" }} >Go Back</Link>
                         <a href="#">Shop</a>
                         <a href="#">Contact</a>
                         <a href="#">Sign In</a>
                         <a href="#">Bag<span className="dot"></span></a>
                     </div>
                     <a className="hidden-bag" href="#">Bag<span className="dot"></span></a>
-                    <div onClick={() => setIsActive(prevState => prevState = !prevState)} className="hamburger-wrapper">
+                    <div
+                        onClick={() => setIsActive(prevState => !prevState)}
+                        className="hamburger-wrapper">
                         <div className={isActive ? "hamburger-menu active" : "hamburger-menu"}>
                         </div>
                     </div>
@@ -80,4 +80,4 @@ function Header(theLocation) {
     )
 }
 
-export default Header;
+export default withRouter(Header);

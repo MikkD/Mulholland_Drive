@@ -1,0 +1,41 @@
+.dropdown{
+    position: relative;
+}
+
+.regular-button {
+    font-family: 'Bebas-Neue';
+    margin: 0px 5px;
+    padding: 10px 20px;
+    color: black;
+    opacity: 0.8;
+    border: 1px solid #ccc;
+    text-decoration: none;
+    outline: 1px solid transparent;
+    background-color: white;
+    transition: all 0.2s ease-in-out;
+}
+
+.dropdown-button {
+    position: relative;
+    padding-right: 40px !important;
+}
+
+.dropdown-items{
+    position: absolute;
+    top:40px;
+    left: 5px;
+    background-color: #e5e5e5;
+    line-height: 25px;
+    z-index: 1;
+    width: 120px;
+    font-size: 14px;
+    
+}
+
+.dropdown-item{
+    padding: 0px 5px;
+    cursor: pointer;
+}
+.dropdown-item:hover{
+background-color: #d8d7d5cf;
+}

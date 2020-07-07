@@ -1,13 +1,16 @@
 import React from 'react';
 import './App.css';
 import Header from './components/Header/Header';
-import FirstSection from './components/FirstSection/FirstSection';
+import Hero from './components/Hero/Hero';
+import ShopItems from './components/ShopItems/ShopItems';
 
-function App(props) {
+
+function App() {
   return (
     <div className="App">
-      <Header theLocation={props} />
-      <FirstSection />
+      <Header />
+      <Hero />
+      <ShopItems />
     </div >
   )
 }
