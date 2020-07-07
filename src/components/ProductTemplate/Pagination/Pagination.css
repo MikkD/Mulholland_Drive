@@ -1,0 +1,27 @@
+.pagination{
+    width: 90%;
+    text-align: center;
+    margin: 25px auto;
+    border-bottom: 1px solid rgb(214, 214, 214,0.5);
+
+}
+
+.pagination a{
+    display: inline-block;
+    padding: 5px 10px;
+    color:black;
+    opacity: 0.9;
+    font-size: 20px;
+    text-decoration: none;
+    border:1px solid transparent;
+}
+.pagination a:hover:first-child,
+.pagination a:hover:last-child{
+    border:1px solid grey;
+}
+.pagination-span{
+padding: 0px 10px;
+text-transform: uppercase;
+}
+
+/*  */

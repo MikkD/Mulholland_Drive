@@ -7,6 +7,8 @@ import { faSortUp } from '@fortawesome/free-solid-svg-icons';
 import { getProduct } from './utils';
 import { withRouter } from 'react-router-dom';
 import DropDownMenu from '../ProductTemplate/DropdownMenu/DropdownMenu';
+import QuantityDropDown from '../ProductTemplate/QuantityDropDown/QuantityDropDown';
+import Pagination from './Pagination/Pagination';
 
 
 class ProductTemplate extends Component {
@@ -42,19 +44,9 @@ class ProductTemplate extends Component {
                     {/* Product */}
                     <div className="single-product-wrapper">
                         <h2>{this.props.match.params.product}<span className="dot"></span></h2>
-                        {/* Filter */}
-
                         <div className="product-filter">
                             <DropDownMenu />
-
-
-                            {this.state.viewport > 450 ?
-                                <div className="quantity-filter">
-                                    <button className="dropdown-button regular-button"><FontAwesomeIcon className="arrow-icon" icon={faSortUp} />
-                                1</button> of 7  <a className="regular-button">View All</a>
-                                </div>
-                                : null}
-
+                            <QuantityDropDown />
                         </div>
 
 
@@ -75,7 +67,13 @@ class ProductTemplate extends Component {
                                 )
                             })}
                         </div>
+
                     </div>
+
+                    {/* Pagination */}
+                    <Pagination />
+
+
                     {/* Footer */}
                     <div className="product-footer">
                         <div className="product-footer-wrapper">

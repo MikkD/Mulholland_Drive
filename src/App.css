@@ -29,6 +29,15 @@ h4{
 p{
   opacity: 0.9;
 }
+
+a:hover{
+  opacity: 1 !important;
+}
+a:active{
+  border: 1px solid transparent !important;
+}
+
+
 /* .App{
   font-family: 'Bebas-Neue';
   background-color: black;

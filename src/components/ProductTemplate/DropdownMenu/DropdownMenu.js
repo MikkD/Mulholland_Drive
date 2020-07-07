@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import './DropdownMenu.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSortUp } from '@fortawesome/free-solid-svg-icons';
@@ -10,8 +10,13 @@ function DropDownMenu() {
     return (
         <React.Fragment>
             <div className="dropdown">
-                <button onClick={() => setDropDownIsOpen(prevState => !prevState)} className="regular-button dropdown-button">Filter
-                    <FontAwesomeIcon className="arrow-icon" icon={faSortUp} />
+                <button
+                    onBlur={() => setDropDownIsOpen(false)}
+                    onClick={() => setDropDownIsOpen(prevState => !prevState)}
+                    className="regular-button dropdown-button">Filter
+                    <FontAwesomeIcon
+                        style={DropDownIsOpen ? { transform: 'rotate(180deg)', top: '0' } : null}
+                        className="arrow-icon" icon={faSortUp} />
                 </button>
                 {DropDownIsOpen ? <ul className="dropdown-items">
                     {DropDownOptions.map((option, index) => <li key={index} className="dropdown-item">{option}</li>)}
