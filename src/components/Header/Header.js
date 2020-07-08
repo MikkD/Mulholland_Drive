@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import './Header.css';
 import { withRouter } from 'react-router-dom';
+
 const DEFAULT_WIDTH = 550;
 
 function Header(props) {
@@ -12,18 +13,18 @@ function Header(props) {
 
     useEffect(() => {
         console.log('Hedaer with the new page')
+        console.log('props', props)
+        // #1
         const handleViewPortChange = () => {
-            // #1
             if (isActiveRef.current && window.innerWidth > DEFAULT_WIDTH) {
                 setIsActive(false)
             }
         }
-
+        // #2
         const handleScroll = () => {
             props.match.params.product === undefined && window.scrollY > 725 ?
                 navbar.current.style.backgroundColor = "black" : navbar.current.style.backgroundColor = "transparent"
             props.match.params.product !== undefined ? navbar.current.style.backgroundColor = "black" : navbar.current.style.backgroundColor = "transparent";
-
         }
         window.addEventListener('resize', handleViewPortChange)
         window.addEventListener('scroll', handleScroll)
@@ -36,17 +37,22 @@ function Header(props) {
 
     return (
         <React.Fragment>
-            <header ref={navbar} className="header">
+            <header
+                ref={navbar} className="header"
+                style={props.match.params.product === undefined ? { position: "fixed" } : { position: "relative" }}>
                 <div className="flex-header">
                     <a href="#" className="logo">Mulholland Drive</a>
                     <div className="menu">
                         <Link
                             to={{ pathname: '/' }}
-                            style={props.match.params.product === undefined ? { display: "none" } : { color: "crimson", display: "inline-block" }} >Go Back</Link>
+                            style={props.match.params.product === undefined ?
+                                { display: "none" } :
+                                { color: "crimson", display: "inline-block" }} >
+                            Go Back</Link>
                         <a href="#">Shop</a>
                         <a href="#">Contact</a>
                         <a href="#">Sign In</a>
-                        <a href="#">Bag<span className="dot"></span></a>
+                        <Link to={{ pathname: '/ShoppingBag/XXXX' }} >Bag<span className="dot"></span></Link>
                     </div>
                     <a className="hidden-bag" href="#">Bag<span className="dot"></span></a>
                     <div
@@ -64,7 +70,7 @@ function Header(props) {
                         <li><a href="#">Shop</a></li>
                         <li><a href="#">Contact</a></li>
                         <li><div className="divider"></div></li>
-                        <li><a href="#">Bag</a></li>
+                        <li><Link to={{ pathname: '/ShoppingBag' }}>Bag</Link></li>
                         <li><div className="divider"></div></li>
                         <li><a className="social-link" href="#">Facebook</a></li>
                         <li><a className="social-link" href="#">Instagram</a></li>

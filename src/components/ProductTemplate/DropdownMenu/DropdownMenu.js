@@ -7,6 +7,7 @@ function DropDownMenu() {
     const [DropDownIsOpen, setDropDownIsOpen] = useState(false);
     const DropDownOptions = ['By category', 'Price: High to low', 'Price: Low to high']
 
+
     return (
         <React.Fragment>
             <div className="dropdown">

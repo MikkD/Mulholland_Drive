@@ -23,20 +23,41 @@
   color: white;
   /* font-family: 'Darker-Grotesque'; */
 }
+h2{
+  font-size: 36px;
+  padding: 10px 0px;
+  }
+  h3{
+    font-size: 24px;
+  }
 h4{
   padding: 5px 0px;
 }
+
 p{
   opacity: 0.9;
+  line-height: 20px;
 }
-
-a:hover{
-  opacity: 1 !important;
+a{
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.2 ease-in-out;
+  color: white;
+  text-decoration: underline;
+  }
+ 
+  
+button{    
+  border-radius: 1px;
+  border: 1px solid transparent;
+  background: #ffffffe0;
 }
-a:active{
-  border: 1px solid transparent !important;
+button:hover{
+  background-color: white;
 }
-
+button:active{
+  transform: scale(0.99);
+}
 
 /* .App{
   font-family: 'Bebas-Neue';

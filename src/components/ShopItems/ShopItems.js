@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import './ShopItems.css';
+import Footer from '../ProductTemplate/Footer/Footer';
 
 
 class ShopItems extends Component {
@@ -52,19 +53,21 @@ class ShopItems extends Component {
                             const { title, description, img } = el;
                             return (
                                 <div key={index} className="flex-item">
-                                    <img className="image-item" src={require(`${img}`)} />
-                                    <div className="image-desciption">
-                                        <h2>{title}</h2>
-                                        <p>{description}</p>
-                                        {/* <Link to={`/ProductTemplate/?name=${title}`}>Discover Now</Link> */}
-                                        <Link to={`/ProductTemplate/${title}`}>Discover Now</Link>
-                                    </div>
+                                    <Link to={`/ProductTemplate/${title}`}>
+                                        <img className="image-item" src={require(`${img}`)} />
+                                        <div className="image-desciption">
+                                            <h2>{title}</h2>
+                                            <p>{description}</p>
+                                            <Link to={`/ProductTemplate/${title}`}>Discover Now</Link>
+                                        </div>
+                                    </Link>
                                 </div>
 
                             )
                         })}
                     </div>
                 </div>
+                <Footer style={{ background: '#1d1d23' }} />
             </React.Fragment>
         )
     }
