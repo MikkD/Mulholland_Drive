@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import './QuantityDropDown.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSortUp } from '@fortawesome/free-solid-svg-icons';
@@ -24,7 +24,7 @@ export default function QuantityDropDown() {
                         </ul> :
                         null}
 
-                    <a className="regular-button">View All</a>
+                    <button className="regular-button">View All</button>
                 </div>
                 : null}
         </React.Fragment>

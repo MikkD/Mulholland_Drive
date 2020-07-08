@@ -1,7 +1,8 @@
 .pagination{
     width: 90%;
     text-align: center;
-    margin: 25px auto;
+    margin: 0px auto;
+    padding: 40px 0px;
     border-bottom: 1px solid rgb(214, 214, 214,0.5);
 }
 
@@ -12,16 +13,25 @@
     opacity: 0.9;
     font-size: 20px;
     text-decoration: none;
-    border:1px solid transparent;
+    border:2px solid transparent;
+    border-radius: 2px;
 }
 .pagination a:hover:first-child,
 .pagination a:hover:last-child{
-    border:1px solid grey;
+    background-color: #c3c3c3;
+}
+.pagination a:hover:not(:first-child):not(:last-child){
+    background-color: #d73e17;
 }
 .pagination-span{
 padding: 0px 10px;
 text-transform: uppercase;
 }
+.pagi-wrapper{
+    border-bottom: 3px solid #d73e15;
+    display: inline-block;
+}
+
 
 @media only screen and (max-width: 375px) {
     .pagination a:not(:last-child) {

@@ -1,0 +1,216 @@
+.parent-block{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+h2{
+    font-size: 1.8em;
+    font-weight: bold;
+}
+h5{
+    margin:10px 0px;
+    padding: 0px 20px;
+}
+a{
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color:var(--dark-mode-link-color);
+    margin: 15px 10px;
+    text-decoration: none;
+    border: 1px solid var(--dark-mode-link-color);
+    border-radius: 50%;
+    height: 40px;
+    width: 40px;
+    transition: 0.2s ease-in-out;
+}
+a:hover{
+    color:var(--dark-mode-link-hover-color);
+    border: 1px solid var(--dark-mode-link-hover-color);
+}
+
+.button{
+    color:rgba(255, 255, 255, 0.9);
+    border: none;
+    cursor: pointer;
+    padding: 10px 25px;
+    border-radius: 5px;
+    background:var(--red-gardient-color);
+    margin: 10px 0px;
+    transition: 0.3s ease-in-out;
+    transition: transform 80ms ease-in;
+    font-weight: bold;
+    text-transform: capitalize;
+    outline: none;
+}
+
+.button:active{
+    transform: scale(0.97);
+}
+
+.button:hover{
+    background:var(--red-gardient-color);
+    color: var(--dark-mode-font-color);
+    color:rgba(255, 255, 255, 1);
+}
+
+.sign-in-form,.sign-up-form{
+    text-align: center;
+    width: 80%;
+}
+
+input{
+    display: block;
+    width: 90%;
+    margin: 10px auto;
+    background-color: var(--dark-mode-input-bg-color);
+    color:var(--dark-mode-font-color);
+    border: none;
+    outline: none;
+    border-radius: 3px;
+    padding: 10px 10px;
+    
+}
+
+.flex-main{
+    width: 80%;
+    height: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--dark-mode-flex-main-bg-color);
+    -webkit-box-shadow: 10px 9px 43px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 10px 9px 43px 0px rgba(0,0,0,0.75);
+    box-shadow: 10px 9px 43px 0px rgba(0,0,0,0.75);
+    border-radius: 5px;
+    position: relative;
+    overflow: hidden;
+}
+
+
+.flex-sign-in-left{
+    height: 100%;
+    flex-basis: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    /* after absolute positioning */
+    opacity: 0;
+    opacity: 1;
+    transition: all 0.6s ease-in-out;
+    z-index: 1;
+   
+}
+.flex-sign-up-right{
+    height: 100%;
+    flex-basis: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    /* after absolute positioning */
+    opacity: 0;
+    transition: all 0.6s ease-in-out;
+    transform: translateX(-20%);
+   
+}
+
+.overlay-container{
+    position: absolute;
+    height: 100%;
+    width: 100%;
+
+}
+.overlay{
+    /* color:var(--light-mode-link-color); */
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    /* background: linear-gradient(45deg, #9E1B38, #F05350 ); */
+    /* background: linear-gradient(45deg, #D70652, #FF025E); */
+    /* background: linear-gradient(45deg, #601343, #F4528D); */
+    /* background: linear-gradient(45deg,#e9e4f0,#d3cce3); */
+    /* background: linear-gradient(45deg,#eb3349,#f45c43) */
+}
+.overlay-panel{
+    width: 50%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: var(--red-gardient-color);
+    /* transition:  transform 0.6s ease-in-out; */
+    transition:  all 0.6s ease-in-out;
+}
+.overlay-sign-in-button,.overlay-sign-up-button{
+    background: var(--dark-mode-flex-main-bg-color) !important;
+    transition: all 0.2s ease-in;
+}
+.overlay-sign-in-button,.overlay-sign-up-button:hover{
+    background: var(--dark-mode-flex-main-bg-color);
+    opacity: 1;
+}
+
+.sign-in-overlay{
+    z-index: -1;
+    transform: translateX(20%);
+    /* animation-name: signIn; */
+    /* animation-duration: 1s; */
+}
+
+.animate{
+    animation-name: animate;
+    animation-duration: 1s;
+    animation-timing-function: ease-in-out;
+}
+
+/* .sign-up-overlay{
+    transform: translateX(0%);
+    animation-name: signUp;
+    animation-duration: 0.5s;
+    animation-timing-function:ease-in-out;
+} */
+}
+
+@keyframes animate{
+    0%   {opacity:0}
+    50%   {color:green}
+    100%  {opacity:1}
+}
+
+
+@media screen and (max-width: 650px) {
+    .flex-main{
+        width: 90%;
+        height: 90%;
+        flex-wrap: wrap;
+    }
+    
+  }
+@media screen and (max-width: 550px) {
+    .flex-main{
+        width: 90%;
+        height: 100%;
+    }
+    .flex-sign-in-left,.flex-sign-up-right{
+        height: 50%;
+        flex-basis: 100%;
+    }
+    .overlay{
+        flex-direction: column;
+    }
+    .overlay-container {
+        height: 100%;
+    }
+    .overlay-panel{
+        height: 100%;
+        width: 100%;
+    }
+
+  }

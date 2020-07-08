@@ -3,7 +3,7 @@ import { getProduct } from '../utils';
 import { withRouter } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import './ProductItems.css';
-
+import ScrollToTopButton from '../../ScrollToTopButton/ScrollToTopButton';
 
 export class ProductItems extends Component {
     constructor(props) {
@@ -21,7 +21,7 @@ export class ProductItems extends Component {
                         return (
                             <div key={index} className="product-item-tile">
                                 <Link to={{ pathname: '/' }} className="product-item-link-wrapper" >
-                                    <img src={item.image} />
+                                    <img src={item.image} alt="product" />
                                     <Link to={{ pathname: '/' }} className="regular-button">Add to Cart</Link>
                                 </Link>
                                 <div className="product-item-tile-description">
@@ -32,6 +32,7 @@ export class ProductItems extends Component {
                             </div>
                         )
                     })}
+                    <ScrollToTopButton />
                 </div>
             </React.Fragment>
         )

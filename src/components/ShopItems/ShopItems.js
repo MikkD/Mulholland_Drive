@@ -46,7 +46,8 @@ class ShopItems extends Component {
                     <div className="items-heading">
                         <h2>New Arrivals</h2>
                         <p>Check out our latest arrivals for the upcoming season</p>
-                        <a href="#" >See full collection here</a>
+                        {/* <a href="#" >See full collection here</a> */}
+                        <p className="underline">See full collection here</p>
                     </div>
                     <div className="flex-parent">
                         {this.state.shopOptions.map((el, index) => {
@@ -58,7 +59,7 @@ class ShopItems extends Component {
                                         <div className="image-desciption">
                                             <h2>{title}</h2>
                                             <p>{description}</p>
-                                            <Link to={`/ProductTemplate/${title}`}>Discover Now</Link>
+                                            <p className="underline">Discover Now</p>
                                         </div>
                                     </Link>
                                 </div>
@@ -67,7 +68,7 @@ class ShopItems extends Component {
                         })}
                     </div>
                 </div>
-                <Footer style={{ background: '#1d1d23' }} />
+                {/* <Footer style={{ background: '#1d1d23' }} /> */}
             </React.Fragment>
         )
     }

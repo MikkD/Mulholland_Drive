@@ -14,9 +14,9 @@ export class ShoppingBag extends Component {
     render() {
         return (
             <React.Fragment>
-                <Header />
+                {/* <Header /> */}
                 <div className="sb-container">
-                    {/*  */}
+                    {/* sb-header */}
                     <div className="sb-header">
                         <div className="sb-upper-header flex-grow-1">
                             <h3>Shopping Bag</h3>
@@ -30,15 +30,15 @@ export class ShoppingBag extends Component {
                             </div>
                         </div>
                     </div>
-                    {/*  */}
+                    {/* sb-body */}
                     <div className="sb-body">
                         <div className="sb-item flex-grow-1">
-                            <img className="sb-image" style={{ width: '100px', height: '100px' }}
+                            <img className="sb-image" alt="item1" style={{ width: '100px', height: '100px' }}
                                 src={require('./bag.png')} />
                             <div className="sb-item-desctiption">
                                 <p>Item name</p>
                                 <p>Description</p>
-                                <a className="remove-item-button">remove</a>
+                                <p className="remove-item-button underline">remove</p>
                             </div>
                         </div>
 
@@ -51,7 +51,7 @@ export class ShoppingBag extends Component {
                             </span>
                         </div>
                     </div>
-                    {/*  */}
+                    {/* sb-footer */}
                     <div className="sb-item sb-footer">
                         <div className="subtotal flex-grow-1 "><h3>Your subtotal is : 500$</h3></div>
                         <div className="shrink">

@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import './ProductTemplate.css';
 import Header from '../Header/Header';
 import DropDownMenu from '../ProductTemplate/DropdownMenu/DropdownMenu';
 import QuantityDropDown from '../ProductTemplate/QuantityDropDown/QuantityDropDown';
 import Pagination from './Pagination/Pagination';
 import ProductItems from './ProductItems/ProductItems';
-import Footer from './Footer/Footer';
 
 class ProductTemplate extends Component {
     constructor(props) {
@@ -35,7 +33,7 @@ class ProductTemplate extends Component {
         return (
             <React.Fragment>
                 <div className="main-product-section">
-                    <Header />
+                    {/* <Header /> */}
                     <div className="single-product-wrapper">
                         <h2>{this.props.match.params.product}<span className="dot"></span></h2>
                         <div className="product-filter">
@@ -45,7 +43,7 @@ class ProductTemplate extends Component {
                         <ProductItems />
                     </div>
                     <Pagination />
-                    <Footer />
+                    {/* <Footer /> */}
                 </div>
             </React.Fragment>
         )

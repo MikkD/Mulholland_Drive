@@ -1,10 +1,13 @@
-/* Footer */
 .product-footer{
-    /* background-color: black; */
+    /* position: absolute;
+    width: 100%;
+    bottom: 0; */
     background-color: #1d1d1d;
     min-height: 200px;
     display: flex;
     align-items: center;
+    
+   
 }
 
 .product-footer-wrapper{
@@ -13,7 +16,7 @@
     margin: 0 auto;
     padding: 10px 25px;
     box-sizing: border-box;
-    /* border: 1px solid crimson; */
+    
     display: flex;
     align-items: center;
     justify-content: center;
@@ -45,5 +48,12 @@
     justify-content: center;
 }
 .footer-item h2{
-     padding :5px 0px;
+padding :5px 0px;
 }
+
+
+@media only screen and (max-width: 450px) {
+    .middle-footer{
+        display: none;
+    }
+    }
