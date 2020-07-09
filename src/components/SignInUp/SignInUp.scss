@@ -1,3 +1,4 @@
+
 .parent-block{
     width: 100%;
     height: 100vh;
@@ -9,10 +10,7 @@ h2{
     font-size: 1.8em;
     font-weight: bold;
 }
-h5{
-    margin:10px 0px;
-    padding: 0px 20px;
-}
+
 a{
     display: inline-flex;
     align-items: center;
@@ -125,7 +123,6 @@ input{
 
 }
 .overlay{
-    /* color:var(--light-mode-link-color); */
     height: 100%;
     display: flex;
     justify-content: center;
@@ -145,7 +142,6 @@ input{
     align-items: center;
     justify-content: center;
     background: var(--red-gardient-color);
-    /* transition:  transform 0.6s ease-in-out; */
     transition:  all 0.6s ease-in-out;
 }
 .overlay-sign-in-button,.overlay-sign-up-button{
@@ -160,8 +156,6 @@ input{
 .sign-in-overlay{
     z-index: -1;
     transform: translateX(20%);
-    /* animation-name: signIn; */
-    /* animation-duration: 1s; */
 }
 
 .animate{
@@ -169,13 +163,6 @@ input{
     animation-duration: 1s;
     animation-timing-function: ease-in-out;
 }
-
-/* .sign-up-overlay{
-    transform: translateX(0%);
-    animation-name: signUp;
-    animation-duration: 0.5s;
-    animation-timing-function:ease-in-out;
-} */
 }
 
 @keyframes animate{

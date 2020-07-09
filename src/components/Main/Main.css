@@ -1,0 +1,107 @@
+@font-face{
+  font-family: 'Bebas-Neue';
+  src: 
+  /* url('./fonts/Bebas_Neue/BebasNeue-Regular.ttf') */
+  url('../../fonts/Bebas_Neue//BebasNeue-Regular.ttf');
+}
+
+@font-face{
+  font-family: 'Darker-Grotesque';
+  src:  
+        /* url('./fonts/Darker_Grotesque/DarkerGrotesque-Light.ttf') */
+        url('../../fonts/Darker_Grotesque/DarkerGrotesque-Medium.ttf')
+        /* url('./fonts/Darker_Grotesque/DarkerGrotesque-Regular.ttf') */
+        /* url('./fonts/Darker_Grotesque/DarkerGrotesque-SemiBold.ttf') */
+        /* url('./fonts/Darker_Grotesque/DarkerGrotesque-Bold.ttf') */
+        /* url('./fonts/Darker_Grotesque/DarkerGrotesque-ExtraBold.ttf') */
+        /* url('./fonts/Darker_Grotesque/DarkerGrotesque-Black.ttf') */
+}
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,800');
+
+:root{
+font-family: 'Bebas-Neue';
+background-color: black;
+color: white;
+scroll-behavior: smooth;
+/* font-family: 'Darker-Grotesque'; */
+/* font-family: 'Montserrat'; */
+/* --dark-mode-bg-color:  #131313;  */
+/* --dark-mode-bg-color:  #303033; */
+--dark-mode-bg-color:  #f5fbff;
+--dark-mode-flex-main-bg-color:  #131313;
+--dark-mode-heding-color: white ;
+--dark-mode-font-color: #f5f5f7;
+--dark-mode-link-color: #aba8a8de;
+--dark-mode-link-hover-color: #ecececde;
+--dark-mode-input-bg-color: #404040;
+--dark-mode-button-color: #ecececde;
+--red-gardient-color:linear-gradient(45deg, #9E1B38, #F05350 );
+
+/* Light mode */
+/* --light-mode-bg-color:  #f6f5f7;
+--light-mode-flex-main-bg-color:  #fff ;
+--light-mode-heding-color:  #1d1d1f;
+--light-mode-font-color: #86868b;
+--light-mode-link-color: #333;
+--light-mode-link-hover-color: #rgb(32, 32, 32);
+--light-mode-input-bg-color: #ecececde;
+--light-mode-button-bg-color: #ff4b2b; */
+
+}
+
+h2{
+  font-size: 36px;
+  padding: 10px 0px;
+  }
+h3{
+  font-size: 24px;
+  }
+h4{
+  padding: 5px 0px;
+}
+h5{
+  margin:10px 0px;
+  padding: 0px 20px;
+}
+p{
+  opacity: 0.9;
+  line-height: 20px;
+}
+a{
+  text-decoration: none;
+  cursor: pointer;
+  color: white;
+  text-decoration: underline;
+  transition: all 0.3 ease-in-out;
+  border-radius: 1px;
+  }
+  a:hover{
+    opacity: 1;
+  }
+  a:active{
+    transform: scale(0.99);
+  }
+  .underline{
+    text-decoration: underline;
+    cursor: pointer;
+    /* color: #d73e15; */
+  }
+  
+button{    
+  border-radius: 1px;
+  border: 1px solid transparent;
+  background: #ffffffe0;
+}
+button:hover{
+  background-color: white;
+}
+button:active{
+  transform: scale(0.99);
+}
+
+/* .App{
+  font-family: 'Bebas-Neue';
+  background-color: black;
+  color: white;
+} */
+

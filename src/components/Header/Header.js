@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import './Header.css';
 import { withRouter } from 'react-router-dom';
+import { auth } from '../../firebase/firebse.utils';
 
 const DEFAULT_WIDTH = 550;
 
@@ -52,12 +53,12 @@ function Header(props) {
                             style={props.location.pathname === '/' ?
                                 { display: "none" } :
                                 { color: "crimson", display: "inline-block" }}
-
-                        >
-                            Go Back</Link>
+                        >Go Back</Link>
                         <Link>Shop</Link>
                         <Link>Contact</Link>
-                        <Link to={{ pathname: '/SignInUp' }}>Sign In</Link>
+                        {props.currentUser !== null ?
+                            <Link onClick={() => auth.signOut()}>Sign Out</Link> :
+                            <Link to={{ pathname: '/SignInUp' }}>Sign In</Link>}
                         <Link to={{ pathname: '/ShoppingBag' }} >Bag<span className="dot"></span></Link>
                     </div>
                     <a className="hidden-bag" href="#">Bag<span className="dot"></span></a>
