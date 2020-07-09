@@ -13,7 +13,7 @@ function Header(props) {
     const navbar = useRef()
 
     useEffect(() => {
-        // console.log('useffect / props :', props)
+        console.log('useffect / props in header:', props)
         // console.log('useffect / props.history :', props.history)
         // console.log('useffect / props.location :', props.location)
         // console.log('useffect / props.match :', props.match)

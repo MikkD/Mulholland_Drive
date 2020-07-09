@@ -8,6 +8,7 @@ import Header from './components/Header/Header';
 import Footer from './components/ProductTemplate/Footer/Footer';
 import SignInUp from './components/SignInUp/SignInUp';
 import { auth } from './firebase/firebse.utils';
+import { createUserProfile } from './firebase/firebse.utils';
 
 
 
@@ -15,7 +16,7 @@ class App extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      currentUser: []
+      currentUser: null
     }
   }
 
@@ -23,10 +24,22 @@ class App extends React.Component {
 
   // We subscribe on Firebase to see who is currenlty singed in
   componentDidMount() {
-    this.unsubscribeFromAuth = auth.onAuthStateChanged(user => {
-      this.setState({ currentUser: user })
-      console.log('user', user)
-      console.log('this.state.currentUser', this.state.currentUser)
+    this.unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
+      if (userAuth) {
+        // Берём только что зарегестрированного 
+        // либо уже сущестующего пользователя из базы данных
+        const userRef = await createUserProfile(userAuth);
+        userRef.onSnapshot(snapShot => {
+          this.setState({
+            currentUser: {
+              ...snapShot.data(),
+              id: snapShot.id,
+            }
+          })
+        })
+      } else {
+        this.setState({ currentUser: userAuth })
+      }
     })
   }
 

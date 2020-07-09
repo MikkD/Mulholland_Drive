@@ -1,61 +1,31 @@
 import React, { useState, useEffect, useRef } from 'react';
 import './SignInUp.scss';
 import { signInWithGoogle, signInWithFacebook, signInWithTwitter } from '../../firebase/firebse.utils';
+import { auth, createUserProfile } from '../../firebase/firebse.utils';
+import { signUpSlide, signInSlide } from './Animations';
 
 function SignInUp() {
-    // Animation
     const signUpOverlay = useRef();
     const signInOverlay = useRef();
     const signUpForm = useRef();
     const signInForm = useRef();
 
-    const signUpSlide = () => {
-        // signUpverlay - Right / Moved to the left and make it dissapear
-        dissapear(signUpOverlay, 'translateX(-100%)');
-        // signInOverlay - Left / Made it visibble with sliding effect
-        showUp(signInOverlay, 'translateX(0%)');
-        // signInForm - Left  /  Moved to right and make it dissapear
-        dissapear(signInForm, 'translateX(100%)');
-        // signUpForm - Right  /  Made it visible with sliding effect
-        showUp(signUpForm, 'translateX(0%)');
-    }
-    const signInSlide = () => {
-        // signInOverlay - Left / Moved to right and make it dissapear
-        dissapear(signInOverlay, 'translateX(100%)');
-        // SignUpForm - right / Moved to left and make it dissapear
-        dissapear(signUpForm, 'translateX(-100%)');
-        // SignUpOverlay - left / Moved to right and make it visible
-        showUp(signUpOverlay, 'translateX(0%)');
-        // SignUpOverlay - / Made it visible with sliding effect
-        showUp(signInForm, 'translateX(0%)');
-    }
-    const showUp = (element, translate) => {
-        element.current.style.transform = `${translate}`;
-        element.current.style.opacity = '1';
-        element.current.style.zIndex = '1';
-    }
-    const dissapear = (element, translate) => {
-        element.current.style.transform = `${translate}`;
-        element.current.style.opacity = '0';
-        element.current.style.zIndex = '0';
-    }
-
-    //Logic
-    const [signInFormValues, setSignInFormValues] = useState({ name: '', password: '' });
+    //*************Logic************
+    const [signInFormValues, setSignInFormValues] = useState({ name: '', password: '', email: '' });
 
     const handleSignInSubmitChange = (e) => {
         setSignInFormValues({ ...signInFormValues, [e.target.name]: e.target.value })
-        // WHY NOT WORKING ?????
-        // setForm((state) => ({
-        //     ...state,
-        //     [e.target.name]: e.target.value
-        // }))
     }
 
-    const handleSingInForm = (event) => {
+    const handleSingInForm = async event => {
         event.preventDefault();
-        setSignInFormValues({ name: '', password: '' })
-
+        try {
+            const { user } = await auth.createUserWithEmailAndPassword(signInFormValues.email.trim().toString(), signInFormValues.password.trim())
+            await createUserProfile(user)
+            setSignInFormValues({ name: '', password: '', email: '' })
+        } catch (err) {
+            console.log('err', err)
+        }
     }
 
 
@@ -98,16 +68,32 @@ function SignInUp() {
                         <h2>Create Account</h2>
                         <form action="#" className="sign-up-form">
                             <div className="icons-container">
-                                <a href="https://www.facebook.com/login" className="social" ><i className="fab fa-facebook-f"></i></a>
-                                <a href="https://accounts.google.com/signin" className="social" ><i className="fab fa-google-plus-g"></i></a>
-                                <a href="https://www.linkedin.com/login" className="social" ><i className="fab fa-twitter"></i></a>
+                                <a onClick={signInWithFacebook} className="social" ><i className="fab fa-facebook-f"></i></a>
+                                <a onClick={signInWithGoogle} className="social" ><i className="fab fa-google-plus-g"></i></a>
+                                <a onClick={signInWithTwitter} className="social" ><i className="fab fa-twitter"></i></a>
                             </div>
                             <h5>Or use your email for registration</h5>
-                            <input name="name" placeholder="Name" />
-                            <input name="email" placeholder="Email" />
-                            <input name="password" placeholder="Password" />
+                            <input
+                                value={signInFormValues.name}
+                                onChange={handleSignInSubmitChange}
+                                name="name"
+                                placeholder="Name" />
+                            <input
+                                value={signInFormValues.password}
+                                onChange={handleSignInSubmitChange}
+                                type="password"
+                                name="password"
+                                placeholder="Password" />
+                            <input
+                                value={signInFormValues.email}
+                                onChange={handleSignInSubmitChange}
+                                name="email"
+                                placeholder="Email" />
+                            <button
+                                type="submit"
+                                onClick={handleSingInForm}
+                                className="button">Sign Up</button>
                         </form>
-                        <button className="button">Sign Up</button>
                     </div>
                     {/* Overlay */}
                     <div className="overlay-container">
@@ -116,7 +102,7 @@ function SignInUp() {
                                 <h2>Welcome Back</h2>
                                 <h5>Enter your personal details and start journey with us</h5>
                                 <button
-                                    onClick={signInSlide}
+                                    onClick={() => signInSlide({ signUpOverlay, signInOverlay, signInForm, signUpForm })}
                                     className="button overlay-sign-in-button">Sign In</button>
                             </div>
 
@@ -124,7 +110,7 @@ function SignInUp() {
                                 <h2>Hello Friend</h2>
                                 <h5>To keep connected with us please login with your personal info</h5>
                                 <button
-                                    onClick={signUpSlide}
+                                    onClick={() => signUpSlide({ signUpOverlay, signInOverlay, signInForm, signUpForm })}
                                     className="button overlay-sign-up-button">Sign Up</button>
                             </div>
                         </div>
