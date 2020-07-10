@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import './Header.css';
 import { withRouter } from 'react-router-dom';
 import { auth } from '../../firebase/firebse.utils';
+import firebase from 'firebase';
 
 const DEFAULT_WIDTH = 550;
 
@@ -30,8 +31,6 @@ function Header(props) {
         const handleScroll = () => {
             props.location.pathname === '/' && window.scrollY > 725 ?
                 navbar.current.style.backgroundColor = "black" : navbar.current.style.backgroundColor = "null"
-
-
         }
         window.addEventListener('resize', handleViewPortChange)
         window.addEventListener('scroll', handleScroll)
@@ -57,7 +56,7 @@ function Header(props) {
                         <Link>Shop</Link>
                         <Link>Contact</Link>
                         {props.currentUser !== null ?
-                            <Link onClick={() => auth.signOut()}>Sign Out</Link> :
+                            <Link onClick={() => firebase.auth().signOut()}>Sign Out</Link> :
                             <Link to={{ pathname: '/SignInUp' }}>Sign In</Link>}
                         <Link to={{ pathname: '/ShoppingBag' }} >Bag<span className="dot"></span></Link>
                     </div>

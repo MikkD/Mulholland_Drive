@@ -7,8 +7,7 @@ import ShoppingBag from './components/ShoppingBag/ShoppingBag';
 import Header from './components/Header/Header';
 import Footer from './components/ProductTemplate/Footer/Footer';
 import SignInUp from './components/SignInUp/SignInUp';
-import { auth } from './firebase/firebse.utils';
-import { createUserProfile } from './firebase/firebse.utils';
+import firebase from 'firebase';
 
 
 
@@ -20,32 +19,16 @@ class App extends React.Component {
     }
   }
 
-  unsubscribeFromAuth = () => null
-
-  // We subscribe on Firebase to see who is currenlty singed in
   componentDidMount() {
-    this.unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
-      if (userAuth) {
-        // Берём только что зарегестрированного 
-        // либо уже сущестующего пользователя из базы данных
-        const userRef = await createUserProfile(userAuth);
-        userRef.onSnapshot(snapShot => {
-          this.setState({
-            currentUser: {
-              ...snapShot.data(),
-              id: snapShot.id,
-            }
-          })
-        })
-      } else {
-        this.setState({ currentUser: userAuth })
-      }
+    firebase.auth().onAuthStateChanged((firebaseUser) => {
+      this.setState({ currentUser: firebaseUser })
+      console.log('firebaseUser is logged in with email : ', firebaseUser.email, 'and id : ', firebaseUser.uid)
+      // При помощи uid достаём товары из базы данных и кидаем в корзину 
     })
   }
 
-  componentWillMount() {
-    this.unsubscribeFromAuth()
-  }
+
+
 
 
 
@@ -70,3 +53,4 @@ class App extends React.Component {
 }
 
 export default App;
+

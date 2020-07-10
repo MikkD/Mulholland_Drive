@@ -1,8 +1,10 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, Children } from 'react';
 import './SignInUp.scss';
 import { signInWithGoogle, signInWithFacebook, signInWithTwitter } from '../../firebase/firebse.utils';
-import { auth, createUserProfile } from '../../firebase/firebse.utils';
 import { signUpSlide, signInSlide } from './Animations';
+import firebase from 'firebase';
+const auth = firebase.auth();
+const firestore = firebase.firestore();
 
 function SignInUp() {
     const signUpOverlay = useRef();
@@ -10,23 +12,54 @@ function SignInUp() {
     const signUpForm = useRef();
     const signInForm = useRef();
 
-    //*************Logic************
-    const [signInFormValues, setSignInFormValues] = useState({ name: '', password: '', email: '' });
+    const [inputValues, setInputValues] = useState({ name: '', password: '', email: '' })
+    const [signInAuthErrorMessage, setSignInAuthErrorMessage] = useState('')
+    const [signUpAuthErrorMessage, setSignUpAuthErrorMessage] = useState('')
 
-    const handleSignInSubmitChange = (e) => {
-        setSignInFormValues({ ...signInFormValues, [e.target.name]: e.target.value })
+    const handleInputFieldChange = (e) => {
+        setInputValues({ ...inputValues, [e.target.name]: e.target.value });
     }
 
-    const handleSingInForm = async event => {
-        event.preventDefault();
+    const handleSingInForm = async (event) => {
+        event.preventDefault()
+        // Authenticate a user 
+        const { email, password } = inputValues;
         try {
-            const { user } = await auth.createUserWithEmailAndPassword(signInFormValues.email.trim().toString(), signInFormValues.password.trim())
-            await createUserProfile(user)
-            setSignInFormValues({ name: '', password: '', email: '' })
-        } catch (err) {
-            console.log('err', err)
+            const existingUser = await auth.signInWithEmailAndPassword(email.trim().toString(), password.trim().toString())
+            const docRef = firestore.doc(`authenticatedUsers/${existingUser.user.uid}`);
+            const registerdUserInfo = await docRef.get();
+        } catch (error) {
+            setSignInAuthErrorMessage(error.message);
         }
+        // Reset Input
+        setInputValues({ name: '', password: '', email: '' })
+
     }
+    const handleSingUpForm = async (event) => {
+        event.preventDefault()
+        // Authenticate a user 
+        const { name, password, email } = inputValues;
+        try {
+            const authenticatedUser = await auth.createUserWithEmailAndPassword(email, password);
+            console.log('authenticatedUser : ', authenticatedUser)
+            const docRef = firestore.doc(`authenticatedUsers/${authenticatedUser.user.uid}`);
+            const { exists } = await docRef.get();
+            if (!exists) {
+                const newUser = await docRef.set({
+                    name,
+                    password,
+                    email,
+                    timeCreated: new Date().toLocaleString()
+                });
+
+            }
+        } catch (error) {
+            setSignUpAuthErrorMessage(error.message)
+        }
+        // Reset Input
+        setInputValues({ name: '', password: '', email: '' })
+    }
+
 
 
 
@@ -34,9 +67,9 @@ function SignInUp() {
         <React.Fragment>
             <div className="parent-block">
                 <div className="flex-main">
+                    {/* Sign-in-left form */}
                     <div ref={signInForm} className="flex-sign-in-left">
                         <h2>Sign In</h2>
-                        {/* Sign-in-left form */}
                         <form action="#" className="sign-in-form">
                             <div className="icons-container">
                                 <a onClick={signInWithFacebook} className="social" ><i className="fab fa-facebook-f"></i></a>
@@ -45,18 +78,17 @@ function SignInUp() {
                             </div>
                             <h5>Or use your account</h5>
                             <input
-                                onChange={handleSignInSubmitChange}
-                                value={signInFormValues.name}
-                                name="name"
-                                placeholder="Name" />
+                                onChange={handleInputFieldChange}
+                                value={inputValues.email}
+                                name="email"
+                                placeholder="Email" />
                             <input
-                                value={signInFormValues.password}
-                                onChange={handleSignInSubmitChange}
+                                value={inputValues.password}
+                                onChange={handleInputFieldChange}
                                 name="password"
                                 type="password"
                                 placeholder="Password" />
-                            {/* Form used to be here before / shifted below */}
-                            <h5>Forgot your password?</h5>
+                            {signInAuthErrorMessage ? <h5 style={{ color: 'crimson' }}>{signInAuthErrorMessage}</h5> : <h5>Forgot your password?</h5>}
                             <button
                                 type="submit"
                                 onClick={handleSingInForm}
@@ -72,26 +104,26 @@ function SignInUp() {
                                 <a onClick={signInWithGoogle} className="social" ><i className="fab fa-google-plus-g"></i></a>
                                 <a onClick={signInWithTwitter} className="social" ><i className="fab fa-twitter"></i></a>
                             </div>
-                            <h5>Or use your email for registration</h5>
+                            {signUpAuthErrorMessage ? <h5>{signUpAuthErrorMessage}</h5> : <h5>Or use your email for registration</h5>}
                             <input
-                                value={signInFormValues.name}
-                                onChange={handleSignInSubmitChange}
+                                value={inputValues.name}
+                                onChange={handleInputFieldChange}
                                 name="name"
                                 placeholder="Name" />
                             <input
-                                value={signInFormValues.password}
-                                onChange={handleSignInSubmitChange}
+                                value={inputValues.password}
+                                onChange={handleInputFieldChange}
                                 type="password"
                                 name="password"
                                 placeholder="Password" />
                             <input
-                                value={signInFormValues.email}
-                                onChange={handleSignInSubmitChange}
+                                value={inputValues.email}
+                                onChange={handleInputFieldChange}
                                 name="email"
                                 placeholder="Email" />
                             <button
                                 type="submit"
-                                onClick={handleSingInForm}
+                                onClick={handleSingUpForm}
                                 className="button">Sign Up</button>
                         </form>
                     </div>
