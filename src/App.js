@@ -7,7 +7,10 @@ import ShoppingBag from './components/ShoppingBag/ShoppingBag';
 import Header from './components/Header/Header';
 import Footer from './components/ProductTemplate/Footer/Footer';
 import SignInUp from './components/SignInUp/SignInUp';
+import { addUserToFirestore } from './firebase/firebse.utils';
 import firebase from 'firebase';
+const firestore = firebase.firestore();
+
 
 
 
@@ -20,16 +23,19 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    firebase.auth().onAuthStateChanged((firebaseUser) => {
-      this.setState({ currentUser: firebaseUser })
-      console.log('firebaseUser is logged in with email : ', firebaseUser.email, 'and id : ', firebaseUser.uid)
-      // При помощи uid достаём товары из базы данных и кидаем в корзину 
+    firebase.auth().onAuthStateChanged(async (firebaseUser) => {
+      if (firebaseUser) {
+        const { displayName } = firebaseUser;
+        const docRef = await addUserToFirestore(firebaseUser, displayName)
+        docRef.onSnapshot(async snapshot => {
+          const theSnapData = snapshot.data()
+          this.setState({ currentUser: theSnapData })
+        })
+      } else {
+        this.setState({ currentUser: firebaseUser })
+      }
     })
   }
-
-
-
-
 
 
   render() {

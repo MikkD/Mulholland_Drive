@@ -1,16 +1,20 @@
 import React, { useState, useEffect, useRef, Children } from 'react';
 import './SignInUp.scss';
 import { signInWithGoogle, signInWithFacebook, signInWithTwitter } from '../../firebase/firebse.utils';
+import { addUserToFirestore } from '../../firebase/firebse.utils';
 import { signUpSlide, signInSlide } from './Animations';
 import firebase from 'firebase';
 const auth = firebase.auth();
 const firestore = firebase.firestore();
+
+
 
 function SignInUp() {
     const signUpOverlay = useRef();
     const signInOverlay = useRef();
     const signUpForm = useRef();
     const signInForm = useRef();
+
 
     const [inputValues, setInputValues] = useState({ name: '', password: '', email: '' })
     const [signInAuthErrorMessage, setSignInAuthErrorMessage] = useState('')
@@ -20,43 +24,39 @@ function SignInUp() {
         setInputValues({ ...inputValues, [e.target.name]: e.target.value });
     }
 
+    // Sign-In
     const handleSingInForm = async (event) => {
         event.preventDefault()
-        // Authenticate a user 
-        const { email, password } = inputValues;
+        const { email, password, name } = inputValues;
+        if (!password || !email) {
+            setSignUpAuthErrorMessage('Fill out all input fields')
+            return
+        }
         try {
-            const existingUser = await auth.signInWithEmailAndPassword(email.trim().toString(), password.trim().toString())
-            const docRef = firestore.doc(`authenticatedUsers/${existingUser.user.uid}`);
-            const registerdUserInfo = await docRef.get();
+            const { user } = await auth.signInWithEmailAndPassword(email.trim().toString(), password.trim().toString())
+            addUserToFirestore(user, name)
         } catch (error) {
             setSignInAuthErrorMessage(error.message);
         }
-        // Reset Input
         setInputValues({ name: '', password: '', email: '' })
 
     }
+
+
+    // Sign-Up
     const handleSingUpForm = async (event) => {
         event.preventDefault()
-        // Authenticate a user 
         const { name, password, email } = inputValues;
+        if (!name || !password || !email) {
+            setSignUpAuthErrorMessage('Fill out all input fields')
+            return
+        }
         try {
-            const authenticatedUser = await auth.createUserWithEmailAndPassword(email, password);
-            console.log('authenticatedUser : ', authenticatedUser)
-            const docRef = firestore.doc(`authenticatedUsers/${authenticatedUser.user.uid}`);
-            const { exists } = await docRef.get();
-            if (!exists) {
-                const newUser = await docRef.set({
-                    name,
-                    password,
-                    email,
-                    timeCreated: new Date().toLocaleString()
-                });
-
-            }
+            const { user } = await auth.createUserWithEmailAndPassword(email.trim().toString(), password.trim().toString())
+            addUserToFirestore(user, name)
         } catch (error) {
             setSignUpAuthErrorMessage(error.message)
         }
-        // Reset Input
         setInputValues({ name: '', password: '', email: '' })
     }
 
@@ -104,7 +104,7 @@ function SignInUp() {
                                 <a onClick={signInWithGoogle} className="social" ><i className="fab fa-google-plus-g"></i></a>
                                 <a onClick={signInWithTwitter} className="social" ><i className="fab fa-twitter"></i></a>
                             </div>
-                            {signUpAuthErrorMessage ? <h5>{signUpAuthErrorMessage}</h5> : <h5>Or use your email for registration</h5>}
+                            {signUpAuthErrorMessage ? <h5 style={{ color: 'crimson' }} >{signUpAuthErrorMessage}</h5> : <h5>Or use your email for registration</h5>}
                             <input
                                 value={inputValues.name}
                                 onChange={handleInputFieldChange}

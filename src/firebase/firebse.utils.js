@@ -18,6 +18,23 @@ export const auth = firebase.auth();
 export const firestore = firebase.firestore();
 
 
+export const addUserToFirestore = async (authenticatedUser, userName) => {
+    const docRef = firestore.doc(`authenticatedUsers/${authenticatedUser.uid}`);
+    const { exists } = await docRef.get();
+    if (!exists) {
+        const { uid, email } = authenticatedUser;
+        const theName = userName ? userName : 'Unknown person'
+        const newUser = await docRef.set({
+            name: theName,
+            email: email,
+            id: uid,
+            timeCreated: new Date().toLocaleString()
+        });
+    }
+    return docRef;
+}
+
+
 
 
 
