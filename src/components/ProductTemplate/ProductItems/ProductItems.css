@@ -25,7 +25,7 @@ box-shadow: 2px 2px 10px 3px rgba(206, 206, 206, 0.75);
     opacity: 1;
 }
 .product-item-link-wrapper>.regular-button{
-    width: 65px;
+    width: 110px;
     position: absolute;
     bottom:0;
     margin-bottom: 10px;
@@ -41,7 +41,7 @@ box-shadow: 2px 2px 10px 3px rgba(206, 206, 206, 0.75);
     border:1px solid #ccc;
     text-decoration: none;
     outline: 1px solid transparent;
-    background-color: white;
+    
 }
 
 .product-item-tile-description{

@@ -15,13 +15,8 @@ import { setCurrentUser } from './redux/user/user.actions';
 
 
 
+
 class App extends React.Component {
-  // constructor(props) {
-  //   super(props)
-  //   this.state = {
-  //     currentUser: null
-  //   }
-  // }
 
   componentDidMount() {
 
@@ -53,16 +48,16 @@ class App extends React.Component {
       <div className="App" >
         <React.StrictMode>
           <BrowserRouter>
-            {/* <Header currentUser={this.state.currentUser} /> */}
             <Header />
             <Switch>
               <Route exact path="/" component={Main} />
               <Route exact path="/ProductTemplate/:product" component={ProductTemplate} />
-              <Route exact path="/ShoppingBag" component={() => <ShoppingBag currentUser={this.state.currentUser} />} />
-              <Route path="/SignInUp" component={SignInUp} />
-              {this.props.setCurrentUser ?
-                <ShoppingBag currentUser={this.props.setCurrentUser} /> :
-                <Route path="/SignInUp" component={SignInUp} />}
+              {/* <Route path="/SignInUp" component={SignInUp} /> */}
+              <ShoppingBag currentUser={this.props.isCurrentUserLoggedIn} />
+              {/* Почему 4 раза рендериться???? Мне поэтому пришлось ставить условие */}
+              {this.props.isCurrentUserLoggedIn !== null ?
+                <ShoppingBag currentUser={this.props.isCurrentUserLoggedIn} /> :
+                <Route path="/SignInUp" component={SignInUp} /> && <SignInUp />}
             </Switch>
             <Footer />
           </BrowserRouter>
@@ -73,7 +68,7 @@ class App extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  setCurrentUser: state.rootUsers.currentUser
+  isCurrentUserLoggedIn: state.rootUsers.currentUser
 })
 
 const mapDispatchToProps = dispatch => ({

@@ -45,7 +45,7 @@
     width:120px;
     display: flex;
     text-align: center;
-    justify-content: space-between;
+    justify-content: flex-end;
     /* border: 1px solid gold; */
 }
 .sb-container span{
@@ -64,7 +64,7 @@ padding: 10px 0px;
 text-decoration: none;
 transition: all 0.1s ease-in-out;
 display: inline-block;
-width: 100%;
+width: 85%;
 }
 
 .checkout-button:hover{

@@ -1,20 +1,20 @@
 import React, { Component } from 'react';
 import './ShoppingBag.css';
-import Header from '../Header/Header';
+import { getProduct, Jeans } from '../ProductTemplate/utils'
 
 export class ShoppingBag extends Component {
     constructor(props) {
         super(props)
 
         this.state = {
-
+            shoppingBagItems: getProduct('Jeans')
         }
     }
 
     render() {
         if (this.props.currentUser) {
             const { name, id, email } = this.props.currentUser;
-            console.log('name', name)
+            console.log('this.shoppingBagItems', this.state.shoppingBagItems)
         }
 
         return (
@@ -43,7 +43,34 @@ export class ShoppingBag extends Component {
                         </div>
                     </div>
                     {/* sb-body */}
-                    <div className="sb-body">
+
+                    {this.state.shoppingBagItems.map((item, index) => {
+                        return (
+                            <div id={item.id} className="sb-body">
+                                <div className="sb-item flex-grow-1">
+                                    <img src={item.image}
+                                        className="sb-image" alt="item1"
+                                        style={{ width: '100px', height: '100px' }}
+                                    />
+                                    <div className="sb-item-desctiption">
+                                        <p>{item.name}</p>
+                                        <p>{item.description}</p>
+                                        <p className="remove-item-button underline">remove</p>
+                                    </div>
+                                </div>
+
+                                <div className="shrink quantity-edit">
+                                    <span>{item.price}$</span>
+                                    <span>
+                                        <button className="sb-button substract-item">-</button>
+                                        <span>1</span>
+                                        <button className="sb-button add-item">+</button>
+                                    </span>
+                                </div>
+                            </div>
+                        )
+                    })}
+                    {/* <div className="sb-body">
                         <div className="sb-item flex-grow-1">
                             <img className="sb-image" alt="item1" style={{ width: '100px', height: '100px' }}
                                 src={require('./bag.png')} />
@@ -62,7 +89,7 @@ export class ShoppingBag extends Component {
                                 <button className="sb-button add-item">+</button>
                             </span>
                         </div>
-                    </div>
+                    </div> */}
                     {/* sb-footer */}
                     <div className="sb-item sb-footer">
                         <div className="subtotal flex-grow-1 "><h3>Your subtotal is : 500$</h3></div>

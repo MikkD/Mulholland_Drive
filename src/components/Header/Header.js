@@ -4,6 +4,7 @@ import './Header.css';
 import { withRouter } from 'react-router-dom';
 import firebase from 'firebase';
 import { connect } from 'react-redux';
+import CartIconCounter from './CartIconCounter/CartIconCounter';
 
 const DEFAULT_WIDTH = 550;
 
@@ -53,14 +54,14 @@ function Header(props) {
                         >Go Back</Link>
                         <Link>Shop</Link>
                         <Link>Contact</Link>
-                        {/* REGULAR BELOW  */}
-                        {props.setCurrentUser !== null ?
+                        {props.isCurrentUserLoggedIn !== null ?
                             <Link onClick={() => firebase.auth().signOut()}>Sign Out</Link> :
                             <Link to={{ pathname: '/SignInUp' }}>Sign In</Link>}
-
-                        <Link to={{ pathname: '/ShoppingBag' }} >Bag<span className="dot"></span></Link>
+                        <CartIconCounter />
                     </div>
-                    <a className="hidden-bag" href="#">Bag<span className="dot"></span></a>
+                    <a className="hidden-bag" href="#">
+                        <CartIconCounter />
+                    </a>
                     <div
                         onClick={() => setIsActive(prevState => !prevState)}
                         className="hamburger-wrapper">
@@ -92,9 +93,9 @@ function Header(props) {
     )
 
 }
-// Redux 
+// Redux
 const mapStateToProps = state => ({
-    setCurrentUser: state.rootUsers.currentUser
+    isCurrentUserLoggedIn: state.rootUsers.currentUser
 })
 
 // export default withRouter(Header);

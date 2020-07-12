@@ -68,7 +68,7 @@ function SignInUp() {
                 <div className="flex-main">
                     {/* Sign-in-left form */}
                     <div ref={signInForm} className="flex-sign-in-left">
-                        <h2>Sign In</h2>
+                        <h2>Welcome Back</h2>
                         <form action="#" className="sign-in-form">
                             <div className="icons-container">
                                 <a onClick={signInWithFacebook} className="social" ><i className="fab fa-facebook-f"></i></a>

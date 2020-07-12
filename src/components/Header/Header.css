@@ -19,15 +19,6 @@
     font-size: 24px;
     opacity: 0.9;
 }
-.dot{
-    position: absolute;
-    top: 3px;
-    right: -15px;
-    width: 10px;
-    height: 10px;
-    background:var(--red-gardient-color);
-    border-radius: 50%;
-}
 .hidden-bag{
     display: none;
     padding-right: 20px;
@@ -46,6 +37,7 @@
     opacity: 0.9;
     transition: all 0.2 ease-in-out;
 }
+
 .menu>a:hover{
     opacity: 1;
 }
@@ -58,6 +50,8 @@
     height: 25px;
     display: none;
 }
+
+
 /* Hamburger menu */
 .hamburger-menu{
     width: 20px;
@@ -170,14 +164,13 @@ background: transparent;
     }
     .hidden-bag{
         display: block;
-        padding-right: 20px;
+        padding-right: 30px;
         position: relative;
 
     }
-    .dot {
-        top: 18px;
-        right: 5px;
-        
+    
+    .items-in-cart-number {
+        font-size: 10px;
     }
     .menu{
         display: none;
@@ -186,4 +179,4 @@ background: transparent;
     flex-grow: 1;
 }
     
-  }
+}
