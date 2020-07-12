@@ -1,11 +1,10 @@
-import React, { useState, useEffect, useRef, Children } from 'react';
+import React, { useState, useRef } from 'react';
 import './SignInUp.scss';
 import { signInWithGoogle, signInWithFacebook, signInWithTwitter } from '../../firebase/firebse.utils';
 import { addUserToFirestore } from '../../firebase/firebse.utils';
 import { signUpSlide, signInSlide } from './Animations';
 import firebase from 'firebase';
 const auth = firebase.auth();
-const firestore = firebase.firestore();
 
 
 

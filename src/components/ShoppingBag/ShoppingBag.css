@@ -10,16 +10,16 @@
     padding: 15px 20px;
 }
 
-/* .sb-header{
-    display: flex;
-    flex-direction: column;
-} */
-
 .sb-header>div{
     display: flex;
     padding:5px 20px;
     border-bottom: 1px solid #d73e15c9;
+    align-items: center;
 }
+.sb-header>div>div>h3{
+    display: inline-block;
+}
+
 
 .flex-grow-1{
     flex-grow: 1;
@@ -54,6 +54,7 @@
     align-items: center;
     justify-content: center;
     width:50px;
+    opacity: 0.9;
 }
 
 .checkout-button{

@@ -12,16 +12,28 @@ export class ShoppingBag extends Component {
     }
 
     render() {
+        if (this.props.currentUser) {
+            const { name, id, email } = this.props.currentUser;
+            console.log('name', name)
+        }
+
         return (
             <React.Fragment>
                 {/* <Header /> */}
                 <div className="sb-container">
                     {/* sb-header */}
                     <div className="sb-header">
-                        <div className="sb-upper-header flex-grow-1">
-                            <h3>Shopping Bag</h3>
-                            <span>2items</span>
+                        <div className="sb-upper-header">
+                            <div className="flex-grow-1">
+                                <h3>Shopping Bag</h3>
+                                <span>2items</span>
+                            </div>
+
+                            <div className="weclome-message">
+                                <h2>Welcome {this.props.currentUser ? this.props.currentUser.name : ''}</h2>
+                            </div>
                         </div>
+
                         <div className="sb-header-description">
                             <p className="flex-grow-1">Item</p>
                             <div className="shrink">

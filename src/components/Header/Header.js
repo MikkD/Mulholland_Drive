@@ -2,8 +2,8 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import './Header.css';
 import { withRouter } from 'react-router-dom';
-import { auth } from '../../firebase/firebse.utils';
 import firebase from 'firebase';
+import { connect } from 'react-redux';
 
 const DEFAULT_WIDTH = 550;
 
@@ -13,11 +13,9 @@ function Header(props) {
     isActiveRef.current = isActive;
     const navbar = useRef()
 
+    console.log('HEADER props', props)
+
     useEffect(() => {
-        console.log('useffect / props in header:', props)
-        // console.log('useffect / props.history :', props.history)
-        // console.log('useffect / props.location :', props.location)
-        // console.log('useffect / props.match :', props.match)
         props.location.pathname === '/' ?
             navbar.current.style.backgroundColor = 'transparent' :
             navbar.current.style.backgroundColor = 'black';
@@ -55,9 +53,11 @@ function Header(props) {
                         >Go Back</Link>
                         <Link>Shop</Link>
                         <Link>Contact</Link>
-                        {props.currentUser !== null ?
+                        {/* REGULAR BELOW  */}
+                        {props.setCurrentUser !== null ?
                             <Link onClick={() => firebase.auth().signOut()}>Sign Out</Link> :
                             <Link to={{ pathname: '/SignInUp' }}>Sign In</Link>}
+
                         <Link to={{ pathname: '/ShoppingBag' }} >Bag<span className="dot"></span></Link>
                     </div>
                     <a className="hidden-bag" href="#">Bag<span className="dot"></span></a>
@@ -90,6 +90,12 @@ function Header(props) {
 
         </React.Fragment >
     )
-}
 
-export default withRouter(Header);
+}
+// Redux 
+const mapStateToProps = state => ({
+    setCurrentUser: state.rootUsers.currentUser
+})
+
+// export default withRouter(Header);
+export default connect(mapStateToProps, null)(withRouter(Header))
