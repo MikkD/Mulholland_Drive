@@ -61,6 +61,12 @@ padding-bottom: 0px;
     border-left: 2px solid #d73e15;
 }
 
+.loader{
+    display: fixed;
+    width:400px;
+    height:400px;
+    background-color: red;
+}
 
 @media only screen and (max-width: 850px) {
     .product-item-tile{

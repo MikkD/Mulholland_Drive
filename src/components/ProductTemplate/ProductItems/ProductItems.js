@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useMemo } from 'react';
 import { getProduct } from '../utils';
 import { withRouter } from 'react-router-dom';
 import './ProductItems.css';
@@ -10,9 +10,25 @@ import { action_cartItemsNumber } from '../../../redux/cartItems/cartItems.actio
 
 
 const ProductItems = props => {
-    // console.log('props !', props)
-    const { newCartItem, removeShoppingBagItem, cartItemsNumber } = props;
-    const [items, setItems] = useState(getProduct(props.match.params.product))
+    const { newCartItem, removeShoppingBagItem, cartItemsNumber, filterItemByProduct, filterItemByPriceLowToHigh, filterItemByPriceHighToLow } = props;
+    const [items, setItems] = useState([])
+
+    useEffect(() => {
+        setTimeout(() => {
+            setItems(getProduct(props.match.params.product))
+        }, 1000);
+    }, [])
+
+    useEffect(() => {
+        if (filterItemByProduct) {
+            setItems((prevState) => [...prevState.sort((a, b) => a.name > b.name ? 1 : -1)])
+        } else if (filterItemByPriceLowToHigh) {
+            setItems((prevState) => [...prevState.sort((a, b) => parseInt(a.price) < parseInt(b.price) ? 1 : -1)])
+        } else if (filterItemByPriceHighToLow) {
+            setItems((prevState) => [...prevState.sort((a, b) => parseInt(a.price) > parseInt(b.price) ? 1 : -1)])
+        }
+
+    }, [filterItemByProduct, filterItemByPriceLowToHigh, filterItemByPriceHighToLow])
 
 
     const addToShoppingBag = (e) => {
@@ -42,40 +58,48 @@ const ProductItems = props => {
     return (
         <React.Fragment>
             <div className="product-items-wrapper">
-                {items.map(item => {
-                    return (
-                        <div id={item.id} key={item.id} className="product-item-tile">
-                            <div className="product-item-link-wrapper" >
-                                <img src={item.image} alt="product" />
-                                <button
-                                    id={item.id}
-                                    onClick={addToShoppingBag}
-                                    className="regular-button">
-                                    {item.isAdded ? 'Remove from cart' : 'Add to cart'}
-                                </button>
+                {!items ? <div className="LOADER">LOADING</div> :
+                    items.map(item => {
+                        return (
+                            <div id={item.id} key={item.id} className="product-item-tile">
+                                <div className="product-item-link-wrapper" >
+                                    <img src={item.image} alt="product" />
+                                    <button
+                                        id={item.id}
+                                        onClick={addToShoppingBag}
+                                        className="regular-button">
+                                        {item.isAdded ? 'Remove from cart' : 'Add to cart'}
+                                    </button>
+                                </div>
+                                <div className="product-item-tile-description">
+                                    <h4>{item.name}</h4>
+                                    <p>{item.description}</p>
+                                    <p>{item.price}$</p>
+                                </div>
                             </div>
-                            <div className="product-item-tile-description">
-                                <h4>{item.name}</h4>
-                                <p>{item.description}</p>
-                                <p>{item.price}$</p>
-                            </div>
-                        </div>
-                    )
-                })}
+                        )
+                    })}
                 <ScrollToTopButton />
             </div>
+
         </React.Fragment>
     )
 }
+
+const mapStateToProps = state => ({
+    addedButtonsToCart: state.cartItems.shoppingBagItems,
+    filterItemByProduct: state.filterItems.filterByProduct,
+    filterItemByPriceLowToHigh: state.filterItems.filterByPriceLowToHigh,
+    filterItemByPriceHighToLow: state.filterItems.filterByPriceHighToLow
+})
 
 const mapDispatchToProps = dispatch => ({
     newCartItem: (newShoppingBagItem) => dispatch(action_newShoppingBagItem(newShoppingBagItem)),
     removeShoppingBagItem: (id) => dispatch(action_removeShoppingBagItem(id)),
     cartItemsNumber: () => dispatch(action_cartItemsNumber())
-
 })
 
-export default connect(null, mapDispatchToProps)(withRouter(ProductItems))
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(ProductItems))
 
 
 
