@@ -19,23 +19,18 @@ import { setCurrentUser } from './redux/user/user.actions';
 class App extends React.Component {
 
   componentDidMount() {
-
-    console.log('this.state', this.state)
     firebase.auth().onAuthStateChanged(async (firebaseUser) => {
       if (firebaseUser) {
         const { displayName } = firebaseUser;
         const docRef = await addUserToFirestore(firebaseUser, displayName)
         docRef.onSnapshot(async snapshot => {
           const theSnapData = snapshot.data()
-          // this.setState({ currentUser: theSnapData })
-          // Redux
           this.props.setCurrentUser(theSnapData)
         })
 
 
 
       } else {
-        // this.setState({ currentUser: firebaseUser })
         this.props.setCurrentUser(firebaseUser)
       }
     })
@@ -43,7 +38,6 @@ class App extends React.Component {
 
 
   render() {
-    console.log('this.props', this.props)
     return (
       <div className="App" >
         <React.StrictMode>
@@ -52,8 +46,10 @@ class App extends React.Component {
             <Switch>
               <Route exact path="/" component={Main} />
               <Route exact path="/ProductTemplate/:product" component={ProductTemplate} />
-              {/* <Route path="/SignInUp" component={SignInUp} /> */}
-              <ShoppingBag currentUser={this.props.isCurrentUserLoggedIn} />
+              <Route path="/SignInUp" component={SignInUp} />
+              <Route path="/ShoppingBag" component={ShoppingBag} />
+
+              {/* <ShoppingBag currentUser={this.props.isCurrentUserLoggedIn} /> */}
               {/* Почему 4 раза рендериться???? Мне поэтому пришлось ставить условие */}
               {this.props.isCurrentUserLoggedIn !== null ?
                 <ShoppingBag currentUser={this.props.isCurrentUserLoggedIn} /> :

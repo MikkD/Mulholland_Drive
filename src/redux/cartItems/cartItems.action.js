@@ -5,3 +5,10 @@ export const action_newShoppingBagItem = (item) => ({
     type: cartItemsTypes.ADD_ITEM,
     payload: item
 })
+export const action_removeShoppingBagItem = (id) => ({
+    type: cartItemsTypes.REMOVE_ITEM,
+    payload: id
+})
+export const action_cartItemsNumber = () => ({
+    type: cartItemsTypes.CART_ITEMS_NUMBER,
+})

@@ -14,7 +14,6 @@ function Header(props) {
     isActiveRef.current = isActive;
     const navbar = useRef()
 
-    console.log('HEADER props', props)
 
     useEffect(() => {
         props.location.pathname === '/' ?

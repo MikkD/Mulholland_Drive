@@ -1,21 +1,15 @@
 import React, { Component } from 'react';
 import './ShoppingBag.css';
-import { getProduct, Jeans } from '../ProductTemplate/utils'
+import { getProduct } from '../ProductTemplate/utils';
+import { connect } from 'react-redux';
 
 export class ShoppingBag extends Component {
-    constructor(props) {
-        super(props)
-
-        this.state = {
-            shoppingBagItems: getProduct('Jeans')
-        }
-    }
 
     render() {
-        if (this.props.currentUser) {
-            const { name, id, email } = this.props.currentUser;
-            console.log('this.shoppingBagItems', this.state.shoppingBagItems)
-        }
+        console.log('this.props SB', this.props)
+        console.log('this.state SB', this.state)
+
+        const { shoppingBagItems } = this.props;
 
         return (
             <React.Fragment>
@@ -44,7 +38,7 @@ export class ShoppingBag extends Component {
                     </div>
                     {/* sb-body */}
 
-                    {this.state.shoppingBagItems.map((item, index) => {
+                    {shoppingBagItems.map(item => {
                         return (
                             <div id={item.id} className="sb-body">
                                 <div className="sb-item flex-grow-1">
@@ -58,7 +52,6 @@ export class ShoppingBag extends Component {
                                         <p className="remove-item-button underline">remove</p>
                                     </div>
                                 </div>
-
                                 <div className="shrink quantity-edit">
                                     <span>{item.price}$</span>
                                     <span>
@@ -70,26 +63,6 @@ export class ShoppingBag extends Component {
                             </div>
                         )
                     })}
-                    {/* <div className="sb-body">
-                        <div className="sb-item flex-grow-1">
-                            <img className="sb-image" alt="item1" style={{ width: '100px', height: '100px' }}
-                                src={require('./bag.png')} />
-                            <div className="sb-item-desctiption">
-                                <p>Item name</p>
-                                <p>Description</p>
-                                <p className="remove-item-button underline">remove</p>
-                            </div>
-                        </div>
-
-                        <div className="shrink quantity-edit">
-                            <span>105$</span>
-                            <span>
-                                <button className="sb-button substract-item">-</button>
-                                <span>1</span>
-                                <button className="sb-button add-item">+</button>
-                            </span>
-                        </div>
-                    </div> */}
                     {/* sb-footer */}
                     <div className="sb-item sb-footer">
                         <div className="subtotal flex-grow-1 "><h3>Your subtotal is : 500$</h3></div>
@@ -103,4 +76,9 @@ export class ShoppingBag extends Component {
     }
 }
 
-export default ShoppingBag
+
+const mapStateToProps = state => ({
+    shoppingBagItems: state.cartItems.shoppingBagItems
+})
+
+export default connect(mapStateToProps, null)(ShoppingBag)
