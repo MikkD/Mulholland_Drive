@@ -5,6 +5,7 @@ import { action_removeShoppingBagItem } from '../../redux/cartItems/cartItems.ac
 import { action_cartItemsNumber } from '../../redux/cartItems/cartItems.action';
 import { action_updateCartItem } from '../../redux/cartItems/cartItems.action';
 import CartHeader from './CartHeader/CartHeader';
+import CartFooter from './CartFooter/CartFooter';
 
 const ShoppingBag = (props) => {
     const { shoppingBagItems, removeShoppingBagItem, cartItemsNumber, updateCartItem } = props;
@@ -43,8 +44,6 @@ const ShoppingBag = (props) => {
             totalPerItem: parseInt(item.price) * (item.quantity + 1)
         } : item)
         updateCartItem(updatedItems)
-
-        // setNumberOfItem(prevState => prevState + 1)
     }
 
     const substractItem = (event) => {
@@ -57,8 +56,6 @@ const ShoppingBag = (props) => {
             totalPerItem: parseInt(item.price) * (item.quantity - 1)
         } : item)
         updateCartItem(updatedItems)
-
-        // setNumberOfItem(prevState => prevState - 1)
     }
 
 
@@ -91,6 +88,7 @@ const ShoppingBag = (props) => {
                                     <span>{item.totalPerItem ? item.totalPerItem : item.price}$</span>
                                     <span>
                                         <button
+                                            disabled={item.quantity === 1 ? true : false}
                                             id={item.id}
                                             onClick={substractItem}
                                             className="sb-button substract-item">-</button>
@@ -105,14 +103,7 @@ const ShoppingBag = (props) => {
                         </React.Fragment>
                     )
                 })}
-                {/* sb-footer */}
-                <div className="sb-item sb-footer">
-                    <div className="subtotal flex-grow-1 "><h3>Your subtotal is : {}$</h3></div>
-                    <div className="shrink">
-                        <a className="checkout-button">Check Out</a>
-                    </div>
-                </div>
-
+                <CartFooter />
             </div>
         </React.Fragment >
     )

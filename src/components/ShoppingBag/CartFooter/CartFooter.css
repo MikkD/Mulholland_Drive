@@ -1,0 +1,15 @@
+
+.checkout-button{
+border:1px solid whitesmoke;
+opacity: 0.9;
+padding: 10px 0px;
+text-decoration: none;
+transition: all 0.1s ease-in-out;
+display: inline-block;
+width: 85%;
+}
+.checkout-button:hover{
+background-color: white;
+opacity: 1;
+color: black;
+}

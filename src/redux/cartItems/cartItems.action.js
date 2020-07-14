@@ -16,3 +16,7 @@ export const action_updateCartItem = (item) => ({
     type: cartItemsTypes.UPDATE_CART_ITEMS,
     payload: item
 })
+export const action_deliverTotalSum = (totalSum) => ({
+    type: cartItemsTypes.TOTAL_SUM,
+    payload: totalSum
+})

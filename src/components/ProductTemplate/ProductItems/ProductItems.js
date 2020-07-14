@@ -65,7 +65,12 @@ const ProductItems = props => {
         let newShoppingBagItem = copy.find(item => item.id === id && !item.isAdded);
         if (newShoppingBagItem) {
             const theIndex = copy.findIndex(item => item.id === id);
-            newShoppingBagItem = { ...newShoppingBagItem, isAdded: true, quantity: 1 }
+            newShoppingBagItem = {
+                ...newShoppingBagItem,
+                isAdded: true,
+                quantity: 1,
+                totalPerItem: parseInt(newShoppingBagItem.price)
+            }
             copy.splice(theIndex, 1, newShoppingBagItem)
             setItems(copy)
             newCartItem(newShoppingBagItem)

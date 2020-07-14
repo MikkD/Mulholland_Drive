@@ -34,32 +34,14 @@
     width:120px;
     display: flex;
     text-align: center;
-    justify-content: flex-end;
+    justify-content:center;
     /* border: 1px solid gold; */
+    
 }
 .sb-container span{
     padding: 0px 5px;
-    display: inline-flex;
+    display: inline-block;
     align-items: center;
     justify-content: center;
-    width:50px;
     opacity: 0.9;
 }
-
-.checkout-button{
-border:1px solid whitesmoke;
-opacity: 0.9;
-padding: 10px 0px;
-text-decoration: none;
-transition: all 0.1s ease-in-out;
-display: inline-block;
-width: 85%;
-}
-
-.checkout-button:hover{
-    background-color: white;
-    opacity: 1;
-    color: black;
-}
-
-  
