@@ -4,10 +4,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSortUp } from '@fortawesome/free-solid-svg-icons';
 import { connect } from 'react-redux';
 import { action_pagination_number } from '../../../redux/pagination/pagination.action';
+import { action_showAllItems } from '../../../redux/pagination/pagination.action';
 
 
 function QuantityDropDown(props) {
-    const { totalNumberOfPages, clickedPaginationPage } = props
+    const { totalNumberOfPages, clickedPaginationPage, dispatchShowAllItems, showAllItems } = props
     const [DropDownIsOpen, setDropDownIsOpen] = useState(false);
     const DropDownOptions = Array.from(Array(totalNumberOfPages).keys())
 
@@ -15,7 +16,9 @@ function QuantityDropDown(props) {
     const handlePageNumber = (e) => {
         const pageClicked = parseInt(e.target.innerText);
         clickedPaginationPage(pageClicked)
-
+    }
+    const handelShowAllItems = () => {
+        dispatchShowAllItems()
     }
 
     return (
@@ -37,7 +40,9 @@ function QuantityDropDown(props) {
                         </ul> :
                         null}
 
-                    <button className="regular-button">View All</button>
+                    <button
+                        onClick={handelShowAllItems}
+                        className="regular-button">{showAllItems ? 'Collapse' : 'Show All'}</button>
                 </div>
                 : null}
         </React.Fragment>
@@ -45,10 +50,12 @@ function QuantityDropDown(props) {
 }
 
 const mapStateToProps = state => ({
-    totalNumberOfPages: state.pagination.totalNumberOfPages
+    totalNumberOfPages: state.pagination.totalNumberOfPages,
+    showAllItems: state.pagination.showAllItems
 })
 const disptachStateToProps = dispatch => ({
-    clickedPaginationPage: (pageClicked) => dispatch(action_pagination_number(pageClicked))
+    clickedPaginationPage: (pageClicked) => dispatch(action_pagination_number(pageClicked)),
+    dispatchShowAllItems: () => dispatch(action_showAllItems())
 })
 
 export default connect(mapStateToProps, disptachStateToProps)(QuantityDropDown)

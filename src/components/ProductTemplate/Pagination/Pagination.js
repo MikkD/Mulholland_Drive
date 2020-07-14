@@ -6,7 +6,7 @@ import { action_pagination_number } from '../../../redux/pagination/pagination.a
 
 
 function Pagination(props) {
-    const { totalNumberOfPages, clickedPaginationNumber, dispatchClickedPageNumber } = props;
+    const { totalNumberOfPages, clickedPaginationNumber, dispatchClickedPageNumber, showAllItems } = props;
     const numberOfPaginationPages = [...Array(totalNumberOfPages).keys()]
 
 
@@ -21,7 +21,6 @@ function Pagination(props) {
         }
         else {
             let clickedPageNumber = parseInt(event.target.innerHTML);
-            // console.log('clickedPageNumber')
             dispatchClickedPageNumber(clickedPageNumber)
         }
     }
@@ -29,7 +28,7 @@ function Pagination(props) {
 
     return (
         <React.Fragment>
-            <div className="pagination">
+            <div style={showAllItems ? { display: 'none' } : { display: 'block' }} className="pagination">
                 <div className="pagi-wrapper">
                     <a style={clickedPaginationNumber === 1 ? { display: 'none' } : { display: 'inline-block' }}
                         onClick={handlePaginationPageNumber} href="#">&laquo;<span className="pagination-span">Previous</span></a>
@@ -48,7 +47,8 @@ function Pagination(props) {
 
 const mapStateToProps = state => ({
     totalNumberOfPages: state.pagination.totalNumberOfPages,
-    clickedPaginationNumber: state.pagination.clickedPaginationNumber
+    clickedPaginationNumber: state.pagination.clickedPaginationNumber,
+    showAllItems: state.pagination.showAllItems,
 })
 
 const dispatchStateToProps = dispatch => ({

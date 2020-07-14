@@ -13,3 +13,6 @@ export const action_pagination_total_number_of_pages = (numberOfPages) => ({
     type: paginationTypes.TOTAL_NUMBER_OF_PAGES,
     payload: numberOfPages
 });
+export const action_showAllItems = () => ({
+    type: paginationTypes.SHOW_ALL_ITEMS
+});

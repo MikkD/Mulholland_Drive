@@ -24,6 +24,12 @@ const cartItemsReducer = (state = INITIAL_STATE, action) => {
                 ...state,
                 numberOfCartItems: state.shoppingBagItems.length
             }
+        case cartItemsTypes.UPDATE_CART_ITEMS:
+            return {
+                ...state,
+                shoppingBagItems: action.payload
+
+            }
     }
     return state
 }

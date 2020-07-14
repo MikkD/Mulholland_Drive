@@ -12,3 +12,7 @@ export const action_removeShoppingBagItem = (id) => ({
 export const action_cartItemsNumber = () => ({
     type: cartItemsTypes.CART_ITEMS_NUMBER,
 })
+export const action_updateCartItem = (item) => ({
+    type: cartItemsTypes.UPDATE_CART_ITEMS,
+    payload: item
+})

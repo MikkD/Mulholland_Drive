@@ -10,17 +10,6 @@
     padding: 15px 20px;
 }
 
-.sb-header>div{
-    display: flex;
-    padding:5px 20px;
-    border-bottom: 1px solid #d73e15c9;
-    align-items: center;
-}
-.sb-header>div>div>h3{
-    display: inline-block;
-}
-
-
 .flex-grow-1{
     flex-grow: 1;
 }

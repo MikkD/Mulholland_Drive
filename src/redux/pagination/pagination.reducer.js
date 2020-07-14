@@ -4,7 +4,8 @@ import paginationTypes from './pagination.types';
 const INITIAL_STATE = {
     clickedPaginationNumber: 1,
     totalItemsPerPage: 0,
-    totalNumberOfPages: 0
+    totalNumberOfPages: 0,
+    showAllItems: false
 
 }
 
@@ -25,6 +26,11 @@ const paginationReducer = (state = INITIAL_STATE, action) => {
             return {
                 ...state,
                 totalNumberOfPages: action.payload
+            }
+        case paginationTypes.SHOW_ALL_ITEMS:
+            return {
+                ...state,
+                showAllItems: !state.showAllItems
             }
     }
     return state

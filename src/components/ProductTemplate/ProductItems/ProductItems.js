@@ -17,7 +17,8 @@ const ProductItems = props => {
         cartItemsNumber, filterItemByProduct,
         filterItemByPriceLowToHigh, filterItemByPriceHighToLow,
         dispatchPaginationNumber, dispatchTotalItemsPerPage, dispatchTotalNumberOfPages,
-        clickedPaginationNumberFromRedux } = props;
+        clickedPaginationNumberFromRedux, showAllItems } = props;
+
     const [items, setItems] = useState([])
     const [totalNumberOfItems, setTotalNumberOfItems] = useState()
     // Pagination Redux
@@ -32,18 +33,19 @@ const ProductItems = props => {
         dispatchTotalNumberOfPages(totalNumberOfPages)
     }
 
-    // Setting range of items per page 
     useEffect(() => {
         setTimeout(() => {
-            const theItems = getProduct(props.match.params.product)
+            let theItems = getProduct(props.match.params.product)
             setTotalNumberOfItems(theItems.length)
-            theItems.slice(firstItemInRange, lastItemInRange)
-            setItems(theItems)
+            if (showAllItems == true) {
+                setItems(theItems)
+            } else {
+                const slicedItems = theItems.slice(firstItemInRange, lastItemInRange)
+                setItems(slicedItems)
+            }
         }, 1000);
 
-    }, [clickedPaginationNumber])
-
-
+    }, [clickedPaginationNumber, showAllItems])
 
     useEffect(() => {
         if (filterItemByProduct) {
@@ -63,7 +65,7 @@ const ProductItems = props => {
         let newShoppingBagItem = copy.find(item => item.id === id && !item.isAdded);
         if (newShoppingBagItem) {
             const theIndex = copy.findIndex(item => item.id === id);
-            newShoppingBagItem = { ...newShoppingBagItem, isAdded: true }
+            newShoppingBagItem = { ...newShoppingBagItem, isAdded: true, quantity: 1 }
             copy.splice(theIndex, 1, newShoppingBagItem)
             setItems(copy)
             newCartItem(newShoppingBagItem)
@@ -80,13 +82,11 @@ const ProductItems = props => {
     }
 
 
-
-
     return (
         <React.Fragment>
             <div className="product-items-wrapper">
                 {!items ? <div className="LOADER">LOADING</div> :
-                    items.slice(firstItemInRange, lastItemInRange).map(item => {
+                    items.map(item => {
                         return (
                             <div id={item.id} key={item.id} className="product-item-tile">
                                 <div className="product-item-link-wrapper" >
@@ -101,7 +101,7 @@ const ProductItems = props => {
                                 <div className="product-item-tile-description">
                                     <h4>{item.name}</h4>
                                     <p>{item.description}</p>
-                                    <p>{item.price}$</p>
+                                    <p>{parseInt(item.price)}$</p>
                                 </div>
                             </div>
                         )
@@ -118,7 +118,8 @@ const mapStateToProps = state => ({
     filterItemByProduct: state.filterItems.filterByProduct,
     filterItemByPriceLowToHigh: state.filterItems.filterByPriceLowToHigh,
     filterItemByPriceHighToLow: state.filterItems.filterByPriceHighToLow,
-    clickedPaginationNumberFromRedux: state.pagination.clickedPaginationNumber
+    clickedPaginationNumberFromRedux: state.pagination.clickedPaginationNumber,
+    showAllItems: state.pagination.showAllItems,
 })
 
 
