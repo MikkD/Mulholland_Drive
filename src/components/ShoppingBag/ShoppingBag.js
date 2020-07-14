@@ -74,7 +74,7 @@ const ShoppingBag = (props) => {
                                 <div className="sb-item flex-grow-1">
                                     <img src={item.image}
                                         className="sb-image" alt="item1"
-                                        style={{ width: '100px', height: '100px' }}
+                                        style={{ width: '130px', height: '130px' }}
                                     />
                                     <div className="sb-item-desctiption">
                                         <p>{item.name}</p>

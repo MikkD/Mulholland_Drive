@@ -13,5 +13,15 @@
     top: -3px;
     left: 12px;
     color: black;
-    
 }
+.welcome-message{
+    display: flex;
+    align-items: center;
+}
+
+@media only screen and (max-width: 450px) 
+{
+.shopping-bag-icon{
+    display:  none;
+}
+} 

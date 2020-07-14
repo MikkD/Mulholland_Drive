@@ -9,12 +9,12 @@ function CartHeader(props) {
             <div className="sb-header">
                 <div className="sb-upper-header">
                     <div className="flex-grow-1">
-                        <h3>Shopping Bag</h3>
-                        <span>{cartItemsNumber} items</span>
+                        <h2>Welcome {currentUser ? currentUser.name : ''}</h2>
                     </div>
 
-                    <div className="weclome-message">
-                        <h2>Welcome {currentUser ? currentUser.name : ''}</h2>
+                    <div className="welcome-message shrink">
+                        <h4>Shopping Bag</h4>
+                        <span>{cartItemsNumber} items</span>
                     </div>
                 </div>
 

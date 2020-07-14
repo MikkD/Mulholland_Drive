@@ -4,6 +4,7 @@
     margin:139px  auto;
     background-color: #191919;
     box-sizing: border-box;
+    font-size: 22px;
 }
 .sb-container>div:not(:first-child){
     border-bottom: 1px solid #d73e15c9;
@@ -20,6 +21,7 @@
     display: flex;
     align-items: center;
     flex-wrap: wrap;
+    flex-basis: 60%;
 }
 
 .sb-item-desctiption{
@@ -31,7 +33,7 @@
     justify-content: center;
 }
 .shrink {
-    width:120px;
+    width: 200px;
     display: flex;
     text-align: center;
     justify-content:center;

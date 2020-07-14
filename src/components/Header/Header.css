@@ -5,6 +5,9 @@
     left:0;
     font-family: 'Bebas-Neue';
     z-index: 2;
+    padding-top: 10px;
+    padding-bottom: 5px;
+    border-bottom: 1px solid rgba(255,255,255,.3);
 }
 .flex-header{
     display: flex;
@@ -13,7 +16,6 @@
     width: 90%;
     margin: 0 auto;
     line-height: 50px;
-    border-bottom: 1px solid rgba(255,255,255,.3);
 }
 .logo{
     font-size: 32px;

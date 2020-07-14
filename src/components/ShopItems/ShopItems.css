@@ -42,14 +42,12 @@ position: absolute;
 left:50%;
 bottom: 10%;
 line-height: 20px;
-opacity: 0.8;
-width: 100px;
-margin-left: -50px;
+opacity: 0.9;
+width: 150px;
+margin-left: -75px;
 margin-bottom: -10px;
 }
-.image-desciption h2{
-    font-size: 24px;
-}
+
 .flex-item:nth-of-type(-n+2) .image-desciption{
 width: 300px;
 margin-left: -150px;

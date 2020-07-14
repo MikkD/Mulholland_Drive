@@ -20,7 +20,7 @@ function CartFooter(props) {
     return (
         < React.Fragment >
             <div className="sb-item sb-footer">
-                <div className="subtotal flex-grow-1 "><h3>Your subtotal is : {totalSum}$</h3></div>
+                <div className="subtotal flex-grow-1 "><h3>Your total is : {totalSum}$</h3></div>
                 <div className="shrink">
                     <a className="checkout-button">Check Out</a>
                 </div>
