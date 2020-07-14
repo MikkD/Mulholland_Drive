@@ -151,6 +151,118 @@ export const Jackets = [
         image: require('./assets/jacket-img/jacket9.jpg'),
         id: nextId(),
         price: '220'
+    },
+    {
+        name: 'Stone Island',
+        description: 'Membrana2L Jacket',
+        image: require('./assets/jacket-img/jacket6.jpg'),
+        id: nextId(),
+        price: '600'
+    },
+    {
+        name: 'Barbour',
+        description: 'Ghost Rain Jacket',
+        image: require('./assets/jacket-img/jacket7.jpg'),
+        id: nextId(),
+        price: '500'
+    },
+    {
+        name: 'A.P.C',
+        description: 'Live 14-A Jacket',
+        image: require('./assets/jacket-img/jacket8.jpg'),
+        id: nextId(),
+        price: '420'
+    },
+    {
+        name: 'J-Crew',
+        description: 'Outdoor Jacket',
+        image: require('./assets/jacket-img/jacket9.jpg'),
+        id: nextId(),
+        price: '220'
+    },
+    {
+        name: 'Stone Island',
+        description: 'Membrana2L Jacket',
+        image: require('./assets/jacket-img/jacket6.jpg'),
+        id: nextId(),
+        price: '600'
+    },
+    {
+        name: 'Barbour',
+        description: 'Ghost Rain Jacket',
+        image: require('./assets/jacket-img/jacket7.jpg'),
+        id: nextId(),
+        price: '500'
+    },
+    {
+        name: 'A.P.C',
+        description: 'Live 14-A Jacket',
+        image: require('./assets/jacket-img/jacket8.jpg'),
+        id: nextId(),
+        price: '420'
+    },
+    {
+        name: 'J-Crew',
+        description: 'Outdoor Jacket',
+        image: require('./assets/jacket-img/jacket9.jpg'),
+        id: nextId(),
+        price: '220'
+    },
+    {
+        name: 'Stone Island',
+        description: 'Membrana2L Jacket',
+        image: require('./assets/jacket-img/jacket6.jpg'),
+        id: nextId(),
+        price: '600'
+    },
+    {
+        name: 'Barbour',
+        description: 'Ghost Rain Jacket',
+        image: require('./assets/jacket-img/jacket7.jpg'),
+        id: nextId(),
+        price: '500'
+    },
+    {
+        name: 'A.P.C',
+        description: 'Live 14-A Jacket',
+        image: require('./assets/jacket-img/jacket8.jpg'),
+        id: nextId(),
+        price: '420'
+    },
+    {
+        name: 'J-Crew',
+        description: 'Outdoor Jacket',
+        image: require('./assets/jacket-img/jacket9.jpg'),
+        id: nextId(),
+        price: '220'
+    },
+    {
+        name: 'Stone Island',
+        description: 'Membrana2L Jacket',
+        image: require('./assets/jacket-img/jacket6.jpg'),
+        id: nextId(),
+        price: '600'
+    },
+    {
+        name: 'Barbour',
+        description: 'Ghost Rain Jacket',
+        image: require('./assets/jacket-img/jacket7.jpg'),
+        id: nextId(),
+        price: '500'
+    },
+    {
+        name: 'A.P.C',
+        description: 'Live 14-A Jacket',
+        image: require('./assets/jacket-img/jacket8.jpg'),
+        id: nextId(),
+        price: '420'
+    },
+    {
+        name: 'J-Crew',
+        description: 'Outdoor Jacket',
+        image: require('./assets/jacket-img/jacket9.jpg'),
+        id: nextId(),
+        price: '220'
     }
 
 ]

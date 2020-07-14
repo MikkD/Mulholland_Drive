@@ -7,25 +7,51 @@ import { connect } from 'react-redux';
 import { action_newShoppingBagItem } from '../../../redux/cartItems/cartItems.action';
 import { action_removeShoppingBagItem } from '../../../redux/cartItems/cartItems.action';
 import { action_cartItemsNumber } from '../../../redux/cartItems/cartItems.action';
+import { action_pagination_number } from '../../../redux/pagination/pagination.action';
+import { action_pagination_total_items_per_page } from '../../../redux/pagination/pagination.action';
+import { action_pagination_total_number_of_pages } from '../../../redux/pagination/pagination.action';
 
 
 const ProductItems = props => {
-    const { newCartItem, removeShoppingBagItem, cartItemsNumber, filterItemByProduct, filterItemByPriceLowToHigh, filterItemByPriceHighToLow } = props;
+    const { newCartItem, removeShoppingBagItem,
+        cartItemsNumber, filterItemByProduct,
+        filterItemByPriceLowToHigh, filterItemByPriceHighToLow,
+        dispatchPaginationNumber, dispatchTotalItemsPerPage, dispatchTotalNumberOfPages,
+        clickedPaginationNumberFromRedux } = props;
     const [items, setItems] = useState([])
+    const [totalNumberOfItems, setTotalNumberOfItems] = useState()
+    // Pagination Redux
+    let clickedPaginationNumber = clickedPaginationNumberFromRedux;
+    const totalItemsPerPage = 5
+    let totalNumberOfPages = Math.round(totalNumberOfItems / totalItemsPerPage);
+    let lastItemInRange = clickedPaginationNumber * totalItemsPerPage
+    let firstItemInRange = lastItemInRange - totalItemsPerPage
+    if (items.length > 0) {
+        dispatchPaginationNumber(clickedPaginationNumber)
+        dispatchTotalItemsPerPage(totalItemsPerPage)
+        dispatchTotalNumberOfPages(totalNumberOfPages)
+    }
 
+    // Setting range of items per page 
     useEffect(() => {
         setTimeout(() => {
-            setItems(getProduct(props.match.params.product))
+            const theItems = getProduct(props.match.params.product)
+            setTotalNumberOfItems(theItems.length)
+            theItems.slice(firstItemInRange, lastItemInRange)
+            setItems(theItems)
         }, 1000);
-    }, [])
+
+    }, [clickedPaginationNumber])
+
+
 
     useEffect(() => {
         if (filterItemByProduct) {
             setItems((prevState) => [...prevState.sort((a, b) => a.name > b.name ? 1 : -1)])
         } else if (filterItemByPriceLowToHigh) {
-            setItems((prevState) => [...prevState.sort((a, b) => parseInt(a.price) < parseInt(b.price) ? 1 : -1)])
-        } else if (filterItemByPriceHighToLow) {
             setItems((prevState) => [...prevState.sort((a, b) => parseInt(a.price) > parseInt(b.price) ? 1 : -1)])
+        } else if (filterItemByPriceHighToLow) {
+            setItems((prevState) => [...prevState.sort((a, b) => parseInt(a.price) < parseInt(b.price) ? 1 : -1)])
         }
 
     }, [filterItemByProduct, filterItemByPriceLowToHigh, filterItemByPriceHighToLow])
@@ -34,7 +60,6 @@ const ProductItems = props => {
     const addToShoppingBag = (e) => {
         const id = e.target.id
         const copy = [...items]
-
         let newShoppingBagItem = copy.find(item => item.id === id && !item.isAdded);
         if (newShoppingBagItem) {
             const theIndex = copy.findIndex(item => item.id === id);
@@ -55,11 +80,13 @@ const ProductItems = props => {
     }
 
 
+
+
     return (
         <React.Fragment>
             <div className="product-items-wrapper">
                 {!items ? <div className="LOADER">LOADING</div> :
-                    items.map(item => {
+                    items.slice(firstItemInRange, lastItemInRange).map(item => {
                         return (
                             <div id={item.id} key={item.id} className="product-item-tile">
                                 <div className="product-item-link-wrapper" >
@@ -90,13 +117,19 @@ const mapStateToProps = state => ({
     addedButtonsToCart: state.cartItems.shoppingBagItems,
     filterItemByProduct: state.filterItems.filterByProduct,
     filterItemByPriceLowToHigh: state.filterItems.filterByPriceLowToHigh,
-    filterItemByPriceHighToLow: state.filterItems.filterByPriceHighToLow
+    filterItemByPriceHighToLow: state.filterItems.filterByPriceHighToLow,
+    clickedPaginationNumberFromRedux: state.pagination.clickedPaginationNumber
 })
+
 
 const mapDispatchToProps = dispatch => ({
     newCartItem: (newShoppingBagItem) => dispatch(action_newShoppingBagItem(newShoppingBagItem)),
     removeShoppingBagItem: (id) => dispatch(action_removeShoppingBagItem(id)),
-    cartItemsNumber: () => dispatch(action_cartItemsNumber())
+    cartItemsNumber: () => dispatch(action_cartItemsNumber()),
+    dispatchPaginationNumber: (clickedPaginationNumber) => dispatch(action_pagination_number(clickedPaginationNumber)),
+    dispatchTotalItemsPerPage: (totalItemsPerPage) => dispatch(action_pagination_total_items_per_page(totalItemsPerPage)),
+    dispatchTotalNumberOfPages: (totalNumberOfPages) => dispatch(action_pagination_total_number_of_pages(totalNumberOfPages))
+
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(ProductItems))
