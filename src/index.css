@@ -24,6 +24,9 @@ vertical-align: baseline;
 :focus {
     outline: 0;
 }
+.hidden{
+    display: none;
+}
 
 article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {

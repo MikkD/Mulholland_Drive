@@ -7,47 +7,56 @@ import { connect } from 'react-redux';
 import { action_newShoppingBagItem } from '../../../redux/cartItems/cartItems.action';
 import { action_removeShoppingBagItem } from '../../../redux/cartItems/cartItems.action';
 import { action_cartItemsNumber } from '../../../redux/cartItems/cartItems.action';
-import { action_pagination_number } from '../../../redux/pagination/pagination.action';
-import { action_pagination_total_items_per_page } from '../../../redux/pagination/pagination.action';
-import { action_pagination_total_number_of_pages } from '../../../redux/pagination/pagination.action';
+import { action_deliverAllProductItems } from '../../../redux/cartItems/cartItems.action';
 
 
 const ProductItems = props => {
-    const { newCartItem, removeShoppingBagItem,
-        cartItemsNumber, filterItemByProduct,
-        filterItemByPriceLowToHigh, filterItemByPriceHighToLow,
-        dispatchPaginationNumber, dispatchTotalItemsPerPage, dispatchTotalNumberOfPages,
-        clickedPaginationNumberFromRedux, showAllItems } = props;
+    const { allProducts, deliverAllProductItems, newCartItem, removeShoppingBagItem, cartItemsNumber, clickedPageNumber, showAllItemsFilter, currentShoppingBagItems } = props;
+    const { filterItemByProduct, filterItemByPriceLowToHigh, filterItemByPriceHighToLow } = props.filterTypes;
 
     const [items, setItems] = useState([])
-    const [totalNumberOfItems, setTotalNumberOfItems] = useState()
+    const [totalNumberOfItems, setTotalNumberOfItems] = useState(0)
     // Pagination Redux
-    let clickedPaginationNumber = clickedPaginationNumberFromRedux;
+    let clickedNumber = clickedPageNumber ? clickedPageNumber : 1;
     const totalItemsPerPage = 5
     let totalNumberOfPages = Math.round(totalNumberOfItems / totalItemsPerPage);
-    let lastItemInRange = clickedPaginationNumber * totalItemsPerPage
+    let lastItemInRange = clickedNumber * totalItemsPerPage
     let firstItemInRange = lastItemInRange - totalItemsPerPage
-    if (items.length > 0) {
-        dispatchPaginationNumber(clickedPaginationNumber)
-        dispatchTotalItemsPerPage(totalItemsPerPage)
-        dispatchTotalNumberOfPages(totalNumberOfPages)
+    if (allProducts.length > 0) {
+        props.handleTotalNumberOfPages(totalNumberOfPages)
     }
+
+
+    useEffect(() => {
+        console.log('useEffect called')
+        let theItems = getProduct(props.match.params.product)
+        let newItems = theItems.map(item => ({ ...item, isAdded: false }))
+        console.log('theItems', theItems)
+        // Отправили в Редакс
+        deliverAllProductItems(newItems)
+        setItems(newItems)
+        setTotalNumberOfItems(newItems.length)
+
+
+    }, [])
+
 
     useEffect(() => {
         setTimeout(() => {
-            let theItems = getProduct(props.match.params.product)
-            setTotalNumberOfItems(theItems.length)
-            if (showAllItems == true) {
-                setItems(theItems)
+            if (showAllItemsFilter != true) {
+                const slicedProducts = items.slice(firstItemInRange, lastItemInRange)
+                setItems(slicedProducts)
             } else {
-                const slicedItems = theItems.slice(firstItemInRange, lastItemInRange)
-                setItems(slicedItems)
+                let a = getProduct(props.match.params.product)
+                setItems(a)
             }
         }, 1000);
 
-    }, [clickedPaginationNumber, showAllItems])
+    }, [clickedPageNumber, showAllItemsFilter])
 
+    // Filter
     useEffect(() => {
+        const { filterItemByProduct, filterItemByPriceLowToHigh, filterItemByPriceHighToLow } = props.filterTypes
         if (filterItemByProduct) {
             setItems((prevState) => [...prevState.sort((a, b) => a.name > b.name ? 1 : -1)])
         } else if (filterItemByPriceLowToHigh) {
@@ -59,8 +68,11 @@ const ProductItems = props => {
     }, [filterItemByProduct, filterItemByPriceLowToHigh, filterItemByPriceHighToLow])
 
 
+
+
     const addToShoppingBag = (e) => {
         const id = e.target.id
+        // const copy = [...allProducts]
         const copy = [...items]
         let newShoppingBagItem = copy.find(item => item.id === id && !item.isAdded);
         if (newShoppingBagItem) {
@@ -72,7 +84,7 @@ const ProductItems = props => {
                 totalPerItem: parseInt(newShoppingBagItem.price)
             }
             copy.splice(theIndex, 1, newShoppingBagItem)
-            setItems(copy)
+            deliverAllProductItems(copy)
             newCartItem(newShoppingBagItem)
             cartItemsNumber()
         } else {
@@ -80,18 +92,19 @@ const ProductItems = props => {
             let itemToRemove = copy.find(item => item.id === id)
             itemToRemove.isAdded = !itemToRemove.isAdded
             copy.splice(theIndex, 1, itemToRemove)
-            setItems(copy)
+            deliverAllProductItems(copy)
             removeShoppingBagItem(id)
             cartItemsNumber()
         }
     }
 
-
     return (
+
         <React.Fragment>
+            {console.log('items', items)}
             <div className="product-items-wrapper">
-                {!items ? <div className="LOADER">LOADING</div> :
-                    items.map(item => {
+                {items.length >= 0 ?
+                    items.map((item, index) => {
                         return (
                             <div id={item.id} key={item.id} className="product-item-tile">
                                 <div className="product-item-link-wrapper" >
@@ -110,8 +123,8 @@ const ProductItems = props => {
                                 </div>
                             </div>
                         )
-                    })}
-                <ScrollToTopButton />
+                    }) : null}
+                < ScrollToTopButton />
             </div>
 
         </React.Fragment>
@@ -119,12 +132,8 @@ const ProductItems = props => {
 }
 
 const mapStateToProps = state => ({
-    addedButtonsToCart: state.cartItems.shoppingBagItems,
-    filterItemByProduct: state.filterItems.filterByProduct,
-    filterItemByPriceLowToHigh: state.filterItems.filterByPriceLowToHigh,
-    filterItemByPriceHighToLow: state.filterItems.filterByPriceHighToLow,
-    clickedPaginationNumberFromRedux: state.pagination.clickedPaginationNumber,
-    showAllItems: state.pagination.showAllItems,
+    currentShoppingBagItems: state.cartItems.shoppingBagItems,
+    allProducts: state.cartItems.allProductItems
 })
 
 
@@ -132,9 +141,7 @@ const mapDispatchToProps = dispatch => ({
     newCartItem: (newShoppingBagItem) => dispatch(action_newShoppingBagItem(newShoppingBagItem)),
     removeShoppingBagItem: (id) => dispatch(action_removeShoppingBagItem(id)),
     cartItemsNumber: () => dispatch(action_cartItemsNumber()),
-    dispatchPaginationNumber: (clickedPaginationNumber) => dispatch(action_pagination_number(clickedPaginationNumber)),
-    dispatchTotalItemsPerPage: (totalItemsPerPage) => dispatch(action_pagination_total_items_per_page(totalItemsPerPage)),
-    dispatchTotalNumberOfPages: (totalNumberOfPages) => dispatch(action_pagination_total_number_of_pages(totalNumberOfPages))
+    deliverAllProductItems: (allItems) => dispatch(action_deliverAllProductItems(allItems))
 
 })
 

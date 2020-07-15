@@ -68,7 +68,6 @@ class ShopItems extends Component {
                         })}
                     </div>
                 </div>
-                {/* <Footer style={{ background: '#1d1d23' }} /> */}
             </React.Fragment>
         )
     }

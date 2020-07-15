@@ -27,9 +27,6 @@ class App extends React.Component {
           const theSnapData = snapshot.data()
           this.props.setCurrentUser(theSnapData)
         })
-
-
-
       } else {
         this.props.setCurrentUser(firebaseUser)
       }
@@ -48,9 +45,6 @@ class App extends React.Component {
               <Route exact path="/ProductTemplate/:product" component={ProductTemplate} />
               <Route path="/SignInUp" component={SignInUp} />
               <Route path="/ShoppingBag" component={ShoppingBag} />
-
-              {/* <ShoppingBag currentUser={this.props.isCurrentUserLoggedIn} /> */}
-              {/* Почему 4 раза рендериться???? Мне поэтому пришлось ставить условие */}
               {this.props.isCurrentUserLoggedIn !== null ?
                 <ShoppingBag currentUser={this.props.isCurrentUserLoggedIn} /> :
                 <Route path="/SignInUp" component={SignInUp} /> && <SignInUp />}

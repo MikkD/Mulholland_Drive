@@ -1,53 +1,88 @@
-import React, { Component } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import './ProductTemplate.css';
-import Header from '../Header/Header';
-import DropDownMenu from '../ProductTemplate/DropdownMenu/DropdownMenu';
-import QuantityDropDown from '../ProductTemplate/QuantityDropDown/QuantityDropDown';
 import Pagination from './Pagination/Pagination';
 import ProductItems from './ProductItems/ProductItems';
+import ProductFilter from './ProductFilter/ProductFilter';
 
-class ProductTemplate extends Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            viewport: window.innerWidth
+const ProductTemplate = (props) => {
+    const [totalNumberOfPages, setTotalNumberOfPages] = useState()
+    const [filterTypes, setFilterTypes] = useState({
+        filterItemByProduct: false,
+        filterItemByPriceLowToHigh: false,
+        filterItemByPriceHighToLow: false
+    });
+    const [clickedPageNumber, setClickedPageNumber] = useState(1)
+    const [showAllItemsFilter, setShowAllItemsFilter] = useState(false);
+    const handleFilter = (filterType) => {
+        switch (filterType) {
+            case 0:
+                setFilterTypes(prevState => ({
+                    ...prevState,
+                    filterItemByProduct: true,
+                    filterItemByPriceLowToHigh: false,
+                    filterItemByPriceHighToLow: false
+                }))
+                break
+            case 1:
+                setFilterTypes(prevState => ({
+                    ...prevState,
+                    filterItemByProduct: false,
+                    filterItemByPriceLowToHigh: true,
+                    filterItemByPriceHighToLow: false
+                }))
+                break
+            case 2:
+                setFilterTypes(prevState => ({
+                    ...prevState,
+                    filterItemByProduct: false,
+                    filterItemByPriceLowToHigh: false,
+                    filterItemByPriceHighToLow: true
+                }))
+                break
         }
-        this.handleViewport = this.handleViewport.bind(this);
     }
 
-    componentDidMount() {
-        window.scrollTo(0, 0)
-        window.addEventListener('resize', this.handleViewport)
+    const handleFilterByPageNumber = (number) => {
+        setClickedPageNumber(number)
     }
 
-    componentWillUnmount() {
-        window.removeEventListener('resize', this.handleViewport)
+    const handleShowAllItem = () => {
+        setShowAllItemsFilter(prevState => !prevState)
     }
 
-    handleViewport() {
-        this.setState({ viewport: window.innerWidth })
+    const handleTotalNumberOfPages = (numberOfPages) => {
+        setTotalNumberOfPages(numberOfPages)
     }
 
 
-    render() {
-        return (
-            <React.Fragment>
-                <div className="main-product-section">
-                    {/* <Header /> */}
-                    <div className="single-product-wrapper">
-                        <h2>{this.props.match.params.product}<span className="dot"></span></h2>
-                        <div className="product-filter">
-                            <DropDownMenu />
-                            <QuantityDropDown />
-                        </div>
-                        <ProductItems />
-                    </div>
-                    <Pagination />
-                    {/* <Footer /> */}
+
+
+    return (
+        <React.Fragment>
+            <div className="main-product-section">
+                <div className="single-product-wrapper">
+                    <h2>{props.match.params.product}</h2>
+                    <ProductFilter
+                        handleShowAllItem={handleShowAllItem}
+                        handleFilterByPageNumber={handleFilterByPageNumber}
+                        totalNumberOfPages={totalNumberOfPages}
+                        handleFilter={handleFilter} />
+                    <ProductItems
+                        clickedPageNumber={clickedPageNumber}
+                        showAllItemsFilter={showAllItemsFilter}
+                        handleTotalNumberOfPages={handleTotalNumberOfPages}
+                        filterTypes={filterTypes}
+                    />
                 </div>
-            </React.Fragment>
-        )
-    }
+                <Pagination
+                    handleFilterByPageNumber={handleFilterByPageNumber}
+                    totalNumberOfPages={totalNumberOfPages}
+                    clickedPageNumber={clickedPageNumber}
+                    showAllItemsFilter={showAllItemsFilter}
+                />
+            </div>
+        </React.Fragment>
+    )
 }
 
 export default ProductTemplate;

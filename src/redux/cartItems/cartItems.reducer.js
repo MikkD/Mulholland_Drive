@@ -4,12 +4,18 @@ import cartItemsTypes from './cartItems.types'
 const INITIAL_STATE = {
     shoppingBagItems: [],
     numberOfCartItems: 0,
-    totalSum: 0
+    totalSum: 0,
+    allProductItems: []
 }
 
 const cartItemsReducer = (state = INITIAL_STATE, action) => {
 
     switch (action.type) {
+        case cartItemsTypes.ALL_PRODUCT_ITEMS:
+            return {
+                ...state,
+                allProductItems: action.payload
+            }
         case cartItemsTypes.ADD_ITEM:
             return {
                 ...state,

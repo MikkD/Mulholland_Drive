@@ -1,7 +1,0 @@
-const filterItemsType = {
-    FILTER_BY_PRODUCT: 'FILTER_BY_PRODUCT',
-    FILTER_BY_PRICE_LOW_TO_HIGH: 'FILTER_BY_PRICE_LOW_TO_HIGH',
-    FILTER_BY_PRICE_HIGH_TO_LOW: 'FILTER_BY_PRICE_HIGH_TO_LOW'
-}
-
-export default filterItemsType;
