@@ -7,7 +7,6 @@ import { connect } from 'react-redux';
 import { action_newShoppingBagItem } from '../../../redux/cartItems/cartItems.action';
 import { action_removeShoppingBagItem } from '../../../redux/cartItems/cartItems.action';
 import { action_cartItemsNumber } from '../../../redux/cartItems/cartItems.action';
-// import { action_deliverAllProductItems } from '../../../redux/cartItems/cartItems.action';
 
 
 const ProductItems = props => {
@@ -115,7 +114,6 @@ const ProductItems = props => {
 
 const mapStateToProps = state => ({
     currentShoppingBagItems: state.cartItems.shoppingBagItems,
-    // allProducts: state.cartItems.allProductItems
 })
 
 
@@ -123,31 +121,7 @@ const mapDispatchToProps = dispatch => ({
     newCartItem: (newShoppingBagItem) => dispatch(action_newShoppingBagItem(newShoppingBagItem)),
     removeShoppingBagItem: (id) => dispatch(action_removeShoppingBagItem(id)),
     cartItemsNumber: () => dispatch(action_cartItemsNumber()),
-    // deliverAllProductItems: (allItems) => dispatch(action_deliverAllProductItems(allItems))
 
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(ProductItems))
-
-
-
-// // ЧТО ЗА ХУЙНЯ??????
-// const addToShoppingBag = (e) => {
-//     const id = e.target.id
-//     let copy = [...items]
-//     setItems(copy)
-//     // console.log('copy before ', copy)
-//     let newShoppingBagItem = items.find(item => item.id === id);
-//     let theIndex = items.findIndex(item => item.id === id);
-//     // console.log('theIndex is ', theIndex)
-//     newShoppingBagItem = { ...newShoppingBagItem, isAdded: true }
-//     copy = copy.splice(theIndex, 1, newShoppingBagItem)
-//     // console.log('copy after ', copy)
-//     // setShoppingBagItem((prevState) => [...prevState, newShoppingBagItem])
-//     // newCartItem(newShoppingBagItem)
-//     newCartItem(items)
-// }
-
-// useEffect(() => {
-//     console.log('items', items)
-// }, [items])

@@ -5,6 +5,7 @@ import './Pagination.css';
 function Pagination(props) {
     const { totalNumberOfPages, clickedPageNumber, showAllItemsFilter, handleFilterByPageNumber } = props;
     const numberOfPaginationPages = [...Array(totalNumberOfPages).keys()]
+    console.log('clickedPageNumber', clickedPageNumber)
 
 
     return (
@@ -16,7 +17,7 @@ function Pagination(props) {
                         href="#">&laquo;<span className="pagination-span">Previous</span></a>
                     {numberOfPaginationPages.map((pageNumber, index) =>
                         <a
-                            style={pageNumber + 1 === clickedPageNumber ? { backgroundColor: '#d73e15' } : { backgroundColor: 'none' }}
+                            style={pageNumber + 1 == clickedPageNumber ? { backgroundColor: '#d73e15' } : { backgroundColor: 'transparent' }}
                             key={index}
                             onClick={(e) => handleFilterByPageNumber(e.target.innerHTML)}
                             href="#">{parseInt(pageNumber) + 1}</a>
