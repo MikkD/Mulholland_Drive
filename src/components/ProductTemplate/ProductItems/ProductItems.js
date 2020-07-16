@@ -7,77 +7,57 @@ import { connect } from 'react-redux';
 import { action_newShoppingBagItem } from '../../../redux/cartItems/cartItems.action';
 import { action_removeShoppingBagItem } from '../../../redux/cartItems/cartItems.action';
 import { action_cartItemsNumber } from '../../../redux/cartItems/cartItems.action';
-import { action_deliverAllProductItems } from '../../../redux/cartItems/cartItems.action';
+// import { action_deliverAllProductItems } from '../../../redux/cartItems/cartItems.action';
 
 
 const ProductItems = props => {
-    const { allProducts, deliverAllProductItems, newCartItem, removeShoppingBagItem, cartItemsNumber, clickedPageNumber, showAllItemsFilter, currentShoppingBagItems } = props;
+    const { newCartItem, removeShoppingBagItem, cartItemsNumber, clickedPageNumber, showAllItemsFilter, currentShoppingBagItems } = props;
     const { filterItemByProduct, filterItemByPriceLowToHigh, filterItemByPriceHighToLow } = props.filterTypes;
-
-
-    const [localItems, setLocalItems] = useState([])
+    const [items, setItems] = useState([])
     const [totalNumberOfItems, setTotalNumberOfItems] = useState(0)
 
-
-
-
-    let clickedNumber = clickedPageNumber > 1 ? clickedPageNumber : 1;
-    console.log('clickedNumber', clickedNumber)
-    const totalItemsPerPage = 5
+    const totalItemsPerPage = 5;
     let totalNumberOfPages = Math.round(totalNumberOfItems / totalItemsPerPage);
-    let lastItemInRange = clickedNumber * totalItemsPerPage
+    let lastItemInRange = clickedPageNumber * totalItemsPerPage
     let firstItemInRange = lastItemInRange - totalItemsPerPage
     props.handleTotalNumberOfPages(totalNumberOfPages)
 
-    useEffect(() => {
-        let theItems = getProduct(props.match.params.product)
-        let newItems = theItems.map(item => ({ ...item, isAdded: false }))
-        let a = newItems.slice(firstItemInRange, lastItemInRange)
-        setLocalItems(a)
-        setTotalNumberOfItems(newItems.length)
-        // Отправили в Редакс
-        // deliverAllProductItems(newItems)
-    }, [clickedPageNumber])
-
-
-
 
     useEffect(() => {
-        console.log('useEffect')
-    })
-
-
-    // SUKA
-    useEffect(() => {
-        const copy = [...localItems]
-        if (!showAllItemsFilter) {
-            copy.slice(firstItemInRange, lastItemInRange)
-            setLocalItems(copy)
-        } else {
-            setLocalItems(prevState => getProduct(props.match.params.product))
+        let newItems = getProduct(props.match.params.product)
+        if (currentShoppingBagItems.length > 0) {
+            for (let i = 0; i < newItems.length; i++) {
+                for (let j = 0; j < currentShoppingBagItems.length; j++) {
+                    if (currentShoppingBagItems[j].id === newItems[i].id) {
+                        newItems[i] = {
+                            ...newItems[i],
+                            isAdded: true
+                        }
+                    }
+                }
+            }
         }
+        showAllItemsFilter ? setItems(newItems) : setItems(newItems.slice(firstItemInRange, lastItemInRange))
+        setTotalNumberOfItems(newItems.length)
+    }, [clickedPageNumber, showAllItemsFilter])
 
-    }, [showAllItemsFilter])
 
     // Filter
     useEffect(() => {
         const { filterItemByProduct, filterItemByPriceLowToHigh, filterItemByPriceHighToLow } = props.filterTypes
         if (filterItemByProduct) {
-            setLocalItems((prevState) => [...prevState.sort((a, b) => a.name > b.name ? 1 : -1)])
+            setItems((prevState) => [...prevState.sort((a, b) => a.name > b.name ? 1 : -1)])
         } else if (filterItemByPriceLowToHigh) {
-            setLocalItems((prevState) => [...prevState.sort((a, b) => parseInt(a.price) > parseInt(b.price) ? 1 : -1)])
+            setItems((prevState) => [...prevState.sort((a, b) => parseInt(a.price) > parseInt(b.price) ? 1 : -1)])
         } else if (filterItemByPriceHighToLow) {
-            setLocalItems((prevState) => [...prevState.sort((a, b) => parseInt(a.price) < parseInt(b.price) ? 1 : -1)])
+            setItems((prevState) => [...prevState.sort((a, b) => parseInt(a.price) < parseInt(b.price) ? 1 : -1)])
         }
 
     }, [filterItemByProduct, filterItemByPriceLowToHigh, filterItemByPriceHighToLow])
 
-
-
-
     const addToShoppingBag = (e) => {
         const id = e.target.id
-        const copy = [...localItems]
+        const copy = [...items]
         let newShoppingBagItem = copy.find(item => item.id === id && !item.isAdded);
         if (newShoppingBagItem) {
             const theIndex = copy.findIndex(item => item.id === id);
@@ -88,8 +68,7 @@ const ProductItems = props => {
                 totalPerItem: parseInt(newShoppingBagItem.price)
             }
             copy.splice(theIndex, 1, newShoppingBagItem)
-            setLocalItems(copy)
-            // deliverAllProductItems(copy)
+            setItems(copy)
             newCartItem(newShoppingBagItem)
             cartItemsNumber()
         } else {
@@ -97,19 +76,17 @@ const ProductItems = props => {
             let itemToRemove = copy.find(item => item.id === id)
             itemToRemove.isAdded = !itemToRemove.isAdded
             copy.splice(theIndex, 1, itemToRemove)
-            setLocalItems(copy)
-            // deliverAllProductItems(copy)
+            setItems(copy)
             removeShoppingBagItem(id)
             cartItemsNumber()
         }
     }
 
     return (
-
         <React.Fragment>
             <div className="product-items-wrapper">
-                {localItems.length >= 0 ?
-                    localItems.map(item => {
+                {items.length >= 0 ?
+                    items.map(item => {
                         return (
                             <div id={item.id} key={item.id} className="product-item-tile">
                                 <div className="product-item-link-wrapper" >
@@ -138,7 +115,7 @@ const ProductItems = props => {
 
 const mapStateToProps = state => ({
     currentShoppingBagItems: state.cartItems.shoppingBagItems,
-    allProducts: state.cartItems.allProductItems
+    // allProducts: state.cartItems.allProductItems
 })
 
 
@@ -146,7 +123,7 @@ const mapDispatchToProps = dispatch => ({
     newCartItem: (newShoppingBagItem) => dispatch(action_newShoppingBagItem(newShoppingBagItem)),
     removeShoppingBagItem: (id) => dispatch(action_removeShoppingBagItem(id)),
     cartItemsNumber: () => dispatch(action_cartItemsNumber()),
-    deliverAllProductItems: (allItems) => dispatch(action_deliverAllProductItems(allItems))
+    // deliverAllProductItems: (allItems) => dispatch(action_deliverAllProductItems(allItems))
 
 })
 
