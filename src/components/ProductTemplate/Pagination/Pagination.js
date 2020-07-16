@@ -5,8 +5,6 @@ import './Pagination.css';
 function Pagination(props) {
     const { totalNumberOfPages, clickedPageNumber, showAllItemsFilter, handleFilterByPageNumber } = props;
     const numberOfPaginationPages = [...Array(totalNumberOfPages).keys()]
-    console.log('clickedPageNumber', clickedPageNumber)
-
 
     return (
         <React.Fragment>

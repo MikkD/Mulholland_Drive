@@ -20,7 +20,3 @@ export const action_deliverTotalSum = (totalSum) => ({
     type: cartItemsTypes.TOTAL_SUM,
     payload: totalSum
 })
-export const action_deliverAllProductItems = (allItems) => ({
-    type: cartItemsTypes.ALL_PRODUCT_ITEMS,
-    payload: allItems
-})
