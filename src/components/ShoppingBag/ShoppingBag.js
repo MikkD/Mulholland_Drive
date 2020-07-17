@@ -54,7 +54,7 @@ const ShoppingBag = (props) => {
 
 
 
-
+    console.log('TESTIN')
 
     return (
         <React.Fragment>
