@@ -33,6 +33,18 @@ export const addUserToFirestore = async (authenticatedUser, userName) => {
     return docRef;
 }
 
+// Adding data to Firestore
+export const addProductsToFirestore = async (collectionKey, objectsToAdd) => {
+    const collectionRef = firestore.collection(collectionKey);
+    const batch = firestore.batch()
+    objectsToAdd.forEach(obj => {
+        const newDocRef = collectionRef.doc()
+        batch.set(newDocRef, obj)
+    })
+
+    return await batch.commit()
+}
+
 // Setting up Google authentification utility 
 const googleProvider = new firebase.auth.GoogleAuthProvider();
 const facebookProvider = new firebase.auth.FacebookAuthProvider();

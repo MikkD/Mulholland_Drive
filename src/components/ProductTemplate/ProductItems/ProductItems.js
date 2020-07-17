@@ -8,7 +8,10 @@ import { action_newShoppingBagItem } from '../../../redux/cartItems/cartItems.ac
 import { action_removeShoppingBagItem } from '../../../redux/cartItems/cartItems.action';
 import { action_cartItemsNumber } from '../../../redux/cartItems/cartItems.action';
 import Spinner from '../../Spinner/Spinner';
-
+import addProductsToFirestore from '../../../firebase/firebse.utils';
+import firebase from 'firebase/app';
+import 'firebase/firestore';
+export const firestore = firebase.firestore();
 
 
 const ProductItems = props => {

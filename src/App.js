@@ -15,7 +15,6 @@ import { setCurrentUser } from './redux/user/user.actions';
 
 
 
-
 class App extends React.Component {
 
   componentDidMount() {

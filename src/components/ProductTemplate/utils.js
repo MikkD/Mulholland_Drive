@@ -1,6 +1,5 @@
 import nextId from 'react-id-generator';
 
-
 export const getProduct = (value) => {
     switch (value) {
         case 'Jeans':
