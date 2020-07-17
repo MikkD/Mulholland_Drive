@@ -27,26 +27,49 @@ const ProductItems = props => {
     let firstItemInRange = lastItemInRange - totalItemsPerPage
     props.handleTotalNumberOfPages(totalNumberOfPages)
 
+    // const getDataFromFirebase = async (params) => {
+    //     const theProductsFromFirebase = []
+    //     await firestore.collection(`${params}`)
+    //         .get().then((snapshot) => snapshot.docs.forEach(item => theProductsFromFirebase.push(item.data())))
+    //     return theProductsFromFirebase
+    // }
+
+
+
+
+
+    // NOW WORKING ***********************// NOW WORKING ***********************// NOW WORKING ***********************
+    // Doesn't set the state 
+    useEffect(() => {
+        let theNewItems = getProduct(props.match.params.product)
+        console.log('newItems', theNewItems)
+        if (theNewItems.length > 0) {
+            setItems(theNewItems)
+            setTotalNumberOfItems(theNewItems.length)
+            setLoading(false)
+        }
+    }, [props.match.params.product])
 
     useEffect(() => {
-        setTimeout(() => {
-            let newItems = getProduct(props.match.params.product)
-            if (currentShoppingBagItems.length > 0) {
-                for (let i = 0; i < newItems.length; i++) {
-                    for (let j = 0; j < currentShoppingBagItems.length; j++) {
-                        if (currentShoppingBagItems[j].id === newItems[i].id) {
-                            newItems[i] = {
-                                ...newItems[i],
-                                isAdded: true
-                            }
+        // setTimeout(() => {
+        // let newItems = getProduct(props.match.params.product)
+        let newItems = [...items]
+        if (currentShoppingBagItems.length > 0) {
+            for (let i = 0; i < newItems.length; i++) {
+                for (let j = 0; j < currentShoppingBagItems.length; j++) {
+                    if (currentShoppingBagItems[j].id === newItems[i].id) {
+                        newItems[i] = {
+                            ...newItems[i],
+                            isAdded: true
                         }
                     }
                 }
             }
-            showAllItemsFilter ? setItems(newItems) : setItems(newItems.slice(firstItemInRange, lastItemInRange))
-            setTotalNumberOfItems(newItems.length)
-            setLoading(false)
-        }, 1000);
+        }
+        showAllItemsFilter ? setItems(newItems) : setItems(newItems.slice(firstItemInRange, lastItemInRange))
+        setTotalNumberOfItems(newItems.length)
+        setLoading(false)
+        // }, 1000);
 
     }, [clickedPageNumber, showAllItemsFilter])
 
