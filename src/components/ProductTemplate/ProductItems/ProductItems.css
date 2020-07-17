@@ -66,6 +66,14 @@ padding-bottom: 0px;
     height:400px;
     background-color: red;
 }
+.spinner{
+    width:400px;
+    height:400px;
+    background-color: red;
+    display: block;
+    position: absolute;
+    border-left: 2px solid #d73e15;
+}
 
 @media only screen and (max-width: 850px) {
     .product-item-tile{

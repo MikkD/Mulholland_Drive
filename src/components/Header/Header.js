@@ -10,12 +10,18 @@ const DEFAULT_WIDTH = 550;
 
 function Header(props) {
     const [isActive, setIsActive] = useState(false);
+    const [prevPath, setPrevPath] = useState()
     const isActiveRef = useRef(false);
     isActiveRef.current = isActive;
     const navbar = useRef()
+    const prevPathRef = useRef()
 
 
     useEffect(() => {
+        // #0 Set redirect of Go Back button to previous path
+        prevPathRef.current = prevPath;
+        setPrevPath(props.location.pathname)
+
         props.location.pathname === '/' ?
             navbar.current.style.backgroundColor = 'transparent' :
             navbar.current.style.backgroundColor = 'black';
@@ -46,12 +52,13 @@ function Header(props) {
                     <p className="logo">Mulholland Drive</p>
                     <div className="menu">
                         <Link
-                            to={{ pathname: '/' }}
+                            to={{ pathname: `${prevPathRef.current ? prevPathRef.current : '/'}` }}
                             style={props.location.pathname === '/' ?
                                 { display: "none" } :
                                 { color: "crimson", display: "inline-block" }}
                         >Go Back</Link>
-                        <Link>Shop</Link>
+                        <Link to={{ pathname: '/' }}
+                        >Shop</Link>
                         <Link>Contact</Link>
                         {props.isCurrentUserLoggedIn !== null ?
                             <Link onClick={() => firebase.auth().signOut()}>Sign Out</Link> :

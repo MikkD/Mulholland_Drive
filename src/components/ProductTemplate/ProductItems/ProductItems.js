@@ -7,6 +7,8 @@ import { connect } from 'react-redux';
 import { action_newShoppingBagItem } from '../../../redux/cartItems/cartItems.action';
 import { action_removeShoppingBagItem } from '../../../redux/cartItems/cartItems.action';
 import { action_cartItemsNumber } from '../../../redux/cartItems/cartItems.action';
+import Spinner from '../../Spinner/Spinner';
+
 
 
 const ProductItems = props => {
@@ -14,6 +16,7 @@ const ProductItems = props => {
     const { filterItemByProduct, filterItemByPriceLowToHigh, filterItemByPriceHighToLow } = props.filterTypes;
     const [items, setItems] = useState([])
     const [totalNumberOfItems, setTotalNumberOfItems] = useState(0)
+    const [loading, setLoading] = useState(true)
 
     const totalItemsPerPage = 5;
     let totalNumberOfPages = Math.round(totalNumberOfItems / totalItemsPerPage);
@@ -23,21 +26,25 @@ const ProductItems = props => {
 
 
     useEffect(() => {
-        let newItems = getProduct(props.match.params.product)
-        if (currentShoppingBagItems.length > 0) {
-            for (let i = 0; i < newItems.length; i++) {
-                for (let j = 0; j < currentShoppingBagItems.length; j++) {
-                    if (currentShoppingBagItems[j].id === newItems[i].id) {
-                        newItems[i] = {
-                            ...newItems[i],
-                            isAdded: true
+        setTimeout(() => {
+            let newItems = getProduct(props.match.params.product)
+            if (currentShoppingBagItems.length > 0) {
+                for (let i = 0; i < newItems.length; i++) {
+                    for (let j = 0; j < currentShoppingBagItems.length; j++) {
+                        if (currentShoppingBagItems[j].id === newItems[i].id) {
+                            newItems[i] = {
+                                ...newItems[i],
+                                isAdded: true
+                            }
                         }
                     }
                 }
             }
-        }
-        showAllItemsFilter ? setItems(newItems) : setItems(newItems.slice(firstItemInRange, lastItemInRange))
-        setTotalNumberOfItems(newItems.length)
+            showAllItemsFilter ? setItems(newItems) : setItems(newItems.slice(firstItemInRange, lastItemInRange))
+            setTotalNumberOfItems(newItems.length)
+            setLoading(false)
+        }, 1000);
+
     }, [clickedPageNumber, showAllItemsFilter])
 
 
@@ -83,31 +90,32 @@ const ProductItems = props => {
 
     return (
         <React.Fragment>
-            <div className="product-items-wrapper">
-                {items.length >= 0 ?
-                    items.map(item => {
-                        return (
-                            <div id={item.id} key={item.id} className="product-item-tile">
-                                <div className="product-item-link-wrapper" >
-                                    <img src={item.image} alt="product" />
-                                    <button
-                                        id={item.id}
-                                        onClick={addToShoppingBag}
-                                        className="regular-button">
-                                        {item.isAdded ? 'Remove from cart' : 'Add to cart'}
-                                    </button>
+            {loading ? <h1><Spinner /></h1> :
+                <div className="product-items-wrapper">
+                    {items.length >= 0 ?
+                        items.map(item => {
+                            return (
+                                <div id={item.id} key={item.id} className="product-item-tile">
+                                    <div className="product-item-link-wrapper" >
+                                        <img src={item.image} alt="product" />
+                                        <button
+                                            id={item.id}
+                                            onClick={addToShoppingBag}
+                                            className="regular-button">
+                                            {item.isAdded ? 'Remove from cart' : 'Add to cart'}
+                                        </button>
+                                    </div>
+                                    <div className="product-item-tile-description">
+                                        <h4>{item.name}</h4>
+                                        <p>{item.description}</p>
+                                        <p>{parseInt(item.price)}$</p>
+                                    </div>
                                 </div>
-                                <div className="product-item-tile-description">
-                                    <h4>{item.name}</h4>
-                                    <p>{item.description}</p>
-                                    <p>{parseInt(item.price)}$</p>
-                                </div>
-                            </div>
-                        )
-                    }) : null}
-                < ScrollToTopButton />
-            </div>
-
+                            )
+                        }) : null}
+                    < ScrollToTopButton />
+                </div>
+            }
         </React.Fragment>
     )
 }

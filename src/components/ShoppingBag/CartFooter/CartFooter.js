@@ -2,6 +2,9 @@ import React, { useState, useEffect } from 'react'
 import './CartFooter.css';
 import { connect } from 'react-redux';
 import { action_deliverTotalSum } from '../../../redux/cartItems/cartItems.action';
+import Stripe from '../../stripe/Stripe';
+
+
 
 
 
@@ -17,12 +20,25 @@ function CartFooter(props) {
     useEffect(() => {
         dispatchTotalSum(totalSum)
     }, [totalSum])
+
+    const cardElementOptions = {
+        style: {
+            color: "red",
+            backgroundColor: "red",
+
+        }
+
+    }
+
+
     return (
         < React.Fragment >
             <div className="sb-item sb-footer">
                 <div className="subtotal flex-grow-1 "><h3>Your total is : {totalSum}$</h3></div>
                 <div className="shrink">
-                    <a className="checkout-button">Check Out</a>
+                    <a className="checkout-button">
+                        <Stripe />
+                        Check Out</a>
                 </div>
             </div>
         </React.Fragment >

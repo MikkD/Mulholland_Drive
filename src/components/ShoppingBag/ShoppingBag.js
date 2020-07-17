@@ -11,16 +11,10 @@ const ShoppingBag = (props) => {
     const { shoppingBagItems, removeShoppingBagItem, cartItemsNumber, updateCartItem } = props;
 
 
-
     useEffect(() => {
         if (shoppingBagItems) {
-            console.log('shoppingBagItems regular', shoppingBagItems)
-            // shoppingBagItems.map(el => console.log(' el.totalPerItem', el.totalPerItem))
             let copy = [...shoppingBagItems]
             copy.reduce((a, c) => a + c.totalPerItem, 0)
-            console.log('shoppingBagItems', copy)
-            // let subTotal = shoppingBagItems.map(item => item.totalPerItem.reduce((a, b) => a + b))
-            // console.log('subTotal', subTotal)
         }
 
 
@@ -103,6 +97,7 @@ const ShoppingBag = (props) => {
                         </React.Fragment>
                     )
                 })}
+
                 <CartFooter />
             </div>
         </React.Fragment >

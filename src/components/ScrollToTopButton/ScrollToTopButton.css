@@ -1,22 +1,25 @@
 .to-top-button{
     position: fixed;
-    font-size: 30px;
-    bottom: 30px;
-    right: 10px;
-    opacity: 1;
-    color: gray;
+    font-size: 25px;
+    bottom: 35px;
+    right: 20px;
+    opacity: 0.9;
+    color: white;
     transition: all 0.2s ease-in-out;
     cursor: pointer;
-    background-color: white;
     border-radius: 50%;
-    padding: 20px;
     -webkit-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
     -moz-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
     box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+    width: 25px;
+    height: 25px;
+    background-color: transparent;
+    border:1px solid white;
+    padding: 20px;
     }
     .to-top-button:hover{
     opacity: 1;
-    color:#d73e13;
+    color:white;
     }
     .to-top-button:active{
       transform: scale(0.95);

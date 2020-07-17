@@ -54,6 +54,9 @@ const ProductTemplate = (props) => {
         setTotalNumberOfPages(numberOfPages)
     }
 
+    useEffect(() => {
+        window.scrollTo(0, 0)
+    }, [])
 
 
 

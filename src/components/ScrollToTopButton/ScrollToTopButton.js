@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef, useLayoutEffect } from 'react';
 import './ScrollToTopButton.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowUp } from '@fortawesome/free-solid-svg-icons';
 import { withRouter } from 'react-router-dom';
+import styled from 'styled-components';
 
 
 
@@ -24,14 +25,23 @@ function ScrollToTopButton(props) {
         }
     }, [props.location.pathname]);
 
+
     const scrollToTop = () => {
         window.scrollTo(0, 0);
     }
-    return (<React.Fragment>
-        {offsetHeight - bottomOfThePage < 300 && offsetHeight !== 0 ? <div>
-            <FontAwesomeIcon onClick={scrollToTop} className="to-top-button" icon={faArrowUp} />
-        </div> : null}
-    </React.Fragment>
+    return (
+        <React.Fragment>
+            {offsetHeight - bottomOfThePage < 500 && offsetHeight != 0 ? < div >
+                <styledButton>
+                    <FontAwesomeIcon
+                        onClick={scrollToTop}
+                        style={props.location.pathname !== '/' ? { backgroundColor: 'black' } : { backgroundColor: 'transparent' }}
+                        className="to-top-button" icon={faArrowUp}
+                    />
+                </styledButton>
+            </div> : null
+            }
+        </React.Fragment >
     )
 }
 

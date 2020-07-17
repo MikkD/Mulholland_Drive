@@ -13,8 +13,13 @@ function CartHeader(props) {
                     </div>
 
                     <div className="welcome-message shrink">
-                        <h4>Shopping Bag</h4>
-                        <span>{cartItemsNumber} items</span>
+                        {cartItemsNumber ?
+                            <React.Fragment>
+                                <h4>Shopping Bag</h4>
+                                <span>{cartItemsNumber} items</span>
+                            </React.Fragment>
+                            : <h4>Your Shopping Bag is Empty</h4>}
+
                     </div>
                 </div>
 

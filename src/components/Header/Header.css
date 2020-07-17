@@ -161,6 +161,10 @@ background: transparent;
     
 }
 
+.header-icon{
+    width: 20px;
+    height: 20px;
+}
 @media (max-width: 550px) {  
     .hamburger-wrapper{
         display: flex;
