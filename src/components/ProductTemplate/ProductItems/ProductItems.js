@@ -8,10 +8,7 @@ import { action_newShoppingBagItem } from '../../../redux/cartItems/cartItems.ac
 import { action_removeShoppingBagItem } from '../../../redux/cartItems/cartItems.action';
 import { action_cartItemsNumber } from '../../../redux/cartItems/cartItems.action';
 import Spinner from '../../Spinner/Spinner';
-import addProductsToFirestore from '../../../firebase/firebse.utils';
-import firebase from 'firebase/app';
-import 'firebase/firestore';
-export const firestore = firebase.firestore();
+import { firestore } from '../../../firebase/firebse.utils';
 
 
 const ProductItems = props => {
@@ -27,54 +24,36 @@ const ProductItems = props => {
     let firstItemInRange = lastItemInRange - totalItemsPerPage
     props.handleTotalNumberOfPages(totalNumberOfPages)
 
-    // const getDataFromFirebase = async (params) => {
-    //     const theProductsFromFirebase = []
-    //     await firestore.collection(`${params}`)
-    //         .get().then((snapshot) => snapshot.docs.forEach(item => theProductsFromFirebase.push(item.data())))
-    //     return theProductsFromFirebase
-    // }
-
-
-
-
-
-    // NOW WORKING ***********************// NOW WORKING ***********************// NOW WORKING ***********************
-    // Doesn't set the state 
     useEffect(() => {
-        let theNewItems = getProduct(props.match.params.product)
-        console.log('newItems', theNewItems)
-        if (theNewItems.length > 0) {
-            setItems(theNewItems)
-            setTotalNumberOfItems(theNewItems.length)
-            setLoading(false)
-        }
-    }, [props.match.params.product])
-
-    useEffect(() => {
-        // setTimeout(() => {
-        // let newItems = getProduct(props.match.params.product)
-        let newItems = [...items]
-        if (currentShoppingBagItems.length > 0) {
-            for (let i = 0; i < newItems.length; i++) {
-                for (let j = 0; j < currentShoppingBagItems.length; j++) {
-                    if (currentShoppingBagItems[j].id === newItems[i].id) {
-                        newItems[i] = {
-                            ...newItems[i],
-                            isAdded: true
+        const getDataFromFirebase = async () => {
+            const itemsFromFireStore = []
+            await firestore.collection(`${props.match.params.product}`)
+                .get().then((snapshot) => snapshot.docs.forEach(item => itemsFromFireStore.push(item.data())))
+            console.log('theNewItems', itemsFromFireStore)
+            if (itemsFromFireStore.length > 0) {
+                let newItems = [...itemsFromFireStore]
+                if (currentShoppingBagItems.length > 0) {
+                    for (let i = 0; i < newItems.length; i++) {
+                        for (let j = 0; j < currentShoppingBagItems.length; j++) {
+                            if (currentShoppingBagItems[j].id === newItems[i].id) {
+                                newItems[i] = {
+                                    ...newItems[i],
+                                    isAdded: true
+                                }
+                            }
                         }
                     }
                 }
+                showAllItemsFilter ? setItems(newItems) : setItems(newItems.slice(firstItemInRange, lastItemInRange))
+                setTotalNumberOfItems(newItems.length)
+                setLoading(false)
             }
         }
-        showAllItemsFilter ? setItems(newItems) : setItems(newItems.slice(firstItemInRange, lastItemInRange))
-        setTotalNumberOfItems(newItems.length)
-        setLoading(false)
-        // }, 1000);
+        getDataFromFirebase()
 
-    }, [clickedPageNumber, showAllItemsFilter])
+    }, [props.match.params.product, clickedPageNumber, showAllItemsFilter])
 
 
-    // Filter
     useEffect(() => {
         const { filterItemByProduct, filterItemByPriceLowToHigh, filterItemByPriceHighToLow } = props.filterTypes
         if (filterItemByProduct) {

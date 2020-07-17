@@ -6,7 +6,7 @@ import { faSortUp } from '@fortawesome/free-solid-svg-icons';
 
 
 export default function ProductFilter(props) {
-    const { totalNumberOfPages } = props;
+    const { totalNumberOfPages, clickedPageNumber } = props;
     const DropDownOptions = ['By category', 'Price: Low to high', 'Price: High to low'];
     const DropDownPageNumberOptions = Array.from(Array(totalNumberOfPages).keys());
     const [DropDownIsOpen, setDropDownIsOpen] = useState(false);
@@ -63,7 +63,7 @@ export default function ProductFilter(props) {
                         className="dropdown-button regular-button">
                         <FontAwesomeIcon className="arrow-icon"
                             style={pageNumberDropDownIsOpen ? { transform: 'rotate(180deg)', top: '0' } : null} icon={faSortUp} />
-                                1</button> of {DropDownPageNumberOptions.length}
+                        {clickedPageNumber}</button> of {DropDownPageNumberOptions.length}
                     {pageNumberDropDownIsOpen ?
                         <ul className="dropdown-items-quantity">
                             {DropDownPageNumberOptions.map((number, index) => <li

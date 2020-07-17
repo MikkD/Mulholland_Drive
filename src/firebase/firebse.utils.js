@@ -2,7 +2,7 @@ import firebase from 'firebase/app';
 import 'firebase/firestore';
 import 'firebase/auth';
 
-const config = {
+export const config = {
     apiKey: "AIzaSyCmpPmqljqHcKg-NSoTp7nOqRtViGXyhlc",
     authDomain: "e-commerce-md.firebaseapp.com",
     databaseURL: "https://e-commerce-md.firebaseio.com",
@@ -31,18 +31,6 @@ export const addUserToFirestore = async (authenticatedUser, userName) => {
         });
     }
     return docRef;
-}
-
-// Adding data to Firestore
-export const addProductsToFirestore = async (collectionKey, objectsToAdd) => {
-    const collectionRef = firestore.collection(collectionKey);
-    const batch = firestore.batch()
-    objectsToAdd.forEach(obj => {
-        const newDocRef = collectionRef.doc()
-        batch.set(newDocRef, obj)
-    })
-
-    return await batch.commit()
 }
 
 // Setting up Google authentification utility 

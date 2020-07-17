@@ -66,6 +66,7 @@ const ProductTemplate = (props) => {
                 <div className="single-product-wrapper">
                     <h2>{props.match.params.product}</h2>
                     <ProductFilter
+                        clickedPageNumber={clickedPageNumber}
                         handleShowAllItem={handleShowAllItem}
                         handleFilterByPageNumber={handleFilterByPageNumber}
                         totalNumberOfPages={totalNumberOfPages}
