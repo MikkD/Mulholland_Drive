@@ -13,20 +13,22 @@ export default function ProductFilter(props) {
     const [pageNumberDropDownIsOpen, setPageNumberDropDownIsOpen] = useState(false);
     const [showAllItems, setShowAllItems] = useState(false);
     const filterItem = function (event) {
-        switch (event.target.id) {
-            case '0':
-                props.handleFilter(0)
-                break
-            case '1':
-                props.handleFilter(1)
+        // switch (event.target.id) {
+        //     case '0':
+        //         props.handleFilter(0)
+        //         break
+        //     case '1':
+        //         props.handleFilter(1)
 
-                break
-            case '2':
-                props.handleFilter(2)
-                break
-            default:
-                props.handleFilter(0)
-        }
+        //         break
+        //     case '2':
+        //         props.handleFilter(2)
+        //         break
+        //     default:
+        //         props.handleFilter(0)
+        // }
+
+        props.handleFilter(event.target.innerHTML)
     }
 
     const handlePageNumber = (e) => {

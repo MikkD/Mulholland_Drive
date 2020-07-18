@@ -14,32 +14,33 @@ const ProductTemplate = (props) => {
     const [clickedPageNumber, setClickedPageNumber] = useState(1)
     const [showAllItemsFilter, setShowAllItemsFilter] = useState(false);
     const handleFilter = (filterType) => {
-        switch (filterType) {
-            case 0:
-                setFilterTypes(prevState => ({
-                    ...prevState,
-                    filterItemByProduct: true,
-                    filterItemByPriceLowToHigh: false,
-                    filterItemByPriceHighToLow: false
-                }))
-                break
-            case 1:
-                setFilterTypes(prevState => ({
-                    ...prevState,
-                    filterItemByProduct: false,
-                    filterItemByPriceLowToHigh: true,
-                    filterItemByPriceHighToLow: false
-                }))
-                break
-            case 2:
-                setFilterTypes(prevState => ({
-                    ...prevState,
-                    filterItemByProduct: false,
-                    filterItemByPriceLowToHigh: false,
-                    filterItemByPriceHighToLow: true
-                }))
-                break
-        }
+        // switch (filterType) {
+        //     case 0:
+        //         setFilterTypes(prevState => ({
+        //             ...prevState,
+        //             filterItemByProduct: true,
+        //             filterItemByPriceLowToHigh: false,
+        //             filterItemByPriceHighToLow: false
+        //         }))
+        //         break
+        //     case 1:
+        //         setFilterTypes(prevState => ({
+        //             ...prevState,
+        //             filterItemByProduct: false,
+        //             filterItemByPriceLowToHigh: true,
+        //             filterItemByPriceHighToLow: false
+        //         }))
+        //         break
+        //     case 2:
+        //         setFilterTypes(prevState => ({
+        //             ...prevState,
+        //             filterItemByProduct: false,
+        //             filterItemByPriceLowToHigh: false,
+        //             filterItemByPriceHighToLow: true
+        //         }))
+        //         break
+        // }
+        setFilterTypes(filterType)
     }
 
     const handleFilterByPageNumber = (number) => {

@@ -52,10 +52,6 @@ const ShoppingBag = (props) => {
         updateCartItem(updatedItems)
     }
 
-
-
-    console.log('TESTIN')
-
     return (
         <React.Fragment>
             <div className="sb-container">

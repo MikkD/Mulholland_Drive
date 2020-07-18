@@ -3,7 +3,6 @@ import './ScrollToTopButton.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowUp } from '@fortawesome/free-solid-svg-icons';
 import { withRouter } from 'react-router-dom';
-import styled from 'styled-components';
 
 
 

@@ -9,15 +9,15 @@ import { action_removeShoppingBagItem } from '../../../redux/cartItems/cartItems
 import { action_cartItemsNumber } from '../../../redux/cartItems/cartItems.action';
 import Spinner from '../../Spinner/Spinner';
 import { firestore } from '../../../firebase/firebse.utils';
+import { filterItemsUtils } from './utils';
+import { showAllItemsFilterUtils } from './utils';
 
 
 const ProductItems = props => {
-    const { newCartItem, removeShoppingBagItem, cartItemsNumber, clickedPageNumber, showAllItemsFilter, currentShoppingBagItems } = props;
-    const { filterItemByProduct, filterItemByPriceLowToHigh, filterItemByPriceHighToLow } = props.filterTypes;
+    const { newCartItem, removeShoppingBagItem, cartItemsNumber, clickedPageNumber, showAllItemsFilter, currentShoppingBagItems, filterTypes } = props;
     const [items, setItems] = useState([])
     const [totalNumberOfItems, setTotalNumberOfItems] = useState(0)
     const [loading, setLoading] = useState(true)
-
     const totalItemsPerPage = 5;
     let totalNumberOfPages = Math.round(totalNumberOfItems / totalItemsPerPage);
     let lastItemInRange = clickedPageNumber * totalItemsPerPage
@@ -29,7 +29,6 @@ const ProductItems = props => {
             const itemsFromFireStore = []
             await firestore.collection(`${props.match.params.product}`)
                 .get().then((snapshot) => snapshot.docs.forEach(item => itemsFromFireStore.push(item.data())))
-            console.log('theNewItems', itemsFromFireStore)
             if (itemsFromFireStore.length > 0) {
                 let newItems = [...itemsFromFireStore]
                 if (currentShoppingBagItems.length > 0) {
@@ -44,27 +43,15 @@ const ProductItems = props => {
                         }
                     }
                 }
-                showAllItemsFilter ? setItems(newItems) : setItems(newItems.slice(firstItemInRange, lastItemInRange))
+                setItems(newItems)
                 setTotalNumberOfItems(newItems.length)
                 setLoading(false)
             }
         }
         getDataFromFirebase()
 
-    }, [props.match.params.product, clickedPageNumber, showAllItemsFilter])
+    }, [props.match.params.product])
 
-
-    useEffect(() => {
-        const { filterItemByProduct, filterItemByPriceLowToHigh, filterItemByPriceHighToLow } = props.filterTypes
-        if (filterItemByProduct) {
-            setItems((prevState) => [...prevState.sort((a, b) => a.name > b.name ? 1 : -1)])
-        } else if (filterItemByPriceLowToHigh) {
-            setItems((prevState) => [...prevState.sort((a, b) => parseInt(a.price) > parseInt(b.price) ? 1 : -1)])
-        } else if (filterItemByPriceHighToLow) {
-            setItems((prevState) => [...prevState.sort((a, b) => parseInt(a.price) < parseInt(b.price) ? 1 : -1)])
-        }
-
-    }, [filterItemByProduct, filterItemByPriceLowToHigh, filterItemByPriceHighToLow])
 
     const addToShoppingBag = (e) => {
         const id = e.target.id
@@ -93,12 +80,15 @@ const ProductItems = props => {
         }
     }
 
+
+    const itemsPerPage = showAllItemsFilterUtils(items, showAllItemsFilter, firstItemInRange, lastItemInRange)
+    const filteredItems = filterItemsUtils(itemsPerPage, filterTypes)
     return (
         <React.Fragment>
             {loading ? <h1><Spinner /></h1> :
                 <div className="product-items-wrapper">
-                    {items.length >= 0 ?
-                        items.map(item => {
+                    {filteredItems.length >= 0 ?
+                        filteredItems.map(item => {
                             return (
                                 <div id={item.id} key={item.id} className="product-item-tile">
                                     <div className="product-item-link-wrapper" >
