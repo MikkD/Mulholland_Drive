@@ -1,13 +1,12 @@
-import React, { useState, useRef, useEffect } from 'react';
-import { getProduct } from '../utils';
+import React, { useState, useEffect } from 'react';
 import { withRouter } from 'react-router-dom';
 import './ProductItems.css';
 import ScrollToTopButton from '../../ScrollToTopButton/ScrollToTopButton';
+import Spinner from '../../Spinner/Spinner';
 import { connect } from 'react-redux';
 import { action_newShoppingBagItem } from '../../../redux/cartItems/cartItems.action';
 import { action_removeShoppingBagItem } from '../../../redux/cartItems/cartItems.action';
 import { action_cartItemsNumber } from '../../../redux/cartItems/cartItems.action';
-import Spinner from '../../Spinner/Spinner';
 import { firestore } from '../../../firebase/firebse.utils';
 import { filterItemsUtils } from './utils';
 import { showAllItemsFilterUtils } from './utils';
@@ -29,6 +28,7 @@ const ProductItems = props => {
             const itemsFromFireStore = []
             await firestore.collection(`${props.match.params.product}`)
                 .get().then((snapshot) => snapshot.docs.forEach(item => itemsFromFireStore.push(item.data())))
+            console.log('itemsFromFireStore', itemsFromFireStore)
             if (itemsFromFireStore.length > 0) {
                 let newItems = [...itemsFromFireStore]
                 if (currentShoppingBagItems.length > 0) {

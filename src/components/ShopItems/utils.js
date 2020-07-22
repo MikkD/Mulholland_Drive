@@ -1,28 +1,35 @@
-export const mainPageProducts = [
+export const pageProducts = [
     {
         title: 'Jeans',
         description: 'Get lost in a world of blue denim and beautiful details.',
-        img: "./img/man.jpg"
+        img: require('../../assets/images/shopItems/man.jpg'),
+        id: 'np1'
     },
     {
         title: 'Jackets',
         description: 'Get lost in a world of blue denim and beautiful details.',
-        img: "./img/man2.jpg"
+        img: require("../../assets/images/shopItems/man2.jpg"),
+        id: 'np2'
     },
     {
         title: 'Pants',
-        img: "./img/pants1.png"
+        img: require("../../assets/images/shopItems/pants1.png"),
+        id: 'np3'
     },
     {
         title: 'Sneakers',
-        img: "./img/sneakers1.jpg"
+        img: require("../../assets/images/shopItems/sneakers1.jpg"),
+        id: 'np4'
+
     },
     {
         title: 'Shirts',
-        img: "./img/shirts.png"
+        img: require("../../assets/images/shopItems/shirts.png"),
+        id: 'np5'
     },
     {
         title: 'Accessories',
-        img: "./img/accessories3.jpg"
+        img: require("../../assets/images/shopItems/accessories3.jpg"),
+        id: 'np6'
     },
 ]

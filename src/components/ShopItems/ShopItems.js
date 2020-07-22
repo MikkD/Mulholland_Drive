@@ -1,7 +1,8 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import './ShopItems.css';
-import { mainPageProducts } from './utils';
+import { pageProducts } from './utils';
+
 
 
 const ShopItems = () => {
@@ -16,12 +17,13 @@ const ShopItems = () => {
                     <p className="underline">See full collection here</p>
                 </div>
                 <div className="flex-parent">
-                    {mainPageProducts.map((el, index) => {
-                        const { title, description, img } = el;
+                    {pageProducts.map(el => {
+                        const { id, title, description, img } = el;
+                        console.log('img', img)
                         return (
-                            <div key={index} className="flex-item">
+                            <div key={id} className="flex-item">
                                 <Link to={`/ProductTemplate/${title}`}>
-                                    <img className="image-item" src={require(`${img}`)} />
+                                    <img className="image-item" src={img} />
                                     <div className="image-desciption">
                                         <h2>{title}</h2>
                                         <p>{description}</p>

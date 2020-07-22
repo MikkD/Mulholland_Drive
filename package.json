@@ -23,6 +23,7 @@
     "react-stripe": "^0.1.0",
     "react-stripe-checkout": "^2.6.3",
     "react-style-loader": "^2.3.0",
+    "react-uuid": "^1.0.2",
     "redux": "^4.0.5",
     "redux-devtools-extension": "^2.13.8",
     "redux-logger": "^3.0.6",

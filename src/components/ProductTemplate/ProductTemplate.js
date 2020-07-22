@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import './ProductTemplate.css';
 import Pagination from './Pagination/Pagination';
 import ProductItems from './ProductItems/ProductItems';
@@ -13,35 +13,8 @@ const ProductTemplate = (props) => {
     });
     const [clickedPageNumber, setClickedPageNumber] = useState(1)
     const [showAllItemsFilter, setShowAllItemsFilter] = useState(false);
-    const handleFilter = (filterType) => {
-        // switch (filterType) {
-        //     case 0:
-        //         setFilterTypes(prevState => ({
-        //             ...prevState,
-        //             filterItemByProduct: true,
-        //             filterItemByPriceLowToHigh: false,
-        //             filterItemByPriceHighToLow: false
-        //         }))
-        //         break
-        //     case 1:
-        //         setFilterTypes(prevState => ({
-        //             ...prevState,
-        //             filterItemByProduct: false,
-        //             filterItemByPriceLowToHigh: true,
-        //             filterItemByPriceHighToLow: false
-        //         }))
-        //         break
-        //     case 2:
-        //         setFilterTypes(prevState => ({
-        //             ...prevState,
-        //             filterItemByProduct: false,
-        //             filterItemByPriceLowToHigh: false,
-        //             filterItemByPriceHighToLow: true
-        //         }))
-        //         break
-        // }
-        setFilterTypes(filterType)
-    }
+
+    const handleFilter = (filterType) => setFilterTypes(filterType)
 
     const handleFilterByPageNumber = (number) => {
         setClickedPageNumber(number)
