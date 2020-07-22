@@ -58,7 +58,8 @@ h4{
   padding: 5px 0px;
 }
 h5{
-  margin:10px 0px;
+  width: 70%;
+  margin:10px auto;
   padding: 0px 20px;
 }
 p{
@@ -96,10 +97,3 @@ button:hover{
 button:active{
   transform: scale(0.99);
 }
-
-/* .App{
-  font-family: 'Bebas-Neue';
-  background-color: black;
-  color: white;
-} */
-

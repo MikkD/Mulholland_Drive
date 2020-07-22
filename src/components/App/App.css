@@ -18,9 +18,9 @@ font-size: 100%;
 font: inherit;
 vertical-align: baseline;
 }
-.App{
-    height:calc(100% - 70px) ;
-}
+/* html{
+    height: 100%;
+} */
 
 :focus {
     outline: 0;
@@ -249,3 +249,11 @@ textarea {
     resize: vertical;
 }
 
+.App{
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+}
+.main-content {
+    flex: 1;
+}

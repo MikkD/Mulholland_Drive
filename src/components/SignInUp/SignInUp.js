@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import './SignInUp.scss';
 import { signInWithGoogle, signInWithFacebook, signInWithTwitter } from '../../firebase/firebse.utils';
 import { addUserToFirestore } from '../../firebase/firebse.utils';
@@ -59,6 +59,9 @@ function SignInUp() {
         setInputValues({ name: '', password: '', email: '' })
     }
 
+    useEffect(() => {
+        window.scrollTo(0, 0)
+    }, [])
 
 
 
@@ -87,7 +90,9 @@ function SignInUp() {
                                 name="password"
                                 type="password"
                                 placeholder="Password" />
-                            {signInAuthErrorMessage ? <h5 style={{ color: 'crimson' }}>{signInAuthErrorMessage}</h5> : <h5>Forgot your password?</h5>}
+                            {signInAuthErrorMessage ?
+                                <h5 style={{ color: 'crimson' }}>{signInAuthErrorMessage}</h5> :
+                                <h5>Forgot your password?</h5>}
                             <button
                                 type="submit"
                                 onClick={handleSingInForm}
@@ -103,7 +108,9 @@ function SignInUp() {
                                 <a onClick={signInWithGoogle} className="social" ><i className="fab fa-google-plus-g"></i></a>
                                 <a onClick={signInWithTwitter} className="social" ><i className="fab fa-twitter"></i></a>
                             </div>
-                            {signUpAuthErrorMessage ? <h5 style={{ color: 'crimson' }} >{signUpAuthErrorMessage}</h5> : <h5>Or use your email for registration</h5>}
+                            {signUpAuthErrorMessage ?
+                                <h5 style={{ color: 'crimson' }} >{signUpAuthErrorMessage}</h5> :
+                                <h5>Or use your email for registration</h5>}
                             <input
                                 value={inputValues.name}
                                 onChange={handleInputFieldChange}

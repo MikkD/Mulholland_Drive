@@ -59,7 +59,7 @@ const ShoppingBag = (props) => {
                 {/* sb-body */}
                 {shoppingBagItems.map(item => {
                     return (
-                        <React.Fragment>
+                        <React.Fragment key={item.id}>
                             <div id={item.id} className="sb-body">
                                 <div className="sb-item flex-grow-1">
                                     <img src={item.image}

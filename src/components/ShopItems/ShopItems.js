@@ -19,7 +19,6 @@ const ShopItems = () => {
                 <div className="flex-parent">
                     {pageProducts.map(el => {
                         const { id, title, description, img } = el;
-                        console.log('img', img)
                         return (
                             <div key={id} className="flex-item">
                                 <Link to={`/ProductTemplate/${title}`}>
@@ -31,7 +30,6 @@ const ShopItems = () => {
                                     </div>
                                 </Link>
                             </div>
-
                         )
                     })}
                 </div>

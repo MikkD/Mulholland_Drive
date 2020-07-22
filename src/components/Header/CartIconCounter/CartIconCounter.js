@@ -5,8 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
 import { connect } from 'react-redux';
 
-function CartIconCounter(props) {
-    const { cartItemsNumber } = props
+function CartIconCounter({ cartItemsNumber }) {
     return (
         <React.Fragment>
             <Link to={{ pathname: '/ShoppingBag' }} >

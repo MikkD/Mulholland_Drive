@@ -1,8 +1,5 @@
 .product-footer{
-    height: 140px;
-    padding-top: 50px;
-    padding-bottom: 25px;
-    /* opacity: 0.9; */
+    padding: 20px 0px;
 }
 .product-footer-wrapper{
     height: 80%;

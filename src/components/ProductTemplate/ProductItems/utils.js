@@ -1,5 +1,4 @@
 
-
 export const filterItemsUtils = (items, filterType) => {
     const copy = [...items]
     switch (filterType) {
@@ -10,7 +9,7 @@ export const filterItemsUtils = (items, filterType) => {
         case "Price: High to low":
             return copy.sort((a, b) => parseInt(a.price) < parseInt(b.price) ? 1 : -1);
         default:
-            return copy.sort((a, b) => a.name > b.name ? 1 : -1)
+            return copy
     }
 }
 

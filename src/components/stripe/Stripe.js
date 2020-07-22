@@ -21,7 +21,7 @@ const Stripe = ({ checkoutSum }) => {
             panelLabel="Pay now"
             amount={USD}
             currency="USD"
-            locale="us"
+            locale="auto"
             stripeKey={key}
             token={onToken} />
 

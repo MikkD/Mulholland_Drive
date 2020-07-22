@@ -21,11 +21,6 @@
     font-size: 32px;
     opacity: 0.9;
 }
-.hidden-bag{
-    display: none;
-    padding-right: 20px;
-    position: relative;
-}
 .flex-header a {
     text-decoration: none;
     color: white;
@@ -96,84 +91,13 @@ background: transparent;
 }
 
 
-
-/* End of  Hamburger menu */ 
-.nav-bar-slider{
-    position: fixed;
-    background-color: black;
-    height: 100vh;
-    width: 100%;
-    overflow:hidden;
-    z-index: 1;
-    transform: translateX(100%);
-    transition: all 0.5s ease-in;
-}
-.nav-bar-slider-body{
-    margin: 0 auto;
-    width: 90%;
-    padding-top: 40px;
-    padding-bottom: 30px;
-}
-.divider{
-    margin: 15px 0px;
-    height: 2px;
-    background: #4d4d4d;
-}
-.nav-bar-slider-body a{
-    text-decoration: none;
-    color:white;
-    opacity:0.9;
-    outline: 1px solid transparent;
-}
-.nav-bar-slider-body a:hover{
-    opacity: 1;
-}
-.slider-links>li:nth-last-child(n+3){
-    font-size: 48px;
-    
-}
-.social-link{
-    display: inline-block;
-    font-size: 20px;
-    line-height: 25px;
-}
-.nav-bar-slider-footer{
-    width: 90%;
-    margin: 0 auto;
-}
-.sign-in-up-button{
-    padding: 20px;
-    width: 100%;
-    background: transparent;
-    border: 2px solid white;
-    color:white;
-    opacity: 0.9;
-    transition: all 0.2s ease-in-out;
-    transform: scale(0.99);
-}
-.sign-in-up-button:hover{
-    opacity: 1;
-    
-}
-.sign-in-up-button:active{
-    border: 1.5px solid white;
-    transform: scale(0.97);
-    
-}
-
 .header-icon{
     width: 20px;
     height: 20px;
 }
-@media (max-width: 550px) {  
+@media (max-width: 600px) {  
     .hamburger-wrapper{
         display: flex;
-    }
-    .hidden-bag{
-        display: block;
-        padding-right: 30px;
-        position: relative;
-
     }
     
     .items-in-cart-number {

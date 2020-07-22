@@ -17,6 +17,7 @@ const ProductTemplate = (props) => {
     const handleFilter = (filterType) => setFilterTypes(filterType)
 
     const handleFilterByPageNumber = (number) => {
+        window.scrollTo(0, 0)
         setClickedPageNumber(number)
     }
 
@@ -33,33 +34,32 @@ const ProductTemplate = (props) => {
     }, [])
 
 
-
+    console.log('========>Product Template<============')
     return (
-        <React.Fragment>
+        < React.Fragment >
             <div className="main-product-section">
                 <div className="single-product-wrapper">
                     <h2>{props.match.params.product}</h2>
-                    <ProductFilter
-                        clickedPageNumber={clickedPageNumber}
-                        handleShowAllItem={handleShowAllItem}
-                        handleFilterByPageNumber={handleFilterByPageNumber}
-                        totalNumberOfPages={totalNumberOfPages}
-                        handleFilter={handleFilter} />
+                    {totalNumberOfPages > 0 ?
+                        < ProductFilter
+                            clickedPageNumber={clickedPageNumber}
+                            handleShowAllItem={handleShowAllItem}
+                            handleFilterByPageNumber={handleFilterByPageNumber}
+                            totalNumberOfPages={totalNumberOfPages}
+                            handleFilter={handleFilter} /> : null}
                     <ProductItems
                         clickedPageNumber={clickedPageNumber}
                         showAllItemsFilter={showAllItemsFilter}
                         handleTotalNumberOfPages={handleTotalNumberOfPages}
-                        filterTypes={filterTypes}
-                    />
+                        filterTypes={filterTypes} />
                 </div>
-                <Pagination
-                    handleFilterByPageNumber={handleFilterByPageNumber}
-                    totalNumberOfPages={totalNumberOfPages}
-                    clickedPageNumber={clickedPageNumber}
-                    showAllItemsFilter={showAllItemsFilter}
-                />
+                {!showAllItemsFilter ?
+                    <Pagination
+                        clickedPageNumber={clickedPageNumber}
+                        handleFilterByPageNumber={handleFilterByPageNumber}
+                        totalNumberOfPages={totalNumberOfPages} /> : null}
             </div>
-        </React.Fragment>
+        </React.Fragment >
     )
 }
 

@@ -1,11 +1,11 @@
 import React from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { BrowserRouter, Route, Switch, Redirect, withRouter } from 'react-router-dom';
 import './App.css'
 import Main from '../Main';
 import ProductTemplate from '../ProductTemplate'
 import ShoppingBag from '../ShoppingBag';
 import Header from '../Header';
-import Footer from '../ProductTemplate/Footer';
+import Footer from '../Footer/Footer';
 import SignInUp from '../SignInUp';
 import firebase from 'firebase/app';
 import { addUserToFirestore } from '../../firebase/firebse.utils';
@@ -33,20 +33,23 @@ class App extends React.Component {
 
 
   render() {
+    const { isCurrentUserLoggedIn } = this.props;
     return (
       <div className="App" >
         <React.StrictMode>
           <BrowserRouter>
             <Header />
-            <Switch>
-              <Route exact path="/" component={Main} />
-              <Route exact path="/ProductTemplate/:product" component={ProductTemplate} />
-              <Route path="/SignInUp" component={SignInUp} />
-              <Route path="/ShoppingBag" component={ShoppingBag} />
-              {this.props.isCurrentUserLoggedIn !== null ?
-                <ShoppingBag currentUser={this.props.isCurrentUserLoggedIn} /> :
-                <Route path="/SignInUp" component={SignInUp} /> && <SignInUp />}
-            </Switch>
+
+            <div className="main-content">
+              {isCurrentUserLoggedIn && <Redirect to={{ pathname: "/" }} />}
+              <Switch>
+                <Route exact path="/" component={Main} />
+                <Route exact path="/ProductTemplate/:product" component={ProductTemplate} />
+                <Route exact path="/ShoppingBag" component={ShoppingBag} />
+                {/* <Route exact path="/SignInUp" component={isCurrentUserLoggedIn ? Main : SignInUp} /> */}
+                <Route exact path="/SignInUp" component={SignInUp} />
+              </Switch>
+            </div>
             <Footer />
           </BrowserRouter>
         </React.StrictMode>

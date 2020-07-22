@@ -10,10 +10,13 @@ import { action_cartItemsNumber } from '../../../redux/cartItems/cartItems.actio
 import { firestore } from '../../../firebase/firebse.utils';
 import { filterItemsUtils } from './utils';
 import { showAllItemsFilterUtils } from './utils';
+import { getProduct } from '../utils';
+import uuid from 'react-uuid'
 
 
 const ProductItems = props => {
-    const { newCartItem, removeShoppingBagItem, cartItemsNumber, clickedPageNumber, showAllItemsFilter, currentShoppingBagItems, filterTypes } = props;
+    const { newCartItem, removeShoppingBagItem, cartItemsNumber,
+        clickedPageNumber, showAllItemsFilter, currentShoppingBagItems, filterTypes } = props;
     const [items, setItems] = useState([])
     const [totalNumberOfItems, setTotalNumberOfItems] = useState(0)
     const [loading, setLoading] = useState(true)
@@ -21,14 +24,14 @@ const ProductItems = props => {
     let totalNumberOfPages = Math.round(totalNumberOfItems / totalItemsPerPage);
     let lastItemInRange = clickedPageNumber * totalItemsPerPage
     let firstItemInRange = lastItemInRange - totalItemsPerPage
-    props.handleTotalNumberOfPages(totalNumberOfPages)
+    // props.handleTotalNumberOfPages(totalNumberOfPages)
+    console.log('========>Product Items<============')
 
     useEffect(() => {
         const getDataFromFirebase = async () => {
             const itemsFromFireStore = []
             await firestore.collection(`${props.match.params.product}`)
                 .get().then((snapshot) => snapshot.docs.forEach(item => itemsFromFireStore.push(item.data())))
-            console.log('itemsFromFireStore', itemsFromFireStore)
             if (itemsFromFireStore.length > 0) {
                 let newItems = [...itemsFromFireStore]
                 if (currentShoppingBagItems.length > 0) {
@@ -51,6 +54,10 @@ const ProductItems = props => {
         getDataFromFirebase()
 
     }, [props.match.params.product])
+
+    useEffect(() => {
+        props.handleTotalNumberOfPages(totalNumberOfPages)
+    }, [totalNumberOfPages])
 
 
     const addToShoppingBag = (e) => {
@@ -108,7 +115,6 @@ const ProductItems = props => {
                                 </div>
                             )
                         }) : null}
-                    < ScrollToTopButton />
                 </div>
             }
         </React.Fragment>

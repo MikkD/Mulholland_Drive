@@ -5,6 +5,7 @@ import { withRouter } from 'react-router-dom';
 import firebase from 'firebase';
 import { connect } from 'react-redux';
 import CartIconCounter from './CartIconCounter/CartIconCounter';
+import HiddenMenu from './HiddenMenu/HiddenMenu';
 
 const DEFAULT_WIDTH = 550;
 
@@ -49,52 +50,27 @@ function Header(props) {
         <React.Fragment>
             <header ref={navbar} className="header">
                 <div className="flex-header">
-                    <p className="logo">Mulholland Drive</p>
+                    <Link to={{ pathname: '/' }} className="logo">Mulholland Drive</Link>
                     <div className="menu">
                         <Link
                             to={{ pathname: `${prevPathRef.current ? prevPathRef.current : '/'}` }}
-                            style={props.location.pathname === '/' ?
-                                { display: "none" } :
-                                { color: "crimson", display: "inline-block" }}
-                        >Go Back</Link>
-                        <Link to={{ pathname: '/' }}
-                        >Shop</Link>
-                        <Link>Contact</Link>
+                            style={props.location.pathname === '/' ? { display: "none" } :
+                                { color: "crimson", display: "inline-block" }}>
+                            Go Back
+                        </Link>
+                        <Link to={{ pathname: '/' }}>Shop</Link>
+                        <Link to={{ pathname: '/contact' }}>Contact</Link>
                         {props.isCurrentUserLoggedIn !== null ?
-                            <Link onClick={() => firebase.auth().signOut()}>Sign Out</Link> :
+                            <a onClick={() => firebase.auth().signOut()}>Sign Out</a> :
                             <Link to={{ pathname: '/SignInUp' }}>Sign In</Link>}
                         <CartIconCounter />
                     </div>
-                    <a className="hidden-bag" href="#">
-                        <CartIconCounter />
-                    </a>
-                    <div
-                        onClick={() => setIsActive(prevState => !prevState)}
-                        className="hamburger-wrapper">
-                        <div className={isActive ? "hamburger-menu active" : "hamburger-menu"}>
-                        </div>
+                    <div onClick={() => setIsActive(prevState => !prevState)} className="hamburger-wrapper">
+                        <div className={isActive ? "hamburger-menu active" : "hamburger-menu"}></div>
                     </div>
                 </div>
             </header>
-
-            <div style={{ transform: isActive ? 'translate(0%)' : 'translate(100%)' }} className="nav-bar-slider">
-                <div className="nav-bar-slider-body">
-                    <ul className="slider-links">
-                        <li><a href="#">Shop</a></li>
-                        <li><a href="#">Contact</a></li>
-                        <li><div className="divider"></div></li>
-                        <li><Link to={{ pathname: '/ShoppingBag' }}>Bag</Link></li>
-                        <li><div className="divider"></div></li>
-                        <li><a className="social-link" href="#">Facebook</a></li>
-                        <li><a className="social-link" href="#">Instagram</a></li>
-                    </ul>
-
-                </div>
-                <div className="nav-bar-slider-footer">
-                    <button className="sign-in-up-button">Log In / Register</button>
-                </div>
-            </div>
-
+            <HiddenMenu isActive={isActive} />
         </React.Fragment >
     )
 

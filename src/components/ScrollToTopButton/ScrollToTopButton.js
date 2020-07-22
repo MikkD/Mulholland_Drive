@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef, useLayoutEffect } from 'react';
 import './ScrollToTopButton.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faArrowUp } from '@fortawesome/free-solid-svg-icons';
+import { faLongArrowAltUp } from '@fortawesome/free-solid-svg-icons';
 import { withRouter } from 'react-router-dom';
 
 
@@ -34,8 +34,9 @@ function ScrollToTopButton(props) {
                 <styledButton>
                     <FontAwesomeIcon
                         onClick={scrollToTop}
-                        style={props.location.pathname !== '/' ? { backgroundColor: 'black' } : { backgroundColor: 'transparent' }}
-                        className="to-top-button" icon={faArrowUp}
+                        style={props.location.pathname !== '/' ? { backgroundColor: 'black' } :
+                            { backgroundColor: 'transparent' }}
+                        className="to-top-button" icon={faLongArrowAltUp}
                     />
                 </styledButton>
             </div> : null

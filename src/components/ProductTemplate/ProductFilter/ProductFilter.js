@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import './ProductFilter.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSortUp } from '@fortawesome/free-solid-svg-icons';
+import uuid from 'react-uuid'
 
 
 
@@ -13,21 +14,6 @@ export default function ProductFilter(props) {
     const [pageNumberDropDownIsOpen, setPageNumberDropDownIsOpen] = useState(false);
     const [showAllItems, setShowAllItems] = useState(false);
     const filterItem = function (event) {
-        // switch (event.target.id) {
-        //     case '0':
-        //         props.handleFilter(0)
-        //         break
-        //     case '1':
-        //         props.handleFilter(1)
-
-        //         break
-        //     case '2':
-        //         props.handleFilter(2)
-        //         break
-        //     default:
-        //         props.handleFilter(0)
-        // }
-
         props.handleFilter(event.target.innerHTML)
     }
 
@@ -40,7 +26,7 @@ export default function ProductFilter(props) {
         props.handleShowAllItem()
     }
 
-
+    console.log('========>Product Filter<============')
     return (
         <React.Fragment>
             <div className="product-filter">
@@ -48,16 +34,14 @@ export default function ProductFilter(props) {
                     <button
                         onClick={() => setDropDownIsOpen(prevState => !prevState)}
                         className="regular-button dropdown-button">Filter
-            <FontAwesomeIcon
+                            <FontAwesomeIcon
                             style={DropDownIsOpen ? { transform: 'rotate(180deg)', top: '0' } : null}
                             className="arrow-icon" icon={faSortUp} />
                     </button>
-                    {DropDownIsOpen ?
-                        <ul className="dropdown-items">
-                            {DropDownOptions.map((option, index) =>
-                                <li onClick={filterItem}
-                                    key={index} id={index} className="dropdown-item">{option}</li>)}
-                        </ul> : null}
+                    {DropDownIsOpen ? <ul className="dropdown-items">
+                        {DropDownOptions.map(option =>
+                            <li onClick={filterItem} key={uuid()} id={uuid()} className="dropdown-item">{option}</li>)}
+                    </ul> : null}
                 </div>
                 <div className="quantity-filter">
                     <button

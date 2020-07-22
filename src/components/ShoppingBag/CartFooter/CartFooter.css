@@ -13,3 +13,7 @@ background-color: white;
 opacity: 1;
 color: black;
 }
+
+.sb-footer{
+    align-items: center;
+}

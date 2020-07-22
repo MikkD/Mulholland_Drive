@@ -1,28 +1,30 @@
 import React from 'react';
 import './Pagination.css';
+import uuid from 'react-uuid'
 
 
-function Pagination(props) {
-    const { totalNumberOfPages, clickedPageNumber, showAllItemsFilter, handleFilterByPageNumber } = props;
+function Pagination({ totalNumberOfPages, clickedPageNumber, handleFilterByPageNumber }) {
     const numberOfPaginationPages = [...Array(totalNumberOfPages).keys()]
-
+    console.log('========>Pagination<============')
     return (
         <React.Fragment>
-            <div className={showAllItemsFilter ? "pagination hidden" : "pagination"}>
+            <div className="pagination">
                 <div className="pagi-wrapper">
-                    <a style={clickedPageNumber == 1 ? { display: 'none' } : { display: 'inline-block' }}
-                        onClick={() => handleFilterByPageNumber(parseInt(clickedPageNumber) - 1)}
-                        href="#">&laquo;<span className="pagination-span">Previous</span></a>
-                    {numberOfPaginationPages.map((pageNumber, index) =>
-                        <a
-                            style={pageNumber + 1 == clickedPageNumber ? { backgroundColor: '#d73e15' } : { backgroundColor: 'transparent' }}
-                            key={index}
+                    {clickedPageNumber != 1 ?
+                        <a onClick={() => handleFilterByPageNumber(parseInt(clickedPageNumber) - 1)}>
+                            &laquo;<span className="pagination-span">Previous</span>
+                        </a> : null}
+                    {numberOfPaginationPages.map(pageNumber =>
+                        <a style={pageNumber + 1 == clickedPageNumber ? { backgroundColor: '#d73e15' } :
+                            { backgroundColor: 'transparent' }}
+                            key={uuid()}
                             onClick={(e) => handleFilterByPageNumber(e.target.innerHTML)}
-                            href="#">{parseInt(pageNumber) + 1}</a>
+                        >{parseInt(pageNumber) + 1}</a>
                     )}
-                    <a style={clickedPageNumber == totalNumberOfPages ? { display: 'none' } : { display: 'inline-block' }}
-                        onClick={() => handleFilterByPageNumber(parseInt(clickedPageNumber) + 1)}>
-                        <span className="pagination-span">Next</span>&raquo;</a>
+                    {clickedPageNumber != totalNumberOfPages ?
+                        <a onClick={() => handleFilterByPageNumber(parseInt(clickedPageNumber) + 1)}>
+                            <span className="pagination-span">Next</span>&raquo;
+                    </a> : null}
                 </div>
             </div>
         </React.Fragment >
