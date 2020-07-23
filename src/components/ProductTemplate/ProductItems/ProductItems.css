@@ -64,12 +64,12 @@ padding-bottom: 0px;
     display: fixed;
     width:400px;
     height:400px;
-    background-color: red;
+    /* background-color: red; */
 }
 .spinner{
     width:400px;
     height:400px;
-    background-color: red;
+    /* background-color: red; */
     display: block;
     position: absolute;
     border-left: 2px solid #d73e15;
