@@ -101,28 +101,6 @@ audio:not([controls]) {
 }
 
 
-html {
-    font-size: 100%; /* 1 */
-    -webkit-text-size-adjust: 100%; /* 2 */
-    -ms-text-size-adjust: 100%; /* 2 */
-}
-
-a:focus {
-    outline: thin dotted;
-}
-
-a:active,
-a:hover {
-    outline: 0;
-    opacity: 1;
-}
-
-
-img {
-    border: 0; /* 1 */
-    -ms-interpolation-mode: bicubic; /* 2 */
-}
-
 figure {
     margin: 0;
 }
@@ -256,6 +234,38 @@ textarea {
 }
 .main-content {
     flex: 1;
+}
+
+h1{
+    font-size: 120px;
+}
+
+
+html {
+    font-size: 100%; /* 1 */
+    -webkit-text-size-adjust: 100%; /* 2 */
+    -ms-text-size-adjust: 100%; /* 2 */
+}
+
+a{
+    opacity: 0.97;
+    transition: all 0.4s ease-in-out;
+}
+
+a:focus {
+    outline: thin dotted;
+}
+
+a:active,
+a:hover {
+    outline: 0;
+    opacity: 1;
+}
+
+
+img {
+    border: 0; /* 1 */
+    -ms-interpolation-mode: bicubic; /* 2 */
 }
 
 

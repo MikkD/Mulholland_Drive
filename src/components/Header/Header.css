@@ -89,13 +89,31 @@ background: transparent;
     transform: rotate(-45deg) translate(-5px,-6px);
     
 }
-
-
 .header-icon{
     width: 20px;
     height: 20px;
 }
-@media (max-width: 600px) {  
+.clothing-link:hover .dropdown-header{
+    visibility: visible;
+}
+.dropdown-header{
+    visibility: hidden;
+    position: absolute;
+    top: 25px;
+    left: -1px;
+    line-height: 25px;
+    z-index: 1;
+    width: 180px;
+    font-size: 18px;
+    background-color: black;
+    box-shadow: 1px 2px 5px 0px rgba(0,0,0,0.75);
+}
+.dropdown-header>.dropdown-item:hover{
+    background-color: #ffffffcf;
+    color: black;
+}
+
+@media (max-width: 620px) {  
     .hamburger-wrapper{
         display: flex;
     }

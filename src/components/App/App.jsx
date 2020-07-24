@@ -7,6 +7,7 @@ import ShoppingBag from '../ShoppingBag';
 import Header from '../Header';
 import Footer from '../Footer/Footer';
 import SignInUp from '../SignInUp';
+import ContactUs from '../ContactUs';
 import firebase from 'firebase/app';
 import { addUserToFirestore } from '../../firebase/firebse.utils';
 import { connect } from 'react-redux';
@@ -49,9 +50,10 @@ class App extends React.Component {
                 <Route exact path="/ShoppingBag" component={ShoppingBag} />
                 {/* <Route exact path="/SignInUp" component={isCurrentUserLoggedIn ? Main : SignInUp} /> */}
                 <Route exact path="/SignInUp" component={SignInUp} />
+                <Route exact path="/ContactUs" component={ContactUs} />
               </Switch>
             </div>
-            <Footer />
+            {/* <Footer /> */}
           </BrowserRouter>
         </React.StrictMode>
       </div >

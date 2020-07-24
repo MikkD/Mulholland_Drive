@@ -43,6 +43,7 @@ export default function ProductFilter(props) {
                             <li onClick={filterItem} key={uuid()} id={uuid()} className="dropdown-item">{option}</li>)}
                     </ul> : null}
                 </div>
+                {/* Filter2 */}
                 <div className="quantity-filter">
                     <button
                         onClick={() => setPageNumberDropDownIsOpen(prevState => !prevState)}

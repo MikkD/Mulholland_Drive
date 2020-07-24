@@ -6,6 +6,7 @@ import firebase from 'firebase';
 import { connect } from 'react-redux';
 import CartIconCounter from './CartIconCounter/CartIconCounter';
 import HiddenMenu from './HiddenMenu/HiddenMenu';
+import DropDownOnHover from './DropDownOnHover/DropDownOnHover';
 
 const DEFAULT_WIDTH = 550;
 
@@ -58,8 +59,10 @@ function Header(props) {
                                 { color: "crimson", display: "inline-block" }}>
                             Go Back
                         </Link>
-                        <Link to={{ pathname: '/' }}>Clothing</Link>
-                        <Link to={{ pathname: '/contact' }}>Contact</Link>
+                        <Link className="clothing-link" >Clothing
+                        <DropDownOnHover />
+                        </Link>
+                        <Link to={{ pathname: '/ContactUs' }}>Contact</Link>
                         {props.isCurrentUserLoggedIn !== null ?
                             <a onClick={() => firebase.auth().signOut()}>Sign Out</a> :
                             <Link to={{ pathname: '/SignInUp' }}>Sign In</Link>}
