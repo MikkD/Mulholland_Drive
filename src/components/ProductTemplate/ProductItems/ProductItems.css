@@ -18,6 +18,10 @@
 box-shadow: 2px 2px 10px 3px rgba(206, 206, 206, 0.75);
     
 }
+
+.regular-button.added{
+    color:#c61536;
+}
 .product-item-link-wrapper{
     position: relative;
     display: block;

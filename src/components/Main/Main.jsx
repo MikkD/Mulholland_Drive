@@ -7,6 +7,7 @@ import Carousel from './Carousel/Carousel';
 
 
 function Main() {
+  console.log('~~~~~~~~~~~~~~~Main.jsx~~~~~~~~~~~~~~~')
   return (
     <div className="Main">
       <Hero />

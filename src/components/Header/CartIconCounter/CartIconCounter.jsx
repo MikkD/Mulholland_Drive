@@ -4,6 +4,7 @@ import './CartIconCounter.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
 import { connect } from 'react-redux';
+// import { ReactComponent as ShopIcon } from './icon_bag.svg'
 
 function CartIconCounter({ cartItemsNumber }) {
     return (

@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
+import uuid from 'react-uuid'
 
 
 const Carousel = () => {
@@ -47,7 +48,7 @@ const Carousel = () => {
                     <Link style={{ display: "-webkit-inline-box" }} to={'/ProductTemplate/Sneakers'}>
                         {carouselItems.map((item, index) =>
                             <div ref={el => sliderItems[index] = el}
-                                id={index} key={item.id} className="slider-item">
+                                id={index} key={uuid()} className="slider-item">
                                 <img src={item.image} alt={item.description} />
                             </div>
                         )}

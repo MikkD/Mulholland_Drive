@@ -257,3 +257,13 @@ textarea {
 .main-content {
     flex: 1;
 }
+
+
+
+
+
+@media only screen and (max-width: 665px) {
+    .h2{
+        font-size: 32px;
+    }
+    }

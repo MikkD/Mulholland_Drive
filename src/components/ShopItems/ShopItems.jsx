@@ -6,14 +6,14 @@ import { pageProducts } from './utils';
 
 
 const ShopItems = () => {
+    console.log('========>Shop Items<============')
 
     return (
         <React.Fragment>
             <div className="items-heading">
                 <h2>New Arrivals</h2>
                 <p>Check out our latest arrivals for the upcoming season</p>
-                {/* <a href="#" >See full collection here</a> */}
-                <p className="underline">See full collection here</p>
+                <Link to={'./ProductTemplate/Jeans'} >See full Jeans collection here</Link>
             </div>
             <div className="all-items-section">
                 <div className="flex-parent">

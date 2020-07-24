@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="20px" height="20px" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <g className="this-icons" id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="icon-/-bag" transform="translate(-8.000000, -8.000000)" fill="#000000" fill-rule="nonzero">
+            <g id="icon-/-bag---mobile">
+                <path d="M18,7.9956665 C21.0375661,7.9956665 23.5,10.4581004 23.5,13.4956665 L23.5,13.9996665 L28,14 L28,28 L8,28 L8,14 L12.5,13.9996665 L12.5,13.4956665 C12.5,10.4581004 14.9624339,7.9956665 18,7.9956665 Z M27,15 L23.5,14.9996665 L23.5,18 L22.5,18 L22.5,14.9996665 L13.5,14.9996665 L13.5,18 L12.5,18 L12.5,14.9996665 L9,15 L9,27 L27,27 L27,15 Z M18,8.9956665 C15.5147186,8.9956665 13.5,11.0103851 13.5,13.4956665 L13.5,13.9996665 L22.5,13.9996665 L22.5,13.4956665 C22.5,11.0103851 20.4852814,8.9956665 18,8.9956665 Z" id="bag"></path>
+            </g>
+        </g>
+    </g>
+</svg>

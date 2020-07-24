@@ -4,6 +4,7 @@ import './HiddenMenu.css'
 
 
 export default function HiddenMenu({ isActive }) {
+    console.log('~~~~~~~~~~~~~~~HiddenMenu.jsx~~~~~~~~~~~~~~~')
     return (
         <React.Fragment>
             <div style={{ transform: isActive ? 'translate(0%)' : 'translate(100%)' }} className="nav-bar-slider">

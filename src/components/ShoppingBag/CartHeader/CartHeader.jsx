@@ -4,6 +4,7 @@ import './CartHeader.css';
 
 function CartHeader(props) {
     const { currentUser, cartItemsNumber } = props;
+    console.log('========>Shopping Bag Header <============')
     return (
         <React.Fragment>
             <div className="sb-header">

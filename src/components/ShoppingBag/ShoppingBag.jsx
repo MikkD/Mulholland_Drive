@@ -7,18 +7,11 @@ import { action_updateCartItem } from '../../redux/cartItems/cartItems.action';
 import CartHeader from './CartHeader/CartHeader';
 import CartFooter from './CartFooter/CartFooter';
 
-const ShoppingBag = (props) => {
-    const { shoppingBagItems, removeShoppingBagItem, cartItemsNumber, updateCartItem } = props;
-
+const ShoppingBag = ({ shoppingBagItems, removeShoppingBagItem, cartItemsNumber, updateCartItem }) => {
 
     useEffect(() => {
-        if (shoppingBagItems) {
-            let copy = [...shoppingBagItems]
-            copy.reduce((a, c) => a + c.totalPerItem, 0)
-        }
-
-
-    }, [shoppingBagItems])
+        window.scrollTo(0, 0)
+    }, [])
 
     const removeFromShoppingBag = (e) => {
         const id = e.target.id
@@ -52,6 +45,7 @@ const ShoppingBag = (props) => {
         updateCartItem(updatedItems)
     }
 
+    console.log('========>Shopping Bag <============')
     return (
         <React.Fragment>
             <div className="sb-container">

@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { withRouter } from 'react-router-dom';
 import './ProductItems.css';
-import ScrollToTopButton from '../../ScrollToTopButton/ScrollToTopButton';
-import Spinner from '../../Spinner/Spinner';
+import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { action_newShoppingBagItem } from '../../../redux/cartItems/cartItems.action';
 import { action_removeShoppingBagItem } from '../../../redux/cartItems/cartItems.action';
@@ -10,6 +8,8 @@ import { action_cartItemsNumber } from '../../../redux/cartItems/cartItems.actio
 import { firestore } from '../../../firebase/firebse.utils';
 import { filterItemsUtils } from './utils';
 import { showAllItemsFilterUtils } from './utils';
+import Spinner from '../../Spinner/Spinner';
+import ScrollToTopButton from '../../ScrollToTopButton/ScrollToTopButton';
 import { getProduct } from '../utils';
 import uuid from 'react-uuid'
 
@@ -103,7 +103,7 @@ const ProductItems = props => {
                                         <button
                                             id={item.id}
                                             onClick={addToShoppingBag}
-                                            className="regular-button">
+                                            className={item.isAdded ? "regular-button added" : "regular-button"}>
                                             {item.isAdded ? 'Remove from cart' : 'Add to cart'}
                                         </button>
                                     </div>

@@ -2,14 +2,16 @@
     padding: 20px 0px;
 }
 .product-footer-wrapper{
+    border-top: 1px solid rgba(255,255,255,.3);
     height: 80%;
-    width: 90%;
+    width: 100%;
     margin: 0 auto;
-    padding: 10px 25px;
+    padding: 25px 25px;
     box-sizing: border-box;
     display: flex;
     align-items: center;
     justify-content: center;
+    margin-top: 30px;
 }
 
 .social{
@@ -24,6 +26,7 @@
     height: 60px;
     width: 60px;
     transition: 0.2s ease-in-out;
+    opacity: 0.8;
 }
 .social:hover{
     opacity: 1;
@@ -39,7 +42,13 @@
 .footer-item h2{
 padding :5px 0px;
 }
-
+.footer-item>h2>a {
+padding :5px 0px;
+opacity: 0.9;
+}
+.footer-item h2 a:hover {
+opacity: 1;
+}
 
 
 @media only screen and (max-width: 665px) {

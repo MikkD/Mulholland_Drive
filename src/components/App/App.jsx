@@ -33,6 +33,7 @@ class App extends React.Component {
 
 
   render() {
+    console.log('~~~~~~~~~~~~~~~App.jsx~~~~~~~~~~~~~~~')
     const { isCurrentUserLoggedIn } = this.props;
     return (
       <div className="App" >

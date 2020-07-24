@@ -13,24 +13,16 @@ function CartFooter(props) {
     const [totalSum, setTotalSum] = useState()
 
     useEffect(() => {
-        setTotalSum(shoppingBagItems.reduce((accumulator, currentValue) => accumulator + currentValue.totalPerItem, 0))
-
+        setTotalSum(shoppingBagItems.reduce((accumulator, currentValue) =>
+            accumulator + currentValue.totalPerItem, 0))
     }, [shoppingBagItems])
 
     useEffect(() => {
         dispatchTotalSum(totalSum)
     }, [totalSum])
 
-    const cardElementOptions = {
-        style: {
-            color: "red",
-            backgroundColor: "red",
 
-        }
-
-    }
-
-
+    console.log('========>Shopping Bag Footer <============')
     return (
         < React.Fragment >
             <div className="sb-item sb-footer">

@@ -12,7 +12,7 @@ export const Sneakers = [
     {
         name: 'Carhart WIP',
         description: 'S Sneakers',
-        image: require('../../../assets/images/productTemplate/sneakers-img/sneaker1.jpg'),
+        image: require('../../../assets/images/productTemplate/sneakers-img/sneaker20.jpg'),
         id: 'ss1',
         price: '100'
     },

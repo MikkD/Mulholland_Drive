@@ -18,7 +18,7 @@ export const pageProducts = [
     },
     {
         title: 'Sneakers',
-        img: require("../../assets/images/shopItems/sneakers1.jpg"),
+        img: require("../../assets/images/shopItems/sneakers3.png"),
         id: 'np4'
 
     },
@@ -29,7 +29,7 @@ export const pageProducts = [
     },
     {
         title: 'Accessories',
-        img: require("../../assets/images/shopItems/accessories3.jpg"),
+        img: require("../../assets/images/shopItems/access1.png"),
         id: 'np6'
     },
 ]

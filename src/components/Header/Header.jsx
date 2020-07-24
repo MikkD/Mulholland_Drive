@@ -16,7 +16,7 @@ function Header(props) {
     isActiveRef.current = isActive;
     const navbar = useRef()
     const prevPathRef = useRef()
-
+    console.log('~~~~~~~~~~~~~~~Header.jsx~~~~~~~~~~~~~~~')
 
     useEffect(() => {
         // #0 Set redirect of Go Back button to previous path
@@ -58,7 +58,7 @@ function Header(props) {
                                 { color: "crimson", display: "inline-block" }}>
                             Go Back
                         </Link>
-                        <Link to={{ pathname: '/' }}>Shop</Link>
+                        <Link to={{ pathname: '/' }}>Clothing</Link>
                         <Link to={{ pathname: '/contact' }}>Contact</Link>
                         {props.isCurrentUserLoggedIn !== null ?
                             <a onClick={() => firebase.auth().signOut()}>Sign Out</a> :
