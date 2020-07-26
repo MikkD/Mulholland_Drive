@@ -1,0 +1,88 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Syncopate:wght@700&display=swap');
+
+.button-container{
+    width: 900px;
+    height: 500px;
+    margin: 10% auto;
+    border:1px solid crimson;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #ffdfeb;
+    font-family: 'Syncopate', sans-serif !important;
+    position: relative;
+    cursor: pointer;
+
+
+.distorted-button{
+    font-family:inherit;
+    padding: 20px 50px;
+    background: transparent;
+    border: 2px solid white ;
+    opacity: 0.9;
+    transition: all 0.1s ease-in-out;
+    transform: scale(0.99);
+    font-size: 26px;
+    margin-bottom: 0px ;
+    color:white;
+
+    &:hover{
+        opacity: 1;
+        background-color: white;
+        color: black;
+    }
+    &:active{
+        transform: scale(0.97);
+    }
+
+}
+svg {
+    width: 500px;
+    overflow: visible !important;
+  }
+
+.main-page{
+    position: relative;
+    cursor: pointer;
+}
+
+.the-link{
+    font-size: 8em;
+    display: block;
+    outline: none;
+    -webkit-text-stroke:3px black;
+    
+
+    &:hover{
+        -webkit-text-fill-color:#ff0063;
+    }
+}
+
+.the-link-line{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 20px;
+    width: 100%;
+    background: black;
+    filter:url(#noise);
+}
+
+.img-wrapper{
+    position: relative;
+    width: 400px;
+    height: 400px;
+    img{
+        width: 100%;
+    }
+
+}
+
+svg{
+    position: absolute;
+    top:0;
+    height: 100%;
+}
+
+}

@@ -12,7 +12,7 @@ import firebase from 'firebase/app';
 import { addUserToFirestore } from '../../firebase/firebse.utils';
 import { connect } from 'react-redux';
 import { setCurrentUser } from '../../redux/user/user.actions';
-
+import Button from '../Button/Button';
 
 
 class App extends React.Component {
@@ -51,6 +51,7 @@ class App extends React.Component {
                 {/* <Route exact path="/SignInUp" component={isCurrentUserLoggedIn ? Main : SignInUp} /> */}
                 <Route exact path="/SignInUp" component={SignInUp} />
                 <Route exact path="/ContactUs" component={ContactUs} />
+                <Route exact path="/Button" component={Button} />
               </Switch>
             </div>
             {/* <Footer /> */}

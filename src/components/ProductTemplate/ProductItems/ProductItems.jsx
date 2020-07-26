@@ -11,12 +11,13 @@ import { showAllItemsFilterUtils } from './utils';
 import Spinner from '../../Spinner/Spinner';
 import ScrollToTopButton from '../../ScrollToTopButton/ScrollToTopButton';
 import { getProduct } from '../utils';
-import uuid from 'react-uuid'
+import { action_fetchProductsAsync } from '../../../redux/products/products.action';
 
 
 const ProductItems = props => {
     const { newCartItem, removeShoppingBagItem, cartItemsNumber,
-        clickedPageNumber, showAllItemsFilter, currentShoppingBagItems, filterTypes } = props;
+        clickedPageNumber, showAllItemsFilter, currentShoppingBagItems, filterTypes,
+        fireStoreProducts, fireStoreProductsIsFetching, fireStoreProductsError } = props;
     const [items, setItems] = useState([])
     const [totalNumberOfItems, setTotalNumberOfItems] = useState(0)
     const [loading, setLoading] = useState(true)
@@ -28,8 +29,15 @@ const ProductItems = props => {
     console.log('========>Product Items<============')
 
     useEffect(() => {
+        // dispatch_fetchProductsAsync(props.match.params.product)
+        // console.log('fireStoreProductsIsFetching', fireStoreProductsIsFetching)
+        // console.log('fireStoreProducts', fireStoreProducts)
+        // console.log('fireStoreProductsError', fireStoreProductsError)
+
+        // 
+
         const getDataFromFirebase = async () => {
-            const itemsFromFireStore = []
+            let itemsFromFireStore = []
             await firestore.collection(`${props.match.params.product}`)
                 .get().then((snapshot) => snapshot.docs.forEach(item => itemsFromFireStore.push(item.data())))
             if (itemsFromFireStore.length > 0) {
@@ -113,11 +121,12 @@ const ProductItems = props => {
                                         <p>{parseInt(item.price)}$</p>
                                     </div>
                                 </div>
+
                             )
                         }) : null}
                 </div>
             }
-        </React.Fragment>
+        </React.Fragment >
     )
 }
 
@@ -132,5 +141,17 @@ const mapDispatchToProps = dispatch => ({
     cartItemsNumber: () => dispatch(action_cartItemsNumber()),
 
 })
+
+//REDUX_THUNK
+// const mapStateToProps = state => ({
+//     fireStoreProducts: state.products.products,
+//     fireStoreProductsIsFetching: state.products.isFetching,
+//     fireStoreProductsError: state.products.errorMessage,
+// })
+
+// const mapDispatchToProps = dispatch => ({
+//     dispatch_fetchProductsAsync: (productName) => dispatch(action_fetchProductsAsync(productName)),
+
+// })
 
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(ProductItems))
