@@ -17,7 +17,7 @@ import { action_fetchProductsAsync } from '../../../redux/products/products.acti
 const ProductItems = props => {
     const { newCartItem, removeShoppingBagItem, cartItemsNumber,
         clickedPageNumber, showAllItemsFilter, currentShoppingBagItems, filterTypes,
-        fireStoreProducts, fireStoreProductsIsFetching, fireStoreProductsError } = props;
+        fireStoreProducts } = props;
     const [items, setItems] = useState([])
     const [totalNumberOfItems, setTotalNumberOfItems] = useState(0)
     const [loading, setLoading] = useState(true)
@@ -26,15 +26,19 @@ const ProductItems = props => {
     let lastItemInRange = clickedPageNumber * totalItemsPerPage
     let firstItemInRange = lastItemInRange - totalItemsPerPage
     // props.handleTotalNumberOfPages(totalNumberOfPages)
-    console.log('========>Product Items<============')
+    console.log('~~~~~~~~~~~~~~~Product Items.jsx~~~~~~~~~~~~~~~')
 
     useEffect(() => {
-        // dispatch_fetchProductsAsync(props.match.params.product)
-        // console.log('fireStoreProductsIsFetching', fireStoreProductsIsFetching)
-        // console.log('fireStoreProducts', fireStoreProducts)
-        // console.log('fireStoreProductsError', fireStoreProductsError)
+        // const { fireStoreProductsIsFetching, fireStoreProductsError, fireStoreProducts, dispatch_action_fetchProductsAsync } = props;
+        // const asyncReduxCall = async () => {
+        //     await dispatch_action_fetchProductsAsync(props.match.params.product)
+        //     console.log('fireStoreProductsIsFetching', fireStoreProductsIsFetching)
+        //     console.log('fireStoreProducts', fireStoreProducts)
+        //     console.log('fireStoreProductsError', fireStoreProductsError)
 
-        // 
+        // }
+        // asyncReduxCall()
+
 
         const getDataFromFirebase = async () => {
             let itemsFromFireStore = []
@@ -130,9 +134,12 @@ const ProductItems = props => {
     )
 }
 
-const mapStateToProps = state => ({
-    currentShoppingBagItems: state.cartItems.shoppingBagItems,
-})
+const mapStateToProps = state => {
+    console.log('!!!!!!!!!-------mapStateToProps-------ProductItems----------!!!!!!!!!')
+    return {
+        currentShoppingBagItems: state.cartItems.shoppingBagItems
+    }
+}
 
 
 const mapDispatchToProps = dispatch => ({
@@ -142,15 +149,15 @@ const mapDispatchToProps = dispatch => ({
 
 })
 
-//REDUX_THUNK
+// REDUX_THUNK
 // const mapStateToProps = state => ({
-//     fireStoreProducts: state.products.products,
+//     fireStoreProducts: state.products.storedProducts,
 //     fireStoreProductsIsFetching: state.products.isFetching,
 //     fireStoreProductsError: state.products.errorMessage,
 // })
 
 // const mapDispatchToProps = dispatch => ({
-//     dispatch_fetchProductsAsync: (productName) => dispatch(action_fetchProductsAsync(productName)),
+//     dispatch_action_fetchProductsAsync: (productName) => dispatch(action_fetchProductsAsync(productName)),
 
 // })
 

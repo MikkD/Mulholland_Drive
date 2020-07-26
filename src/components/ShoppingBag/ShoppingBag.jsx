@@ -6,8 +6,9 @@ import { action_cartItemsNumber } from '../../redux/cartItems/cartItems.action';
 import { action_updateCartItem } from '../../redux/cartItems/cartItems.action';
 import CartHeader from './CartHeader/CartHeader';
 import CartFooter from './CartFooter/CartFooter';
+import EmptyShoppingBag from './EmptyShoppingBag/EmptyShoppingBag';
 
-const ShoppingBag = ({ shoppingBagItems, removeShoppingBagItem, cartItemsNumber, updateCartItem }) => {
+const ShoppingBag = ({ shoppingBagItems, currentUser, removeShoppingBagItem, cartItemsNumber, updateCartItem }) => {
 
     useEffect(() => {
         window.scrollTo(0, 0)
@@ -45,60 +46,64 @@ const ShoppingBag = ({ shoppingBagItems, removeShoppingBagItem, cartItemsNumber,
         updateCartItem(updatedItems)
     }
 
-    console.log('========>Shopping Bag <============')
+    console.log('~~~~~~~~~~~~~~~ShoppingBag.jsx~~~~~~~~~~~~~~~')
+
     return (
         <React.Fragment>
-            <div className="sb-container">
-                <CartHeader />
-                {/* sb-body */}
-                {shoppingBagItems.map(item => {
-                    return (
-                        <React.Fragment key={item.id}>
-                            <div id={item.id} className="sb-body">
-                                <div className="sb-item flex-grow-1">
-                                    <img src={item.image}
-                                        className="sb-image" alt="item1"
-                                        style={{ width: '130px', height: '130px' }}
-                                    />
-                                    <div className="sb-item-desctiption">
-                                        <p>{item.name}</p>
-                                        <p>{item.description}</p>
-                                        <a id={item.id}
-                                            onClick={removeFromShoppingBag}
-                                            className="remove-item-button underline">remove</a>
+            {shoppingBagItems.length > 0 ?
+                <div className="sb-container">
+                    <CartHeader />
+                    {/* sb-body */}
+                    {shoppingBagItems.map(item => {
+                        return (
+                            <React.Fragment key={item.id}>
+                                <div id={item.id} className="sb-body">
+                                    <div className="sb-item flex-grow-1">
+                                        <img src={item.image}
+                                            className="sb-image" alt="item1"
+                                            style={{ width: '130px', height: '130px' }}
+                                        />
+                                        <div className="sb-item-desctiption">
+                                            <p>{item.name}</p>
+                                            <p>{item.description}</p>
+                                            <a id={item.id}
+                                                onClick={removeFromShoppingBag}
+                                                className="remove-item-button underline">remove</a>
+                                        </div>
+                                    </div>
+                                    <div className="shrink quantity-edit">
+                                        <span>{item.totalPerItem ? item.totalPerItem : item.price}$</span>
+                                        <span>
+                                            <button
+                                                disabled={item.quantity === 1 ? true : false}
+                                                id={item.id}
+                                                onClick={substractItem}
+                                                className="sb-button substract-item">-</button>
+                                            <span>{item.quantity}</span>
+                                            <button
+                                                id={item.id}
+                                                onClick={addOneMoreItem}
+                                                className="sb-button add-item">+</button>
+                                        </span>
                                     </div>
                                 </div>
-                                <div className="shrink quantity-edit">
-                                    <span>{item.totalPerItem ? item.totalPerItem : item.price}$</span>
-                                    <span>
-                                        <button
-                                            disabled={item.quantity === 1 ? true : false}
-                                            id={item.id}
-                                            onClick={substractItem}
-                                            className="sb-button substract-item">-</button>
-                                        <span>{item.quantity}</span>
-                                        <button
-                                            id={item.id}
-                                            onClick={addOneMoreItem}
-                                            className="sb-button add-item">+</button>
-                                    </span>
-                                </div>
-                            </div>
-                        </React.Fragment>
-                    )
-                })}
-
-                <CartFooter />
-            </div>
+                            </React.Fragment>
+                        )
+                    })}
+                    <CartFooter />
+                </div> : <EmptyShoppingBag />}
         </React.Fragment >
     )
 }
 
 
-const mapStateToProps = state => ({
-    shoppingBagItems: state.cartItems.shoppingBagItems,
-    currentUser: state.rootUsers.currentUser
-})
+const mapStateToProps = state => {
+    console.log('!!!!!!!!!mapStateToProps Shopping Bag!!!!!!!!!')
+    return {
+        shoppingBagItems: state.cartItems.shoppingBagItems,
+        currentUser: state.rootUsers.currentUser
+    }
+}
 const mapDispatchToProps = dispatch => ({
     // newCartItem: (newShoppingBagItem) => dispatch(action_newShoppingBagItem(newShoppingBagItem)),
     removeShoppingBagItem: (id) => dispatch(action_removeShoppingBagItem(id)),

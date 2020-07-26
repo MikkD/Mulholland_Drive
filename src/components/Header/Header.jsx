@@ -79,9 +79,12 @@ function Header(props) {
 
 }
 // Redux
-const mapStateToProps = state => ({
-    isCurrentUserLoggedIn: state.rootUsers.currentUser
-})
+const mapStateToProps = state => {
+    console.log('!!!!!!!!!mapStateToProps Header!!!!!!!!!')
+    return {
+        isCurrentUserLoggedIn: state.rootUsers.currentUser
+    }
+}
 
 // export default withRouter(Header);
 export default connect(mapStateToProps, null)(withRouter(Header))

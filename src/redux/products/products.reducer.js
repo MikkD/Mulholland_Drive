@@ -2,7 +2,7 @@
 import getProductsTypes from './products.types';
 
 const INITIAL_STATE = {
-    products: [],
+    storedProducts: [],
     isFetching: false,
     errorMessage: ''
 }
@@ -18,7 +18,7 @@ const productsReducer = (state = INITIAL_STATE, action) => {
             return {
                 ...state,
                 isFetching: false,
-                shoppingBagItems: action.payload
+                storedProducts: action.payload
             }
         case getProductsTypes.FETCH_PRODUCTS_FAILURE:
             return {

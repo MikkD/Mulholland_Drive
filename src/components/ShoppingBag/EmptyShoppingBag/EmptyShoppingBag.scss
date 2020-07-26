@@ -1,0 +1,30 @@
+.empty-sb-wrapper{
+    margin-top: 65px;
+    height: 90vh;
+    text-align: center;
+    opacity: 0.98;
+
+    .sb-empty-heading{
+        font-size: 82px ;
+        padding: 70px 0px ;
+    }
+
+    .submit-form-button {
+        display: inline-block;
+        font-family: inherit;
+        color: white;
+        margin-top: 110px;
+        text-decoration: none;
+    }
+
+    p{
+        padding-top: 40px;
+        border-bottom: 1px solid #c61536;
+        display: inline-block;
+    }
+    h5{
+        padding-top: 50px;
+        font-size: 30px;
+    }
+}
+

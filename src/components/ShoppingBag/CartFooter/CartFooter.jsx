@@ -22,7 +22,7 @@ function CartFooter(props) {
     }, [totalSum])
 
 
-    console.log('========>Shopping Bag Footer <============')
+    console.log('~~~~~~~~~~~~~~~ShoppingBag Footer.jsx~~~~~~~~~~~~~~~')
     return (
         < React.Fragment >
             <div className="sb-item sb-footer">
@@ -37,9 +37,12 @@ function CartFooter(props) {
     )
 }
 
-const mapStateToProps = state => ({
-    shoppingBagItems: state.cartItems.shoppingBagItems,
-})
+const mapStateToProps = state => {
+    console.log('!!!!!!!!!mapStateToProps CartFooter!!!!!!!!!')
+    return {
+        shoppingBagItems: state.cartItems.shoppingBagItems,
+    }
+}
 const mapDispatchToProps = dispatch => ({
     dispatchTotalSum: (totalSum) => dispatch(action_deliverTotalSum(totalSum))
 })
