@@ -9,6 +9,6 @@ const selectCartItems = state => state.cartItems;
 
 
 export const selectNumberOfCartItems = createSelector(
-    [selectCartItems], cartItems => cartItems.numberOfCartItems)
+    [selectCartItems], (cartItems) => cartItems.numberOfCartItems)
 
 

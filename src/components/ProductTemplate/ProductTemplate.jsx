@@ -34,6 +34,10 @@ const ProductTemplate = (props) => {
     }, [])
 
 
+
+
+
+
     console.log('========>Product Template<============')
     return (
         < React.Fragment >

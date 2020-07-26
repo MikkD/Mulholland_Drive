@@ -12,15 +12,11 @@ function CartHeader(props) {
             <div className="sb-header">
                 <div className="sb-upper-header">
                     <div className="flex-grow-1">
-                        <h2>Welcome {currentUser ? currentUser.name : ''}</h2>
+                        <h2>{currentUser ? `Welcome ${currentUser.name}` : 'You are not logged in'}</h2>
                     </div>
                     <div className="welcome-message shrink">
-                        {cartItemsNumber ?
-                            <React.Fragment>
-                                <h4>Shopping Bag</h4>
-                                <span>{cartItemsNumber} items</span>
-                            </React.Fragment>
-                            : <h4>Your Shopping Bag is Empty</h4>}
+                        <h4>Shopping Bag</h4>
+                        <span>{cartItemsNumber} items</span>
                     </div>
                 </div>
                 <div className="sb-header-description">
@@ -41,5 +37,6 @@ const mapStateToProps = state => {
         cartItemsNumber: selectNumberOfCartItems(state)
     }
 }
+
 
 export default connect(mapStateToProps, null)(CartHeader)

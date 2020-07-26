@@ -2,6 +2,7 @@
 import getProductsTypes from './products.types';
 
 const INITIAL_STATE = {
+    productCategory: [],
     storedProducts: [],
     isFetching: false,
     errorMessage: ''
@@ -26,6 +27,12 @@ const productsReducer = (state = INITIAL_STATE, action) => {
                 isFetching: false,
                 errorMessage: action.payload
             }
+        case getProductsTypes.ADD_PRODUCT_CATEGORY:
+            return {
+                ...state,
+                productCategory: action.payload
+            }
+
     }
     return state
 }

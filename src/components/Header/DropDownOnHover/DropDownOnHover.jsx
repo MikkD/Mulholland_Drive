@@ -7,8 +7,8 @@ const DropDownOnHover = React.memo(() => {
     console.log('~~~~~~~~~~~~~~~DropDownOnHover~~~~~~~~~~~');
     return (
         <React.Fragment>
-            <ul className="dropdown-header">
-                {pageProducts.map(el => <li key={el.id} className="dropdown-item ">
+            <ul className="hidden-dropdown-header">
+                {pageProducts.map(el => <li key={el.id} className="hidden-dropdown-item">
                     <Link to={{ pathname: `/ProductTemplate/${el.title}` }}>
                         {el.title}
                     </Link>

@@ -46,7 +46,6 @@ function Header(props) {
         }
     }, [props.match])
 
-
     return (
         <React.Fragment>
             <header ref={navbar} className="header">
@@ -80,7 +79,7 @@ function Header(props) {
 }
 // Redux
 const mapStateToProps = state => {
-    console.log('!!!!!!!!!mapStateToProps Header!!!!!!!!!')
+    // console.log('!!!!!!!!!mapStateToProps Header!!!!!!!!!')
     return {
         isCurrentUserLoggedIn: state.rootUsers.currentUser
     }

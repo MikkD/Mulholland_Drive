@@ -41,7 +41,6 @@ class App extends React.Component {
         <React.StrictMode>
           <BrowserRouter>
             <Header />
-
             <div className="main-content">
               {isCurrentUserLoggedIn && <Redirect to={{ pathname: "/" }} />}
               <Switch>
@@ -54,7 +53,7 @@ class App extends React.Component {
                 <Route exact path="/Button" component={Button} />
               </Switch>
             </div>
-            {/* <Footer /> */}
+            <Footer />
           </BrowserRouter>
         </React.StrictMode>
       </div >

@@ -8,7 +8,7 @@ import CartHeader from './CartHeader/CartHeader';
 import CartFooter from './CartFooter/CartFooter';
 import EmptyShoppingBag from './EmptyShoppingBag/EmptyShoppingBag';
 
-const ShoppingBag = ({ shoppingBagItems, currentUser, removeShoppingBagItem, cartItemsNumber, updateCartItem }) => {
+const ShoppingBag = ({ shoppingBagItems, removeShoppingBagItem, cartItemsNumber, updateCartItem }) => {
 
     useEffect(() => {
         window.scrollTo(0, 0)
@@ -101,11 +101,9 @@ const mapStateToProps = state => {
     console.log('!!!!!!!!!mapStateToProps Shopping Bag!!!!!!!!!')
     return {
         shoppingBagItems: state.cartItems.shoppingBagItems,
-        currentUser: state.rootUsers.currentUser
     }
 }
 const mapDispatchToProps = dispatch => ({
-    // newCartItem: (newShoppingBagItem) => dispatch(action_newShoppingBagItem(newShoppingBagItem)),
     removeShoppingBagItem: (id) => dispatch(action_removeShoppingBagItem(id)),
     cartItemsNumber: () => dispatch(action_cartItemsNumber()),
     updateCartItem: (updatedItem) => dispatch(action_updateCartItem(updatedItem))

@@ -13,8 +13,14 @@ export const action_fetchProductsSuccess = (fetchedItems) => ({
 export const action_fetchProductsFailure = () => ({
     type: getProductsTypes.FETCH_PRODUCTS_FAILURE,
 })
+export const action_getCurrentProductCategory = (productCategory) => ({
+    type: getProductsTypes.ADD_PRODUCT_CATEGORY,
+    payload: productCategory
+})
 
 export const action_fetchProductsAsync = productName => {
+
+    // let productCategory = { productName: [] }
     return async dispatch => {
         let itemsFromFireStore = [];
         let fetchProducts = firestore.collection(`${productName}`)

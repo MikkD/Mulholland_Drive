@@ -5,5 +5,5 @@ const selectUser = state => state.rootUsers;
 
 
 export const selectIsCurrentUserLoggedIn = createSelector(
-    [selectUser], rootUsers => rootUsers.currentUser
+    [selectUser], (rootUsers) => rootUsers.currentUser
 )
