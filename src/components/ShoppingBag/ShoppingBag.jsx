@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import './ShoppingBag.css';
+import './ShoppingBag.scss';
 import { connect } from 'react-redux';
 import { action_removeShoppingBagItem } from '../../redux/cartItems/cartItems.action';
 import { action_cartItemsNumber } from '../../redux/cartItems/cartItems.action';

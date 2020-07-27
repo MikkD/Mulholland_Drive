@@ -27,13 +27,14 @@
     cursor: pointer;    
 }
 
-.menu>a{
+.menu>a,.clothing-link{
     position: relative;
     margin: 0px 10px;
     cursor: pointer;
     opacity: 0.9;
     transition: all 0.2 ease-in-out;
     font-size: 22px;
+    display: inline-block;
 }
 
 .menu>a:hover{
@@ -93,15 +94,13 @@ background: transparent;
     width: 20px;
     height: 20px;
 }
-.clothing-link:hover .hidden-dropdown-header{
-    /* visibility: visible; */
+.clothing-link:hover>.hidden-dropdown-header{
     display: block;
 }
 .hidden-dropdown-header{
-    /* visibility: hidden; */
     display: none;
     position: absolute;
-    top: 25px;
+    top: 35px;
     left: -1px;
     line-height: 25px;
     z-index: 1;

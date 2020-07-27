@@ -12,7 +12,7 @@ import Spinner from '../../Spinner/Spinner';
 import ScrollToTopButton from '../../ScrollToTopButton/ScrollToTopButton';
 import { getProduct } from '../utils';
 import { action_fetchProductsAsync } from '../../../redux/products/products.action';
-import ViewProductItems from './ViewProductItems';
+import ProductItemsView from './ProductItemsView/ProductItemsView';
 
 
 
@@ -97,7 +97,7 @@ const ProductItems = props => {
             {loading ? <h1><Spinner /></h1> :
                 <div className="product-items-wrapper">
                     {filteredItems.length >= 0 ?
-                        filteredItems.map(item => <ViewProductItems item={item} addToShoppingBag={addToShoppingBag} />)
+                        filteredItems.map(item => <ProductItemsView item={item} addToShoppingBag={addToShoppingBag} />)
                         : null}
                 </div>
             }

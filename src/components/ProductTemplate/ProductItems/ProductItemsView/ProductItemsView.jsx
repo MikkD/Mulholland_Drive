@@ -1,6 +1,6 @@
-import React from 'react'
+import React from 'react';
 
-function ViewProductItems({ item, addToShoppingBag }) {
+function ProductItemsView({ item, addToShoppingBag }) {
     return (
         <React.Fragment>
             <div id={item.id} key={item.id} className="product-item-tile">
@@ -21,6 +21,6 @@ function ViewProductItems({ item, addToShoppingBag }) {
             </div>
         </React.Fragment>
     )
-}
+};
 
-export default ViewProductItems
+export default ProductItemsView;

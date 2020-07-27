@@ -8,7 +8,7 @@ import { TweenMax, TimelineLite, Power3 } from 'gsap';
 
 
 
-const ShopItems = ({ location }) => {
+const ShopItems = () => {
     console.log('========>Shop Items<============')
     const app = useRef(null);
     const imagesRef = useRef(null)
@@ -39,10 +39,10 @@ const ShopItems = ({ location }) => {
             </div>
             <div ref={app} className="all-items-section">
                 <div ref={imagesRef} className="flex-parent">
-                    {pageProducts.map((el, index) => {
+                    {pageProducts.map(el => {
                         const { id, title, description, img } = el;
                         return (
-                            <div ref={el => refArray[index] = el} key={id} className="flex-item">
+                            <div key={id} className="flex-item">
                                 <Link to={{ pathname: `/ProductTemplate/${title}` }} >
                                     <img className="image-item" src={img} />
                                     <div className="image-desciption">

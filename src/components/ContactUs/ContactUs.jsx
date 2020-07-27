@@ -1,6 +1,5 @@
 import React from 'react';
 import './ContactUs.scss';
-import { Link } from 'react-router-dom';
 import ContactForm from './ContactForm/ContactForm';
 
 function ContactUs() {
@@ -39,9 +38,9 @@ function ContactUs() {
                                 </div>
                             </div>
                             <div className="right-side-footer">
-                                <Link>Facebook</Link>
-                                <Link>Instagram</Link>
-                                <Link>LinkedIn</Link>
+                                <a href="https://www.facebook.com/">Facebook</a>
+                                <a href="https://www.instagram.com/">Instagram</a>
+                                <a href="https://www.linkedIn.com/">LinkedIn</a>
                             </div>
                         </div>
                     </div>

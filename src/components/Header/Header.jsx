@@ -35,7 +35,7 @@ function Header(props) {
         }
         // #2
         const handleScroll = () => {
-            props.location.pathname === '/' && window.scrollY > 725 ?
+            props.location.pathname === '/' && window.scrollY > 525 ?
                 navbar.current.style.backgroundColor = "black" : navbar.current.style.backgroundColor = "null"
         }
         window.addEventListener('resize', handleViewPortChange)
@@ -58,9 +58,9 @@ function Header(props) {
                                 { color: "crimson", display: "inline-block" }}>
                             Go Back
                         </Link>
-                        <Link className="clothing-link" >Clothing
+                        <div className="clothing-link" >Clothing
                         <DropDownOnHover />
-                        </Link>
+                        </div>
                         <Link to={{ pathname: '/ContactUs' }}>Contact</Link>
                         {props.isCurrentUserLoggedIn !== null ?
                             <a onClick={() => firebase.auth().signOut()}>Sign Out</a> :

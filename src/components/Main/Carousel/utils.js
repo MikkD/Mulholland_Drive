@@ -4,7 +4,7 @@ export const headerStyles = {
     padding: 0
 }
 export const pStyles = {
-    paddingTop: '10px',
+    paddingTop: '5px',
 }
 
 

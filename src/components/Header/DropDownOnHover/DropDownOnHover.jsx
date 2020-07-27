@@ -3,7 +3,7 @@ import { pageProducts } from './utils';
 import { Link } from 'react-router-dom';
 
 
-const DropDownOnHover = React.memo(() => {
+const DropDownOnHover = () => {
     console.log('~~~~~~~~~~~~~~~DropDownOnHover~~~~~~~~~~~');
     return (
         <React.Fragment>
@@ -16,6 +16,6 @@ const DropDownOnHover = React.memo(() => {
             </ul>
         </React.Fragment>
     )
-})
+}
 
 export default DropDownOnHover

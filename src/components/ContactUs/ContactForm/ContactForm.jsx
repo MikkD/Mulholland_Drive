@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 function ContactForm() {
-    const [formValue, setFormValue] = useState({})
+    const [formValue, setFormValue] = useState({ name: '', email: '', subject: '', textarea: '' })
     const [formError, setFormError] = useState()
     const [isSubmitted, setIsSubmitted] = useState(false)
 
@@ -11,7 +11,7 @@ function ContactForm() {
             setFormError(true)
         } else {
             setFormError(false)
-            setFormValue(prevState => ({ ...prevState, name: '', email: '', subject: '', textarea: '' }))
+            setFormValue({ name: '', email: '', subject: '', textarea: '' })
             setIsSubmitted(true)
         }
     }
@@ -27,16 +27,16 @@ function ContactForm() {
             <form onSubmit={handleSubmit} className="contact-form">
                 {formError ? <p className="error-message">Enter all input fields</p> :
                     <p> feel free to contact us and we will get back to you as soon as we can</p>}
-                <label>
+                <label htmlFor="name">
                     <input onChange={handleChange} value={formValue.name} type="text" name="name" placeholder="name" />
                 </label>
-                <label>
+                <label htmlFor="email">
                     <input onChange={handleChange} value={formValue.email} type="email" name="email" placeholder="email" />
                 </label>
-                <label>
+                <label htmlFor="subject">
                     <input onChange={handleChange} value={formValue.subject} type="text" name="subject" placeholder="subject" />
                 </label>
-                <label>
+                <label htmlFor="textarea">
                     <textarea onChange={handleChange} value={formValue.textarea} type="textarea" name="textarea" placeholder="message" />
                 </label>
                 <input type="submit" value={isSubmitted ? "Submitted" : "Submit"} className="submit-form-button" />
