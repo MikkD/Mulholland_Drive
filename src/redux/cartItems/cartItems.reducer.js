@@ -1,5 +1,5 @@
 
-import cartItemsTypes from './cartItems.types'
+import cartItemsTypes from './cartItems.types';
 
 const INITIAL_STATE = {
     shoppingBagItems: [],
@@ -34,6 +34,13 @@ const cartItemsReducer = (state = INITIAL_STATE, action) => {
             return {
                 ...state,
                 totalSum: action.payload
+            }
+        case cartItemsTypes.ITEMS_CHECKED:
+            return {
+                ...state,
+                shoppingBagItems: [],
+                numberOfCartItems: 0,
+                totalSum: 0
             }
     }
     return state

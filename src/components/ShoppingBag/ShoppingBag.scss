@@ -1,10 +1,15 @@
 .sb-container{
     width: 90%;
+    max-width: 850px;
     height: 100%;
-    margin:139px  auto;
+    margin:140px  auto;
     background-color: #191919;
     box-sizing: border-box;
     font-size: 22px;
+
+    h2{
+        font-size: 30px;
+    }
 }
 .sb-container>div:not(:first-child){
     border-bottom: 1px solid #d73e15c9;
@@ -32,6 +37,10 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    button{
+        width: 30px;
+        height: 30px;
+    }
 }
 .shrink {
     width: 200px;
@@ -63,7 +72,7 @@
     }
     .flex-grow-1{
         flex-grow: 0;
-        min-width: 170px;
+        min-width: 145px;
     }
     h2{
         font-size: 24px;

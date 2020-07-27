@@ -31,5 +31,5 @@ export const pageProducts = [
         title: 'Accessories',
         img: require("../../assets/images/shopItems/access1.png"),
         id: 'np6'
-    },
+    }
 ]

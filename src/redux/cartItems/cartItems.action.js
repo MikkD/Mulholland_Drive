@@ -20,3 +20,6 @@ export const action_deliverTotalSum = (totalSum) => ({
     type: cartItemsTypes.TOTAL_SUM,
     payload: totalSum
 })
+export const action_deliverItemsChecked = () => ({
+    type: cartItemsTypes.ITEMS_CHECKED
+})

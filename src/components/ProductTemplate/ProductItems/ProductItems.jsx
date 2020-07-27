@@ -5,15 +5,14 @@ import { connect } from 'react-redux';
 import { action_newShoppingBagItem } from '../../../redux/cartItems/cartItems.action';
 import { action_removeShoppingBagItem } from '../../../redux/cartItems/cartItems.action';
 import { action_cartItemsNumber } from '../../../redux/cartItems/cartItems.action';
-import { firestore } from '../../../firebase/firebse.utils';
+// import { firestore } from '../../../firebase/firebse.utils';
 import { filterItemsUtils } from './utils';
 import { showAllItemsFilterUtils } from './utils';
 import Spinner from '../../Spinner/Spinner';
-import ScrollToTopButton from '../../ScrollToTopButton/ScrollToTopButton';
+// import ScrollToTopButton from '../../ScrollToTopButton/ScrollToTopButton';
 import { getProduct } from '../utils';
 import { action_fetchProductsAsync } from '../../../redux/products/products.action';
 import ProductItemsView from './ProductItemsView/ProductItemsView';
-
 
 
 const ProductItems = props => {
@@ -24,11 +23,15 @@ const ProductItems = props => {
     const [totalNumberOfItems, setTotalNumberOfItems] = useState(0)
     const [loading, setLoading] = useState(true)
     const [productCategories, setProductCategories] = useState([]);
-    const totalItemsPerPage = 5;
+    const totalItemsPerPage = 6;
     let totalNumberOfPages = Math.round(totalNumberOfItems / totalItemsPerPage);
     let lastItemInRange = clickedPageNumber * totalItemsPerPage
     let firstItemInRange = lastItemInRange - totalItemsPerPage
     console.log('~~~~~~~~~~~~~~~Product Items.jsx~~~~~~~~~~~~~~~')
+
+
+
+
 
 
     useEffect(() => {
@@ -44,7 +47,7 @@ const ProductItems = props => {
                     if (currentShoppingBagItems[j].id === newItems[i].id) {
                         newItems[i] = {
                             ...newItems[i],
-                            isAdded: true
+                            isAdded: true,
                         }
                     }
                 }
@@ -97,7 +100,7 @@ const ProductItems = props => {
             {loading ? <h1><Spinner /></h1> :
                 <div className="product-items-wrapper">
                     {filteredItems.length >= 0 ?
-                        filteredItems.map(item => <ProductItemsView item={item} addToShoppingBag={addToShoppingBag} />)
+                        filteredItems.map(item => <ProductItemsView key={item.id} item={item} addToShoppingBag={addToShoppingBag} />)
                         : null}
                 </div>
             }

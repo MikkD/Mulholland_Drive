@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Route, Switch, Redirect, withRouter } from 'react-router-dom';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import './App.css'
 import Main from '../Main';
 import ProductTemplate from '../ProductTemplate'
@@ -42,13 +42,11 @@ class App extends React.Component {
           <BrowserRouter>
             <Header />
             <div className="main-content">
-              {isCurrentUserLoggedIn && <Redirect to={{ pathname: "/" }} />}
               <Switch>
                 <Route exact path="/" component={Main} />
                 <Route exact path="/ProductTemplate/:product" component={ProductTemplate} />
                 <Route exact path="/ShoppingBag" component={ShoppingBag} />
-                {/* <Route exact path="/SignInUp" component={isCurrentUserLoggedIn ? Main : SignInUp} /> */}
-                <Route exact path="/SignInUp" component={SignInUp} />
+                <Route exact path='/SignInUp' component={isCurrentUserLoggedIn ? Main : SignInUp} />
                 <Route exact path="/ContactUs" component={ContactUs} />
                 <Route exact path="/Button" component={Button} />
               </Switch>

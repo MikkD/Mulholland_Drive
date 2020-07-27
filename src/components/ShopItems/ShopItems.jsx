@@ -1,7 +1,7 @@
 import React, { useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { withRouter } from 'react-router-dom';
-import './ShopItems.css';
+import './ShopItems.scss';
 import { pageProducts } from './utils';
 import { TweenMax, TimelineLite, Power3 } from 'gsap';
 
@@ -23,9 +23,6 @@ const ShopItems = () => {
         // #2 ArrayOfRefs
         // refArray.map(img => timeline.from(img, 1, { y: 80, ease: Power3.easeInOut }))
         TweenMax.to(app.current, 1, { visibility: 'visible' })
-
-
-
     }, [])
 
 

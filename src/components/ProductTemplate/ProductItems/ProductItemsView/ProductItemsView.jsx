@@ -3,7 +3,7 @@ import React from 'react';
 function ProductItemsView({ item, addToShoppingBag }) {
     return (
         <React.Fragment>
-            <div id={item.id} key={item.id} className="product-item-tile">
+            <div className="product-item-tile">
                 <div className="product-item-link-wrapper" >
                     <img src={item.image} alt="product" />
                     <button
