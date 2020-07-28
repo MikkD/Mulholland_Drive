@@ -108,18 +108,20 @@ background: transparent;
     font-size: 18px;
     background-color: black;
     box-shadow: 1px 2px 5px 0px rgba(0,0,0,0.75);
-}
-.hidden-dropdown-item{
-    padding: 0px 5px;
-    transition: all 0.1s ease-in;
-}
-
-.clothing-link>.hidden-dropdown-header>.hidden-dropdown-item:hover{
-    background-color: #ffffffcf;
-}
-.clothing-link>.hidden-dropdown-header>.hidden-dropdown-item:hover>a{
-    color: black ;
-    padding-left: 3px;
+    overflow: hidden;
+    box-sizing: border-box;
+    .hidden-dropdown-item{
+        padding: 0px 5px;
+        transition: all 0.1s ease-in;
+        width: 100%;
+        &:hover{
+            background-color: #ffffffcf;
+            a{
+                color: black ;
+                padding-left: 3px;
+            }
+        }
+    }
 }
 
 @media (max-width: 620px) {  

@@ -24,4 +24,12 @@ export const pageProducts = [
         title: 'Accessories',
         id: 'np6'
     },
+    {
+        title: 'T-Shirts',
+        id: 'np7'
+    },
+    {
+        title: 'Long-Sleeves',
+        id: 'np8'
+    }
 ]
