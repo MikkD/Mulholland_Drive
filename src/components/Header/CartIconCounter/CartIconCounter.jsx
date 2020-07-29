@@ -4,11 +4,11 @@ import './CartIconCounter.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
 import { connect } from 'react-redux';
-// import { ReactComponent as ShopIcon } from './icon_bag.svg'
 import { selectCartItemsNumber } from '../../../redux/cartItems/cartItems.selectors';
+// import { ReactComponent as ShopIcon } from './icon_bag.svg'
+
 
 const CartIconCounter = ({ cartItemsNumber }) => {
-    console.log('~~~~~~~CartIconCounter~~~~~~~~~');
     return (
         <React.Fragment>
             <Link to={{ pathname: '/ShoppingBag' }} >
@@ -21,11 +21,8 @@ const CartIconCounter = ({ cartItemsNumber }) => {
     )
 }
 
-const mapStateToProps = state => {
-    console.log('!!!!!!mapStateToProps-Cart-Icon-NUMBER WIH SELECT!!!!!!!');
-    return {
-        cartItemsNumber: selectCartItemsNumber(state)
-    }
-}
+const mapStateToProps = state => ({
+    cartItemsNumber: selectCartItemsNumber(state)
+})
 
 export default connect(mapStateToProps, null)(CartIconCounter)

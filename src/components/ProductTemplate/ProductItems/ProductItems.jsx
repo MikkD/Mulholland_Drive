@@ -4,8 +4,6 @@ import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { action_newShoppingBagItem } from '../../../redux/cartItems/cartItems.action';
 import { action_removeShoppingBagItem } from '../../../redux/cartItems/cartItems.action';
-// import { action_cartItemsNumber } from '../../../redux/cartItems/cartItems.action';
-// import { firestore } from '../../../firebase/firebse.utils';
 import { filterItemsUtils } from './utils';
 import { showAllItemsFilterUtils } from './utils';
 import Spinner from '../../Spinner/Spinner';

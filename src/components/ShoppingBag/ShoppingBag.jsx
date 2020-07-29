@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import './ShoppingBag.scss';
 import { connect } from 'react-redux';
 import { action_removeShoppingBagItem } from '../../redux/cartItems/cartItems.action';
@@ -6,8 +6,9 @@ import { action_updateCartItem } from '../../redux/cartItems/cartItems.action';
 import CartHeader from './CartHeader/CartHeader';
 import CartFooter from './CartFooter/CartFooter';
 import EmptyShoppingBag from './EmptyShoppingBag/EmptyShoppingBag';
+import { selectCartItems } from '../../redux/cartItems/cartItems.selectors';
 
-const ShoppingBag = ({ shoppingBagItems, removeShoppingBagItem, updateCartItem }) => {
+const ShoppingBag = React.memo(function ShoppingBag({ shoppingBagItems, removeShoppingBagItem, updateCartItem }) {
 
     useEffect(() => {
         window.scrollTo(0, 0)
@@ -20,9 +21,9 @@ const ShoppingBag = ({ shoppingBagItems, removeShoppingBagItem, updateCartItem }
         removeShoppingBagItem(id)
     }
 
-    const addOneMoreItem = (event) => {
+    const addOneMoreItem = (e) => {
         const copy = [...shoppingBagItems]
-        const clickedId = event.target.id
+        const clickedId = e.target.id
         const updatedItems = copy.map(item => item.id === clickedId ? {
             ...item,
             price: parseInt(item.price),
@@ -44,7 +45,7 @@ const ShoppingBag = ({ shoppingBagItems, removeShoppingBagItem, updateCartItem }
         updateCartItem(updatedItems)
     }
 
-    console.log('~~~~~~~~~~~~~~~ShoppingBag.jsx~~~~~~~~~~~~~~~')
+    console.error('~~~~~~~~~~~~~~~ShoppingBag.jsx~~~~~~~~~~~~~~~')
 
     return (
         <React.Fragment>
@@ -93,18 +94,15 @@ const ShoppingBag = ({ shoppingBagItems, removeShoppingBagItem, updateCartItem }
         </React.Fragment >
     )
 }
+)
 
 
-const mapStateToProps = state => {
-    console.log('!!!!!!!!!mapStateToProps Shopping Bag!!!!!!!!!')
-    return {
-        shoppingBagItems: state.cartItems.shoppingBagItems,
-    }
-}
+const mapStateToProps = state => ({
+    shoppingBagItems: selectCartItems(state)
+})
 const mapDispatchToProps = dispatch => ({
     removeShoppingBagItem: (id) => dispatch(action_removeShoppingBagItem(id)),
     updateCartItem: (updatedItem) => dispatch(action_updateCartItem(updatedItem))
-
 })
 
 

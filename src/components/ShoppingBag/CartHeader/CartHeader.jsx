@@ -1,12 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import './CartHeader.scss';
-// import { selectNumberOfCartItems } from '../../../redux/cartItems/cartItems.selectors';
+import { selectCartItemsNumber } from '../../../redux/cartItems/cartItems.selectors';
 import { selectIsCurrentUserLoggedIn } from '../../../redux/user/users.selectors';
 
-function CartHeader(props) {
-    const { currentUser, cartItemsNumber } = props;
-    console.log('~~~~~~~~~~~~~~~ShoppingBag Header.jsx~~~~~~~~~~~~~~~')
+function CartHeader({ currentUser, cartItemsNumber }) {
     return (
         <React.Fragment>
             <div className="sb-header">
@@ -18,7 +16,6 @@ function CartHeader(props) {
                         <h4>Shopping Bag
                         <span>{cartItemsNumber} items</span>
                         </h4>
-
                     </div>
                 </div>
                 <div className="sb-header-description">
@@ -32,15 +29,9 @@ function CartHeader(props) {
         </React.Fragment>
     )
 }
-const mapStateToProps = state => {
-    console.log('!!!!!!mapStateToProps-Cart-Header!!!!!!!');
-    return {
-        currentUser: selectIsCurrentUserLoggedIn(state),
-        cartItemsNumber: state.cartItems.shoppingBagItems.reduce(
-            (acc, currentQuantityOfItems) => acc + currentQuantityOfItems.quantity, 0)
-    }
-}
+const mapStateToProps = state => ({
+    currentUser: selectIsCurrentUserLoggedIn(state),
+    cartItemsNumber: selectCartItemsNumber(state)
+})
 
-
-
-export default connect(mapStateToProps, null)(CartHeader)
+export default connect(mapStateToProps, null)(CartHeader);

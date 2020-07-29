@@ -7,6 +7,7 @@ import { connect } from 'react-redux';
 import CartIconCounter from './CartIconCounter/CartIconCounter';
 import HiddenMenu from './HiddenMenu/HiddenMenu';
 import DropDownOnHover from './DropDownOnHover/DropDownOnHover';
+import { selectIsCurrentUserLoggedIn } from '../../redux/user/users.selectors';
 
 const DEFAULT_WIDTH = 550;
 
@@ -79,11 +80,10 @@ function Header(props) {
 }
 // Redux
 const mapStateToProps = state => {
-    // console.log('!!!!!!!!!mapStateToProps Header!!!!!!!!!')
+    console.log('!!!!!!!!!mapStateToProps Header!!!!!!!!!')
     return {
-        isCurrentUserLoggedIn: state.rootUsers.currentUser
+        isCurrentUserLoggedIn: selectIsCurrentUserLoggedIn(state)
     }
 }
 
-// export default withRouter(Header);
 export default connect(mapStateToProps, null)(withRouter(Header))
