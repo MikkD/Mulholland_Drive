@@ -2,13 +2,12 @@ import React, { useState, useEffect } from 'react';
 import './ShoppingBag.scss';
 import { connect } from 'react-redux';
 import { action_removeShoppingBagItem } from '../../redux/cartItems/cartItems.action';
-import { action_cartItemsNumber } from '../../redux/cartItems/cartItems.action';
 import { action_updateCartItem } from '../../redux/cartItems/cartItems.action';
 import CartHeader from './CartHeader/CartHeader';
 import CartFooter from './CartFooter/CartFooter';
 import EmptyShoppingBag from './EmptyShoppingBag/EmptyShoppingBag';
 
-const ShoppingBag = ({ shoppingBagItems, removeShoppingBagItem, cartItemsNumber, updateCartItem }) => {
+const ShoppingBag = ({ shoppingBagItems, removeShoppingBagItem, updateCartItem }) => {
 
     useEffect(() => {
         window.scrollTo(0, 0)
@@ -19,7 +18,6 @@ const ShoppingBag = ({ shoppingBagItems, removeShoppingBagItem, cartItemsNumber,
         const copy = [...shoppingBagItems]
         const newItems = copy.filter(item => item.id !== id)
         removeShoppingBagItem(id)
-        cartItemsNumber()
     }
 
     const addOneMoreItem = (event) => {
@@ -105,7 +103,6 @@ const mapStateToProps = state => {
 }
 const mapDispatchToProps = dispatch => ({
     removeShoppingBagItem: (id) => dispatch(action_removeShoppingBagItem(id)),
-    cartItemsNumber: () => dispatch(action_cartItemsNumber()),
     updateCartItem: (updatedItem) => dispatch(action_updateCartItem(updatedItem))
 
 })

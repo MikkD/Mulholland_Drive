@@ -11,6 +11,7 @@ const Footer = React.memo(function Footer({ location }) {
     const StyledFooter = styled.div`
     background: ${location.pathname === '/' ? "whitesmoke" : "black"};
     display:${location.pathname === '/ContactUs' || location.pathname === '/ShoppingBag' ? "none" : "flex"};
+    margin-top:50px;
     .social{
         color: ${location.pathname === '/' ? "black" : "whitesmoke"};
         border:1px solid ${location.pathname === '/' ? "black" : "whitesmoke"};

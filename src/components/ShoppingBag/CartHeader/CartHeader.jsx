@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import './CartHeader.css';
-import { selectNumberOfCartItems } from '../../../redux/cartItems/cartItems.selectors';
+import './CartHeader.scss';
+// import { selectNumberOfCartItems } from '../../../redux/cartItems/cartItems.selectors';
 import { selectIsCurrentUserLoggedIn } from '../../../redux/user/users.selectors';
 
 function CartHeader(props) {
@@ -15,8 +15,10 @@ function CartHeader(props) {
                         <h2>{currentUser ? `Welcome ${currentUser.name}` : 'You are not logged in'}</h2>
                     </div>
                     <div className="welcome-message shrink">
-                        <h4>Shopping Bag</h4>
+                        <h4>Shopping Bag
                         <span>{cartItemsNumber} items</span>
+                        </h4>
+
                     </div>
                 </div>
                 <div className="sb-header-description">
@@ -31,12 +33,14 @@ function CartHeader(props) {
     )
 }
 const mapStateToProps = state => {
-    console.log('!!!!!!!!!mapStateToProps CartHeader!!!!!!!!!')
+    console.log('!!!!!!mapStateToProps-Cart-Header!!!!!!!');
     return {
         currentUser: selectIsCurrentUserLoggedIn(state),
-        cartItemsNumber: selectNumberOfCartItems(state)
+        cartItemsNumber: state.cartItems.shoppingBagItems.reduce(
+            (acc, currentQuantityOfItems) => acc + currentQuantityOfItems.quantity, 0)
     }
 }
+
 
 
 export default connect(mapStateToProps, null)(CartHeader)

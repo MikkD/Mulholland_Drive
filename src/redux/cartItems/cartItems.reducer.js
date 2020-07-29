@@ -3,7 +3,6 @@ import cartItemsTypes from './cartItems.types';
 
 const INITIAL_STATE = {
     shoppingBagItems: [],
-    numberOfCartItems: 0,
     totalSum: 0
 }
 
@@ -19,11 +18,6 @@ const cartItemsReducer = (state = INITIAL_STATE, action) => {
             return {
                 ...state,
                 shoppingBagItems: [...state.shoppingBagItems.filter(item => item.id !== action.payload)]
-            }
-        case cartItemsTypes.CART_ITEMS_NUMBER:
-            return {
-                ...state,
-                numberOfCartItems: state.shoppingBagItems.length
             }
         case cartItemsTypes.UPDATE_CART_ITEMS:
             return {

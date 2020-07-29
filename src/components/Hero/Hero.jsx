@@ -1,8 +1,5 @@
 import React from 'react';
 import './Hero.css';
-import { connect } from 'react-redux';
-import { selectNumberOfCartItems } from './../../redux/cartItems/cartItems.selectors';
-import { selectIsCurrentUserLoggedIn } from '../../redux/user/users.selectors';
 
 function Hero() {
     console.log('~~~~~~~~~~~~~~~Hero.jsx~~~~~~~~~~~~~~~')
@@ -19,14 +16,4 @@ function Hero() {
         </React.Fragment>
     )
 }
-
-const mapStateToProps = state => {
-    // console.log('???????????????HERO_MAP_STATE_TO_PROPS????????????????')
-    return {
-        currentUser: selectIsCurrentUserLoggedIn(state),
-        cartItemsNumber: selectNumberOfCartItems(state)
-        // shoppingBagItems: state.cartItems.shoppingBagItems,
-        // currentUser: state.rootUsers.currentUser
-    }
-}
-export default connect(mapStateToProps, null)(Hero);
+export default Hero;

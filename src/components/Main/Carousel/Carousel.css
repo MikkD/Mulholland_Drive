@@ -35,8 +35,6 @@
 }
 
 .image-slider>a>div>img{
-    /* width: 250px;
-    height: 250px; */
     width: 315px;
     height: 315px;
 }
@@ -67,7 +65,7 @@
     width: 90%;
     margin: 0 auto;
     padding-top: 40px;
-    padding-bottom: 10px;
+    padding-bottom: 15px;
 }
 
 @media only screen and (max-width: 400px) {

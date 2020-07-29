@@ -3,7 +3,7 @@ import getProductsTypes from './products.types';
 
 const INITIAL_STATE = {
     productCategory: [],
-    storedProducts: [],
+    storedProducts: {},
     isFetching: false,
     errorMessage: ''
 }
@@ -19,7 +19,7 @@ const productsReducer = (state = INITIAL_STATE, action) => {
             return {
                 ...state,
                 isFetching: false,
-                storedProducts: action.payload
+                storedProducts: { ...state.storedProducts, ...action.payload }
             }
         case getProductsTypes.FETCH_PRODUCTS_FAILURE:
             return {
@@ -27,12 +27,6 @@ const productsReducer = (state = INITIAL_STATE, action) => {
                 isFetching: false,
                 errorMessage: action.payload
             }
-        case getProductsTypes.ADD_PRODUCT_CATEGORY:
-            return {
-                ...state,
-                productCategory: action.payload
-            }
-
     }
     return state
 }

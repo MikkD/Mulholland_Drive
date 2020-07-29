@@ -3,12 +3,17 @@ import { createSelector } from 'reselect';
 
 
 
-//inputSelector
-const selectCartItems = state => state.cartItems;
+//inputSelector / Just returns the slice of the state 
+const selectCart = state => state.cartItems;
 
+export const selectCartItems = createSelector(
+    [selectCart],
+    cartItems => cartItems.shoppingBagItems
+);
 
-
-export const selectNumberOfCartItems = createSelector(
-    [selectCartItems], (cartItems) => cartItems.numberOfCartItems)
+export const selectCartItemsNumber = createSelector(
+    [selectCart],
+    cartItems => cartItems.shoppingBagItems.reduce(
+        (acc, currentQuantityOfItems) => acc + currentQuantityOfItems.quantity, 0))
 
 

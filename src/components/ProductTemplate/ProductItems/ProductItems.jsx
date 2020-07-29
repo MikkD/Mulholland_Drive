@@ -4,7 +4,7 @@ import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { action_newShoppingBagItem } from '../../../redux/cartItems/cartItems.action';
 import { action_removeShoppingBagItem } from '../../../redux/cartItems/cartItems.action';
-import { action_cartItemsNumber } from '../../../redux/cartItems/cartItems.action';
+// import { action_cartItemsNumber } from '../../../redux/cartItems/cartItems.action';
 // import { firestore } from '../../../firebase/firebse.utils';
 import { filterItemsUtils } from './utils';
 import { showAllItemsFilterUtils } from './utils';
@@ -16,13 +16,11 @@ import ProductItemsView from './ProductItemsView/ProductItemsView';
 
 
 const ProductItems = props => {
-    const { newCartItem, removeShoppingBagItem, cartItemsNumber,
+    const { newCartItem, removeShoppingBagItem,
         clickedPageNumber, showAllItemsFilter, currentShoppingBagItems, filterTypes,
         fireStoreProductsIsFetching, fireStoreProductsError, fireStoreProducts, dispatch_action_fetchProductsAsync } = props;
     const [items, setItems] = useState([])
     const [totalNumberOfItems, setTotalNumberOfItems] = useState(0)
-    const [loading, setLoading] = useState(true)
-    const [productCategories, setProductCategories] = useState([]);
     const totalItemsPerPage = 6;
     let totalNumberOfPages = Math.round(totalNumberOfItems / totalItemsPerPage);
     let lastItemInRange = clickedPageNumber * totalItemsPerPage
@@ -30,17 +28,13 @@ const ProductItems = props => {
     console.log('~~~~~~~~~~~~~~~Product Items.jsx~~~~~~~~~~~~~~~')
 
 
-
-
-
-
     useEffect(() => {
         dispatch_action_fetchProductsAsync(props.match.params.product)
-
     }, [props.match.params.product])
 
     useEffect(() => {
-        let newItems = [...fireStoreProducts]
+        const cleanFetcheddata = fireStoreProducts[props.match.params.product]
+        let newItems = [...cleanFetcheddata ? cleanFetcheddata : []]
         if (currentShoppingBagItems.length > 0) {
             for (let i = 0; i < newItems.length; i++) {
                 for (let j = 0; j < currentShoppingBagItems.length; j++) {
@@ -55,7 +49,6 @@ const ProductItems = props => {
         }
         setItems(newItems)
         setTotalNumberOfItems(newItems.length)
-        setLoading(false)
     }, [fireStoreProducts])
 
 
@@ -80,7 +73,6 @@ const ProductItems = props => {
             copy.splice(theIndex, 1, newShoppingBagItem)
             setItems(copy)
             newCartItem(newShoppingBagItem)
-            cartItemsNumber()
         } else {
             const theIndex = copy.findIndex(item => item.id === id);
             let itemToRemove = copy.find(item => item.id === id)
@@ -88,7 +80,6 @@ const ProductItems = props => {
             copy.splice(theIndex, 1, itemToRemove)
             setItems(copy)
             removeShoppingBagItem(id)
-            cartItemsNumber()
         }
     }
 
@@ -97,7 +88,7 @@ const ProductItems = props => {
 
     return (
         <React.Fragment>
-            {loading ? <h1><Spinner /></h1> :
+            {fireStoreProductsIsFetching ? <h1><Spinner /></h1> :
                 <div className="product-items-wrapper">
                     {filteredItems.length >= 0 ?
                         filteredItems.map(item => <ProductItemsView key={item.id} item={item} addToShoppingBag={addToShoppingBag} />)
@@ -119,7 +110,6 @@ const mapDispatchToProps = dispatch => ({
     dispatch_action_fetchProductsAsync: (productName) => dispatch(action_fetchProductsAsync(productName)),
     newCartItem: (newShoppingBagItem) => dispatch(action_newShoppingBagItem(newShoppingBagItem)),
     removeShoppingBagItem: (id) => dispatch(action_removeShoppingBagItem(id)),
-    cartItemsNumber: () => dispatch(action_cartItemsNumber()),
 
 })
 
