@@ -1,5 +1,6 @@
 
 export const filterItemsUtils = (items, filterType) => {
+    // alert('function 1')
     const copy = [...items]
     switch (filterType) {
         case "By category":
@@ -11,14 +12,15 @@ export const filterItemsUtils = (items, filterType) => {
         default:
             return copy
     }
-}
+};
 
 export const showAllItemsFilterUtils = (items, show, firstItemInRange, lastItemInRange) => {
+    // alert('function 2')
     const copy = [...items]
     if (show) {
         return copy
     } else {
         return copy.slice(firstItemInRange, lastItemInRange)
     }
-}
+};
 

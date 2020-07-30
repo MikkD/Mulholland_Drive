@@ -23,4 +23,5 @@ function ProductItemsView({ item, addToShoppingBag }) {
     )
 };
 
-export default ProductItemsView;
+export default React.memo(ProductItemsView);
+// export default ProductItemsView;

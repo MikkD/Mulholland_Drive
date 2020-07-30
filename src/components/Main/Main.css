@@ -40,8 +40,12 @@ scroll-behavior: smooth;
 --light-mode-link-hover-color: #rgb(32, 32, 32);
 --light-mode-input-bg-color: #ecececde;
 --light-mode-button-bg-color: #ff4b2b; */
-
 }
+
+.main-content {
+  flex: 1;
+}
+
 
 h2{
   font-size: 36px;
@@ -67,8 +71,9 @@ a{
   cursor: pointer;
   color: white;
   text-decoration: underline;
-  transition: all 0.3 ease-in-out;
   border-radius: 1px;
+  opacity: 0.97;
+  transition: all 0.4 ease-in-out;
   }
   a:hover{
     opacity: 1;

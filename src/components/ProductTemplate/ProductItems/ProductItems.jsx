@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import './ProductItems.css';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
@@ -82,8 +82,12 @@ const ProductItems = props => {
         }
     }
 
-    const itemsPerPage = showAllItemsFilterUtils(items, showAllItemsFilter, firstItemInRange, lastItemInRange)
-    const filteredItems = filterItemsUtils(itemsPerPage, filterTypes)
+    // const itemsPerPage = useMemo(() => showAllItemsFilterUtils(items, showAllItemsFilter, firstItemInRange, lastItemInRange), [items, showAllItemsFilter, firstItemInRange, lastItemInRange])
+    // const filteredItems = useMemo(() => filterItemsUtils(itemsPerPage, filterTypes), [itemsPerPage, filterTypes])
+    const itemsPerPage = showAllItemsFilterUtils(items, showAllItemsFilter, firstItemInRange, lastItemInRange);
+    const filteredItems = filterItemsUtils(itemsPerPage, filterTypes);
+    // useMemo(itemsPerPage, [items, showAllItemsFilter, firstItemInRange, lastItemInRange])
+    // useMemo(filteredItems, [itemsPerPage, filterTypes])
 
     return (
         <React.Fragment>

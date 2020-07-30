@@ -8,7 +8,6 @@ import Banners from './Banners/Banners';
 
 
 function Main() {
-  console.log('~~~~~~~~~~~~~~~Main.jsx~~~~~~~~~~~~~~~')
   return (
     <div className="Main">
       <Hero />
