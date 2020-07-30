@@ -5,7 +5,6 @@ import uuid from 'react-uuid'
 
 function Pagination({ totalNumberOfPages, clickedPageNumber, handleFilterByPageNumber }) {
     const numberOfPaginationPages = [...Array(totalNumberOfPages).keys()]
-    console.log('========>Pagination<============')
     return (
         <React.Fragment>
             <div className="pagination">

@@ -172,23 +172,20 @@ input{
     100%  {opacity:1}
 }
 
-
-@media screen and (max-width: 650px) {
-    .flex-main{
-        width: 90%;
-        height: 90%;
-        flex-wrap: wrap;
-    }
-    
-  }
-@media screen and (max-width: 550px) {
-    .flex-main{
-        width: 90%;
+@media screen and (max-width: 580px) {
+    .parent-block{
         height: 100%;
     }
+    .parent-block .flex-main{
+        width: 90%;
+        height: auto;
+        flex-wrap: wrap;
+
+    
     .flex-sign-in-left,.flex-sign-up-right{
-        height: 50%;
+        height: auto;
         flex-basis: 100%;
+        min-height: 500px;
     }
     .overlay{
         flex-direction: column;
@@ -200,5 +197,6 @@ input{
         height: 100%;
         width: 100%;
     }
+}
 
   }

@@ -32,7 +32,7 @@ function Header({ isCurrentUserLoggedIn, location, match }) {
         // #1
         const handleViewPortChange = () => {
             if (isActiveRef.current && window.innerWidth > DEFAULT_WIDTH) {
-                setIsActive(false)
+                setIsActive(prevState => !prevState)
             }
         }
         // #2
@@ -46,7 +46,11 @@ function Header({ isCurrentUserLoggedIn, location, match }) {
             window.removeEventListener('resize', handleViewPortChange);
             window.removeEventListener('scroll', handleScroll);
         }
-    }, [match])
+    })
+
+    useEffect(() => {
+        setIsActive(false)
+    }, [location])
 
 
 

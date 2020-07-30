@@ -2,7 +2,6 @@ import React from 'react';
 import './Hero.css';
 
 function Hero() {
-    console.log('~~~~~~~~~~~~~~~Hero.jsx~~~~~~~~~~~~~~~')
     return (
         <React.Fragment>
             <div className="hero">

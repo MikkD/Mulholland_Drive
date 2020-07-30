@@ -5,12 +5,11 @@ import { withRouter } from 'react-router-dom';
 import styled from 'styled-components';
 
 
-const Footer = React.memo(function Footer({ location }) {
-    console.log('~~~~~~~~~Footer.jsx~~~~Memo-not-working~~~~~~~');
+function Footer({ location }) {
 
     const StyledFooter = styled.div`
     background: ${location.pathname === '/' ? "whitesmoke" : "black"};
-    display:${location.pathname === '/ContactUs' || location.pathname === '/ShoppingBag' ? "none" : "flex"};
+    display:${location.pathname === '/ContactUs' || location.pathname === '/ShoppingBag' || location.pathname === '/SignInUp' ? "none" : "flex"};
     margin-top:50px;
     .social{
         color: ${location.pathname === '/' ? "black" : "whitesmoke"};
@@ -41,6 +40,6 @@ const Footer = React.memo(function Footer({ location }) {
             </StyledFooter>
         </React.Fragment>
     )
-});
+};
 
 export default withRouter(Footer)

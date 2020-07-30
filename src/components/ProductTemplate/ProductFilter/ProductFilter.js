@@ -40,7 +40,7 @@ export default function ProductFilter(props) {
                     </button>
                     {DropDownIsOpen ? <ul className="dropdown-items">
                         {DropDownOptions.map(option =>
-                            <li onClick={filterItem} key={uuid()} id={uuid()} className="dropdown-item">{option}</li>)}
+                            <li onClick={filterItem} key={uuid()} className="dropdown-item">{option}</li>)}
                     </ul> : null}
                 </div>
                 {/* Filter2 */}
@@ -50,12 +50,13 @@ export default function ProductFilter(props) {
                         className="dropdown-button regular-button">
                         <FontAwesomeIcon className="arrow-icon"
                             style={pageNumberDropDownIsOpen ? { transform: 'rotate(180deg)', top: '0' } : null} icon={faSortUp} />
-                        {clickedPageNumber}</button> of {DropDownPageNumberOptions.length}
+                        {clickedPageNumber}
+                    </button> of {DropDownPageNumberOptions.length}
                     {pageNumberDropDownIsOpen ?
                         <ul className="dropdown-items-quantity">
-                            {DropDownPageNumberOptions.map((number, index) => <li
+                            {DropDownPageNumberOptions.map(number => <li
                                 onClick={handlePageNumber}
-                                key={index} className="dropdown-item">{number + 1}</li>)}
+                                key={uuid()} className="dropdown-item">{number + 1}</li>)}
                         </ul> :
                         null}
                     <button

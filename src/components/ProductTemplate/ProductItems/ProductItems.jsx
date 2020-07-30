@@ -90,7 +90,8 @@ const ProductItems = props => {
             {fireStoreProductsIsFetching ? <h1><Spinner /></h1> :
                 <div className="product-items-wrapper">
                     {filteredItems.length >= 0 ?
-                        filteredItems.map(item => <ProductItemsView key={item.id} item={item} addToShoppingBag={addToShoppingBag} />)
+                        filteredItems.map(item => <ProductItemsView
+                            key={item.id} item={item} addToShoppingBag={addToShoppingBag} />)
                         : null}
                 </div>
             }

@@ -32,8 +32,6 @@ const Carousel = () => {
         translate = sliderItemWidth * currentItem
     }
 
-    console.log('~~~~~~~~~Carousel~~~~~~~~~');
-
     return (
         <React.Fragment>
             <div className="items-heading">

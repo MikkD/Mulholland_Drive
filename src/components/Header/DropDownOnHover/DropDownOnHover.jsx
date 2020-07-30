@@ -3,8 +3,7 @@ import { pageProducts } from './utils';
 import { Link } from 'react-router-dom';
 
 
-const DropDownOnHover = () => {
-    console.log('~~~~~~~~~~~~~~~DropDownOnHover~~~~~~~~~~~');
+const DropDownOnHover = React.memo(function DropDownOnHover() {
     return (
         <React.Fragment>
             <ul className="hidden-dropdown-header">
@@ -16,6 +15,6 @@ const DropDownOnHover = () => {
             </ul>
         </React.Fragment>
     )
-}
+});
 
 export default DropDownOnHover
