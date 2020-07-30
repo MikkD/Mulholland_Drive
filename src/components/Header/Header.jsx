@@ -11,21 +11,22 @@ import { selectIsCurrentUserLoggedIn } from '../../redux/user/users.selectors';
 
 const DEFAULT_WIDTH = 550;
 
-function Header(props) {
+function Header({ isCurrentUserLoggedIn, location, match }) {
     const [isActive, setIsActive] = useState(false);
-    const [prevPath, setPrevPath] = useState()
+    const [currentPath, setCurrentPath] = useState();
     const isActiveRef = useRef(false);
     isActiveRef.current = isActive;
     const navbar = useRef()
     const prevPathRef = useRef()
+
     console.log('~~~~~~~~~~~~~~~Header.jsx~~~~~~~~~~~~~~~')
 
     useEffect(() => {
         // #0 Set redirect of Go Back button to previous path
-        prevPathRef.current = prevPath;
-        setPrevPath(props.location.pathname)
+        prevPathRef.current = currentPath;
+        setCurrentPath(location.pathname)
 
-        props.location.pathname === '/' ?
+        location.pathname === '/' ?
             navbar.current.style.backgroundColor = 'transparent' :
             navbar.current.style.backgroundColor = 'black';
         // #1
@@ -36,7 +37,7 @@ function Header(props) {
         }
         // #2
         const handleScroll = () => {
-            props.location.pathname === '/' && window.scrollY > 525 ?
+            location.pathname === '/' && window.scrollY > 525 ?
                 navbar.current.style.backgroundColor = "black" : navbar.current.style.backgroundColor = "null"
         }
         window.addEventListener('resize', handleViewPortChange)
@@ -45,25 +46,29 @@ function Header(props) {
             window.removeEventListener('resize', handleViewPortChange);
             window.removeEventListener('scroll', handleScroll);
         }
-    }, [props.match])
+    }, [match])
+
+
+
 
     return (
-        <React.Fragment>
+
+        < React.Fragment >
             <header ref={navbar} className="header">
                 <div className="flex-header">
                     <Link to={{ pathname: '/' }} className="logo">Mulholland Drive</Link>
                     <div className="menu">
                         <Link
                             to={{ pathname: `${prevPathRef.current ? prevPathRef.current : '/'}` }}
-                            style={props.location.pathname === '/' ? { display: "none" } :
+                            style={location.pathname === '/' ? { display: "none" } :
                                 { color: "crimson", display: "inline-block" }}>
                             Go Back
                         </Link>
                         <div className="clothing-link" >Clothing
                         <DropDownOnHover />
                         </div>
-                        <Link to={{ pathname: '/ContactUs' }}>Contact</Link>
-                        {props.isCurrentUserLoggedIn !== null ?
+                        <Link disabled to={{ pathname: '/ContactUs' }}>Contact</Link>
+                        {isCurrentUserLoggedIn !== null ?
                             <a onClick={() => firebase.auth().signOut()}>Sign Out</a> :
                             <Link to={{ pathname: '/SignInUp' }}>Sign In</Link>}
                         <CartIconCounter />
@@ -79,11 +84,8 @@ function Header(props) {
 
 }
 // Redux
-const mapStateToProps = state => {
-    console.log('!!!!!!!!!mapStateToProps Header!!!!!!!!!')
-    return {
-        isCurrentUserLoggedIn: selectIsCurrentUserLoggedIn(state)
-    }
-}
+const mapStateToProps = state => ({
+    isCurrentUserLoggedIn: selectIsCurrentUserLoggedIn(state)
+})
 
 export default connect(mapStateToProps, null)(withRouter(Header))

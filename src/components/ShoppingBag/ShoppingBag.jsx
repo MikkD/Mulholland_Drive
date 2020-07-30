@@ -45,7 +45,7 @@ const ShoppingBag = React.memo(function ShoppingBag({ shoppingBagItems, removeSh
         updateCartItem(updatedItems)
     }
 
-    console.error('~~~~~~~~~~~~~~~ShoppingBag.jsx~~~~~~~~~~~~~~~')
+    // console.error('~~~~~~~~~~~~~~~ShoppingBag.jsx~~~~~~~~~~~~~~~')
 
     return (
         <React.Fragment>

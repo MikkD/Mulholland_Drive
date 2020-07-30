@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import './ProductItems.css';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
@@ -6,11 +6,14 @@ import { action_newShoppingBagItem } from '../../../redux/cartItems/cartItems.ac
 import { action_removeShoppingBagItem } from '../../../redux/cartItems/cartItems.action';
 import { filterItemsUtils } from './utils';
 import { showAllItemsFilterUtils } from './utils';
-import Spinner from '../../Spinner/Spinner';
-// import ScrollToTopButton from '../../ScrollToTopButton/ScrollToTopButton';
 import { getProduct } from '../utils';
 import { action_fetchProductsAsync } from '../../../redux/products/products.action';
+import { selectCartItems } from '../../../redux/cartItems/cartItems.selectors';
+import { selectFetchedProducts } from '../../../redux/products/products.selectors';
+import { selectIsFetching } from '../../../redux/products/products.selectors';
+import { selectIsError } from '../../../redux/products/products.selectors';
 import ProductItemsView from './ProductItemsView/ProductItemsView';
+import Spinner from '../../Spinner/Spinner';
 
 
 const ProductItems = props => {
@@ -23,16 +26,16 @@ const ProductItems = props => {
     let totalNumberOfPages = Math.round(totalNumberOfItems / totalItemsPerPage);
     let lastItemInRange = clickedPageNumber * totalItemsPerPage
     let firstItemInRange = lastItemInRange - totalItemsPerPage
-    console.log('~~~~~~~~~~~~~~~Product Items.jsx~~~~~~~~~~~~~~~')
-
-
-    useEffect(() => {
-        dispatch_action_fetchProductsAsync(props.match.params.product)
-    }, [props.match.params.product])
+    // console.error('~~~~~~~~~~~~~~~Product Items.jsx~~~~~~~~~~~~~~~')
 
     useEffect(() => {
-        const cleanFetcheddata = fireStoreProducts[props.match.params.product]
-        let newItems = [...cleanFetcheddata ? cleanFetcheddata : []]
+        // alert('use effect 3 ');
+        if (fireStoreProducts[props.match.params.product] == undefined) {
+            dispatch_action_fetchProductsAsync(props.match.params.product)
+        }
+        const cleanFetchedData = fireStoreProducts[props.match.params.product]
+        console.log('cleanFetchedData', cleanFetchedData);
+        let newItems = [...cleanFetchedData ? cleanFetchedData : []]
         if (currentShoppingBagItems.length > 0) {
             for (let i = 0; i < newItems.length; i++) {
                 for (let j = 0; j < currentShoppingBagItems.length; j++) {
@@ -47,9 +50,7 @@ const ProductItems = props => {
         }
         setItems(newItems)
         setTotalNumberOfItems(newItems.length)
-    }, [fireStoreProducts])
-
-
+    }, [fireStoreProducts, props.match.params.product])
 
     useEffect(() => {
         props.handleTotalNumberOfPages(totalNumberOfPages)
@@ -97,11 +98,12 @@ const ProductItems = props => {
     )
 }
 
+
 const mapStateToProps = state => ({
-    fireStoreProducts: state.products.storedProducts,
-    fireStoreProductsIsFetching: state.products.isFetching,
-    fireStoreProductsError: state.products.errorMessage,
-    currentShoppingBagItems: state.cartItems.shoppingBagItems
+    fireStoreProducts: selectFetchedProducts(state),
+    fireStoreProductsIsFetching: selectIsFetching(state),
+    fireStoreProductsError: selectIsError(state),
+    currentShoppingBagItems: selectCartItems(state)
 })
 
 const mapDispatchToProps = dispatch => ({
